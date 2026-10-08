@@ -89,3 +89,25 @@ The current machine learning model is trained using synthetic demonstration data
 - User safety REST APIs integrated with GameShield AI
 
 > Note: The moderation classifier uses a small synthetic educational dataset and is not a production moderation model. Voice moderation is demonstrated using speech-to-text transcripts rather than direct raw-audio analysis. Child-safety ratings are simplified prototype categories and do not constitute legal or ESRB/COPPA compliance.
+
+### Part 7 - DevSecOps & Automated Security Testing
+
+- Automated Python security testing implemented using pytest
+- Anti-cheat model testing implemented
+- Marketplace fraud detection testing implemented
+- Password hashing and authentication testing implemented
+- HMAC packet tampering tests implemented
+- Server-side gameplay validation tests implemented
+- Child safety filtering tests implemented
+- Flask API security tests implemented
+- Rate limiting tests implemented
+- Static Python security scanning integrated using Bandit
+- Dependency vulnerability scanning integrated using pip-audit
+- GitHub Actions CI security pipeline configured
+- Automatic ML model training added to CI
+- Local DevSecOps security pipeline runner implemented
+
+## Running Security Tests
+
+```powershell
+python -m pytest tests -v
