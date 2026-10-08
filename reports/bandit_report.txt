@@ -1,0 +1,48 @@
+Run started:2026-10-08 10:43:54.752900+00:00
+
+Test results:
+>> Issue: [B106:hardcoded_password_funcarg] Possible hardcoded password: 'GameShield@2026'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html
+   Location: src\identity_security\authentication.py:185:19
+184	        username="vr_player_01",
+185	        password="GameShield@2026",
+186	        avatar_name="CyberGuardian"
+187	    )
+188	
+189	    print("\nRegistration")
+190	    print("-" * 60)
+
+--------------------------------------------------
+>> Issue: [B106:hardcoded_password_funcarg] Possible hardcoded password: 'GameShield@2026'
+   Severity: Low   Confidence: Medium
+   CWE: CWE-259 (https://cwe.mitre.org/data/definitions/259.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b106_hardcoded_password_funcarg.html
+   Location: src\identity_security\authentication.py:198:12
+197	        username="vr_player_01",
+198	        password="GameShield@2026"
+199	    )
+200	
+201	    print("\nSecure Authentication")
+202	    print("-" * 60)
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 2100
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 2
+		Medium: 0
+		High: 0
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 0
+		Medium: 2
+		High: 0
+Files skipped (0):
