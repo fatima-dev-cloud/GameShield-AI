@@ -1,3 +1,4 @@
+
 name: GameShield AI Security Pipeline
 
 on:
@@ -25,11 +26,11 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements-dev.txt
 
-            - name: Train demonstration ML models
+      - name: Train demonstration ML models
         run: |
           python src/anti_cheat/train_model.py
           python src/content_moderation/train_moderation_model.py
-          
+
       - name: Run automated tests
         run: |
           python -m pytest tests -v
