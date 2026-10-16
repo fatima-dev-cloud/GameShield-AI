@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameShield AI Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>GameShield AI</h1>
+            <p>Advanced Gaming & VR/AR Security Platform</p>
+            <span class="badge">Educational Security Demo</span>
+        </header>
+
+        <section class="modules">
+            <div class="module active">AI Anti-Cheat</div>
+            <div class="module">Asset Security</div>
+            <div class="module">Identity Security</div>
+            <div class="module">Infrastructure Security</div>
+            <div class="module">Content Moderation</div>
+            <div class="module">DevSecOps</div>
+        </section>
+
+        <section class="panel">
+            <h2>AI-Powered Anti-Cheat</h2>
+            <p>Analyze sample player behavior using the trained ML model.</p>
+
+            <label for="playerType">Choose a player:</label>
+            <select id="playerType">
+                <option value="legit">Legitimate Player</option>
+                <option value="cheater">Suspicious Player</option>
+            </select>
+
+            <button id="analyzeButton" type="button">
+                Analyze Player
+            </button>
+
+            <div id="result" class="result" role="status" aria-live="polite">
+                Select a player and click Analyze Player.
+            </div>
+        </section>
+
+<section class="panel asset-panel">
+    <h2>Virtual Asset & Marketplace Security</h2>
+    <p>
+        Analyze sample in-game marketplace transactions
+        for suspicious activity.
+    </p>
+
+    <label for="transactionType">
+        Choose a transaction:
+    </label>
+
+    <select id="transactionType">
+        <option value="normal">
+            Normal Marketplace Transaction
+        </option>
+        <option value="suspicious">
+            Suspicious Marketplace Transaction
+        </option>
+    </select>
+
+    <button id="analyzeTransactionButton" type="button">
+        Analyze Transaction
+    </button>
+
+    <div id="transactionResult"
+         class="result"
+         role="status"
+         aria-live="polite">
+        Select a transaction and click Analyze Transaction.
+    </div>
+
+    <p class="demo-note">
+        Educational demonstration using synthetic transaction data.
+    </p>
+</section>
+
+
+<section class="panel asset-panel">
+    <h2>Virtual Asset Ownership & Duplication Protection</h2>
+    <p>
+        Register a sample gaming asset, verify its owner,
+        and scan the asset registry for duplicates.
+    </p>
+
+    <h3>1. Register Virtual Asset</h3>
+
+    <label for="assetName">Asset Name</label>
+    <input id="assetName" type="text"
+           value="Legendary Dragon Sword"
+           maxlength="100">
+
+    <label for="assetOwner">Owner ID</label>
+    <input id="assetOwner" type="text"
+           value="demo_player_001"
+           maxlength="100">
+
+    <label for="assetType">Asset Type</label>
+    <select id="assetType">
+        <option value="weapon">Weapon</option>
+        <option value="skin">Skin</option>
+        <option value="collectible">Collectible</option>
+    </select>
+
+    <label for="assetValue">Asset Value</label>
+    <input id="assetValue" type="number"
+           value="500" min="0" max="100000"
+           step="0.01">
+
+    <button id="registerAssetButton" type="button">
+        Register Asset
+    </button>
+
+    <div id="assetRegisterResult"
+         class="result"
+         role="status"
+         aria-live="polite">
+        Register a sample asset to begin.
+    </div>
+
+    <h3>2. Verify Asset Ownership</h3>
+
+    <label for="verifyAssetId">Asset ID</label>
+    <input id="verifyAssetId" type="text"
+           placeholder="Asset ID from registration">
+
+    <label for="verifyOwnerId">Owner ID</label>
+    <input id="verifyOwnerId" type="text"
+           value="demo_player_001">
+
+    <button id="verifyAssetButton" type="button">
+        Verify Ownership
+    </button>
+
+    <div id="assetVerifyResult"
+         class="result"
+         role="status"
+         aria-live="polite">
+        Register an asset first, then verify ownership.
+    </div>
+
+    <h3>3. Asset Duplication Scan</h3>
+    <p>Check the existing registry for duplicate assets.</p>
+
+    <button id="scanDuplicatesButton" type="button">
+        Scan for Duplicates
+    </button>
+
+    <div id="duplicationResult"
+         class="result"
+         role="status"
+         aria-live="polite">
+        Click Scan for Duplicates to begin.
+    </div>
+
+    <p class="demo-note">
+        Educational prototype. Use synthetic demo assets only.
+        This is not a live blockchain ownership verification.
+    </p>
+</section>
+
+
+<!-- METAVERSE IDENTITY SECURITY DASHBOARD -->
+<section class="panel identity-panel">
+
+    <h2>Metaverse Identity Security</h2>
+    <p>
+        Test secure authentication, avatar identity,
+        biometric protection and privacy controls.
+    </p>
+
+    <!-- USER REGISTRATION -->
+    <h3>1. Register Demo User</h3>
+
+    <label for="identityUsername">Username</label>
+    <input id="identityUsername" type="text"
+           value="demo_metaverse_player" maxlength="100">
+
+    <label for="identityPassword">Password</label>
+    <input id="identityPassword" type="password"
+           placeholder="Enter a demo password"
+           autocomplete="new-password">
+
+    <label for="identityAvatar">Avatar Name</label>
+    <input id="identityAvatar" type="text"
+           value="CyberWarrior" maxlength="100">
+
+    <button id="registerIdentityButton" type="button">
+        Register Identity
+    </button>
+
+    <div id="identityRegisterResult"
+         class="result" role="status" aria-live="polite">
+        Enter demo credentials and register.
+    </div>
+
+    <!-- LOGIN -->
+    <h3>2. Secure Login</h3>
+
+    <label for="loginUsername">Username</label>
+    <input id="loginUsername" type="text"
+           value="demo_metaverse_player">
+
+    <label for="loginPassword">Password</label>
+    <input id="loginPassword" type="password"
+           placeholder="Enter password"
+           autocomplete="current-password">
+
+    <button id="loginIdentityButton" type="button">
+        Test Login
+    </button>
+
+    <div id="identityLoginResult"
+         class="result" role="status" aria-live="polite">
+        Enter credentials to test authentication.
+    </div>
+
+    <!-- BIOMETRIC PROTECTION -->
+    <h3>3. VR/AR Biometric Data Protection</h3>
+
+    <label for="biometricUserId">Demo User ID</label>
+    <input id="biometricUserId" type="text"
+           value="demo_player_001">
+
+    <button id="protectBiometricButton" type="button">
+        Protect Synthetic Biometric Data
+    </button>
+
+    <div id="biometricResult"
+         class="result" role="status" aria-live="polite">
+        No biometric data processed yet.
+    </div>
+
+    <!-- PRIVACY CONTROLS -->
+    <h3>4. Metaverse Privacy Controls</h3>
+
+    <label for="privacyUserId">Demo User ID</label>
+    <input id="privacyUserId" type="text"
+           value="demo_player_001">
+
+    <label for="privacyDataType">Data Type</label>
+    <select id="privacyDataType">
+        <option value="spatial_audio">Spatial Audio</option>
+        <option value="motion_tracking">Motion Tracking</option>
+        <option value="eye_tracking">Eye Tracking</option>
+        <option value="behavioral_data">Behavioral Data</option>
+    </select>
+
+    <label for="privacyAllowed">Permission</label>
+    <select id="privacyAllowed">
+        <option value="false">Deny Access</option>
+        <option value="true">Allow Access</option>
+    </select>
+
+    <button id="updatePrivacyButton" type="button">
+        Update Privacy Setting
+    </button>
+
+    <div id="privacyResult"
+         class="result" role="status" aria-live="polite">
+        Choose a privacy permission and click Update.
+    </div>
+
+    <p class="demo-note">
+        Educational demonstration. Use synthetic identities
+        and biometric data only. Never enter real passwords
+        or actual biometric information.
+    </p>
+
+</section>
+
+
+<!-- GAMING INFRASTRUCTURE SECURITY -->
+<section class="panel infrastructure-panel">
+
+    <h2>Gaming Infrastructure Security</h2>
+    <p>
+        Test server-side validation, secure netcode,
+        and automated threat response.
+    </p>
+
+    <h3>1. Server-Side Action Validation</h3>
+
+    <label for="gameActionType">Player Action</label>
+    <select id="gameActionType">
+        <option value="normal">Normal Player Movement</option>
+        <option value="suspicious">Suspicious Player Movement</option>
+    </select>
+
+    <button id="validateActionButton" type="button">
+        Validate Game Action
+    </button>
+
+    <div id="actionValidationResult" class="result"
+         role="status" aria-live="polite">
+        Select an action and click Validate.
+    </div>
+
+    <h3>2. Secure Netcode Verification</h3>
+
+    <p>
+         Demo Packet: Player purchases DRAGON-SWORD
+         for 2500 coins.
+    </p>
+
+    <label for="packetSignature">Packet Signature</label>
+    <input id="packetSignature" type="text"
+           value="invalid-demo-signature">
+
+    <button id="verifyPacketButton" type="button">
+        Verify Packet
+    </button>
+
+    <div id="packetVerificationResult" class="result"
+         role="status" aria-live="polite">
+        Enter a packet and signature to test verification.
+    </div>
+
+    <h3>3. Automated Threat Response</h3>
+
+    <label for="threatType">Threat Type</label>
+    <select id="threatType">
+        <option value="ddos">DDoS Attack</option>
+        <option value="brute_force">Brute Force Attack</option>
+        <option value="suspicious_traffic">Suspicious Traffic</option>
+    </select>
+
+    <label for="threatSeverity">Severity</label>
+    <select id="threatSeverity">
+        <option value="low">Low</option>
+        <option value="medium">Medium</option>
+        <option value="high">High</option>
+        <option value="critical">Critical</option>
+    </select>
+
+    <button id="threatResponseButton" type="button">
+        Analyze Threat
+    </button>
+
+    <div id="threatResponseResult" class="result"
+         role="status" aria-live="polite">
+        Select a threat and click Analyze.
+    </div>
+
+    <p class="demo-note">
+        Educational simulation. No real network traffic
+        is blocked by this dashboard.
+    </p>
+
+</section>
+
+
+<!-- CONTENT MODERATION DASHBOARD -->
+<section class="panel moderation-panel" id="moderation-panel">
+
+    <h2>AI Content Moderation & Child Safety</h2>
+    <p>
+        Test gaming chat moderation, age-based content
+        filtering and multiplayer safety.
+    </p>
+
+    <h3>1. AI Text Moderation</h3>
+
+    <label for="moderationMessage">Gaming Message</label>
+    <textarea id="moderationMessage" rows="3"
+        placeholder="Enter a synthetic gaming chat message">Good game, everyone!</textarea>
+
+    <button type="button" id="moderateTextButton">
+        Analyze Message
+    </button>
+
+    <div id="moderationTextResult" class="result"
+         role="status" aria-live="polite">
+        Enter a message and click Analyze.
+    </div>
+
+    <h3>2. Child Safety & Age Filtering</h3>
+
+    <label for="childUserAge">Player Age</label>
+    <input type="number" id="childUserAge"
+           value="12" min="1" max="120">
+
+    <label for="childContentRating">Content Rating</label>
+    <select id="childContentRating">
+        <option value="EVERYONE">Everyone - All Ages</option>
+        <option value="TEEN">Teen - 13+</option>
+        <option value="MATURE">Mature - 17+</option>
+        <option value="ADULT">Adult - 18+</option>
+    </select>
+
+
+    <button type="button" id="checkChildSafetyButton">
+        Check Content Access
+    </button>
+
+    <div id="childSafetyResult" class="result"
+         role="status" aria-live="polite">
+        Select age and rating to check access.
+    </div>
+
+    <h3>3. Real-Time Multiplayer Moderation</h3>
+
+    <label for="multiplayerPlayerId">Player ID</label>
+    <input type="text" id="multiplayerPlayerId"
+           value="demo_player_001">
+
+    <label for="multiplayerChannel">Chat Channel</label>
+    <select id="multiplayerChannel">
+        <option value="global">Global Chat</option>
+        <option value="team">Team Chat</option>
+    </select>
+
+    <label for="multiplayerMessage">Chat Message</label>
+    <textarea id="multiplayerMessage" rows="3">Good teamwork!</textarea>
+
+    <button type="button" id="moderateMultiplayerButton">
+        Moderate Multiplayer Message
+    </button>
+
+    <div id="multiplayerModerationResult" class="result"
+         role="status" aria-live="polite">
+        Enter a sample multiplayer message.
+    </div>
+
+    <p class="demo-note">
+        Educational demonstration using synthetic messages.
+        This is not a production child-safety system.
+    </p>
+
+</section>
+
+
+<!-- DEVSECOPS SECURITY DASHBOARD -->
+<section class="panel devsecops-panel" id="devsecops-panel">
+
+    <h2>DevSecOps Security Pipeline</h2>
+
+    <p>
+        View the latest automated security testing report
+        generated by the GameShield AI security pipeline.
+    </p>
+
+    <button type="button" id="loadDevsecopsReportButton">
+        Load Security Report
+    </button>
+
+    <div id="devsecopsReportResult"
+         class="result"
+         role="status"
+         aria-live="polite">
+        Click Load Security Report to view the latest results.
+    </div>
+
+    <p class="demo-note">
+        This dashboard displays a saved report.
+        Security scans are executed separately by an administrator
+        or CI/CD workflow.
+    </p>
+
+</section>
+
+        <footer>
+            GameShield AI | Educational Prototype | Synthetic Demo Data
+        </footer>
+    </main>
+
+    <script src="/static/dashboard.js"></script>
+</body>
+</html>

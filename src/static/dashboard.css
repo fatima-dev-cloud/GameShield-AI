@@ -1,0 +1,366 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1220;
+    color: #e5e7eb;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+header {
+    text-align: center;
+    padding: 35px 15px;
+}
+
+h1 {
+    color: #38bdf8;
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #94a3b8;
+}
+
+.badge {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 15px;
+    background: #164e63;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+.modules {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 30px 0;
+}
+
+.module {
+    background: #1e293b;
+    border: 1px solid #334155;
+    padding: 25px 12px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.module.active {
+    border-color: #38bdf8;
+    color: #38bdf8;
+}
+
+.panel {
+    background: #111c30;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #334155;
+}
+
+.panel p {
+    color: #94a3b8;
+}
+
+label {
+    display: block;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #1e293b;
+    color: white;
+    border: 1px solid #475569;
+    border-radius: 8px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 13px 24px;
+    background: #0284c7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #0369a1;
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+.result {
+    margin-top: 25px;
+    padding: 20px;
+    background: #1e293b;
+    border-radius: 10px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    line-height: 1.7;
+}
+
+footer {
+    text-align: center;
+    color: #64748b;
+    margin-top: 40px;
+}
+
+@media (max-width: 700px) {
+    .modules {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+}
+
+
+/* Virtual Asset Security Dashboard */
+
+.asset-panel {
+    margin-top: 25px;
+}
+
+.asset-panel h2 {
+    color: #38bdf8;
+}
+
+.asset-panel button {
+    background: #0d9488;
+}
+
+.asset-panel button:hover {
+    background: #0f766e;
+}
+
+.demo-note {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+#transactionResult {
+    font-family: Consolas, monospace;
+    font-size: 14px;
+}
+
+/* Asset Registration and Verification */
+
+.asset-panel h3 {
+    margin-top: 35px;
+    color: #e2e8f0;
+}
+
+.asset-panel input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #1e293b;
+    color: white;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.asset-panel input:focus,
+.asset-panel select:focus {
+    outline: 2px solid #38bdf8;
+    outline-offset: 2px;
+}
+
+.asset-panel input::placeholder {
+    color: #94a3b8;
+}
+
+.asset-panel .result {
+    margin-bottom: 20px;
+}
+
+
+/* ==========================================
+   METAVERSE IDENTITY SECURITY DASHBOARD
+   ========================================== */
+
+.identity-panel {
+    margin-top: 25px;
+}
+
+.identity-panel h2 {
+    color: #38bdf8;
+}
+
+.identity-panel h3 {
+    margin-top: 35px;
+    padding-top: 15px;
+    border-top: 1px solid #334155;
+    color: #e2e8f0;
+}
+
+.identity-panel input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #1e293b;
+    color: white;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.identity-panel input:focus,
+.identity-panel select:focus {
+    outline: 2px solid #38bdf8;
+    outline-offset: 2px;
+}
+
+.identity-panel button {
+    background: #7c3aed;
+}
+
+.identity-panel button:hover {
+    background: #6d28d9;
+}
+
+.identity-panel .result {
+    margin-bottom: 20px;
+}
+
+
+/* GAMING INFRASTRUCTURE SECURITY */
+
+.infrastructure-panel {
+    margin-top: 25px;
+}
+
+.infrastructure-panel h2 {
+    color: #38bdf8;
+}
+
+.infrastructure-panel h3 {
+    margin-top: 35px;
+    padding-top: 15px;
+    border-top: 1px solid #334155;
+    color: #e2e8f0;
+}
+
+.infrastructure-panel input {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #1e293b;
+    color: white;
+    border: 1px solid #475569;
+    border-radius: 8px;
+}
+
+.infrastructure-panel button {
+    background: #ea580c;
+}
+
+.infrastructure-panel button:hover {
+    background: #c2410c;
+}
+
+.infrastructure-panel .result {
+    margin-bottom: 20px;
+}
+
+
+/* AI CONTENT MODERATION DASHBOARD */
+
+.moderation-panel {
+    margin-top: 25px;
+}
+
+.moderation-panel h2 {
+    color: #38bdf8;
+}
+
+.moderation-panel h3 {
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px solid #334155;
+    color: #e2e8f0;
+}
+
+.moderation-panel textarea,
+.moderation-panel input,
+.moderation-panel select {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: #1e293b;
+    color: white;
+    border: 1px solid #475569;
+    border-radius: 8px;
+    font-family: inherit;
+}
+
+.moderation-panel textarea {
+    resize: vertical;
+}
+
+.moderation-panel button {
+    background: #7c3aed;
+    color: white;
+}
+
+.moderation-panel button:hover {
+    background: #6d28d9;
+}
+
+.moderation-panel .result {
+    margin-top: 15px;
+    margin-bottom: 25px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+
+/* DEVSECOPS SECURITY DASHBOARD */
+
+.devsecops-panel {
+    margin-top: 25px;
+}
+
+.devsecops-panel h2 {
+    color: #38bdf8;
+}
+
+.devsecops-panel button {
+    background: #2563eb;
+    color: white;
+}
+
+.devsecops-panel button:hover {
+    background: #1d4ed8;
+}
+
+.devsecops-panel .result {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}

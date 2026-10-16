@@ -1,4 +1,7 @@
-from flask import Flask, jsonify, request
+import json
+from pathlib import Path
+
+from flask import Flask, jsonify, request, render_template
 
 from anti_cheat.detector import analyze_player
 
@@ -654,6 +657,43 @@ def api_realtime_moderation():
             "Real-Time Multiplayer Moderation",
         "analysis": result
     })
+
+
+# DevSecOps Dashboard - Read-Only Security Report
+
+@app.route("/api/devsecops/report", methods=["GET"])
+def api_devsecops_report():
+
+    base_dir = Path(__file__).resolve().parents[1]
+
+    report_file = (
+        base_dir / "reports" / "devsecops_dashboard.json"
+    )
+
+    if not report_file.exists():
+        return jsonify({
+            "error": "Security report not generated yet.",
+            "instruction": (
+                "Run generate_dashboard_report.py first."
+            )
+        }), 404
+
+    try:
+        report = json.loads(
+            report_file.read_text(encoding="utf-8")
+        )
+
+        return jsonify(report)
+
+    except (OSError, ValueError):
+        return jsonify({
+            "error": "Security report could not be read."
+        }), 500
+
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
             
 if __name__ == "__main__":
     app.run(

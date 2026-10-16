@@ -17,3 +17,28 @@ logs/*.log
 
 models/*.pkl
 models/*.joblib
+
+# AWS EC2 private keys
+*.pem
+*.ppk
+
+# Local secrets and credentials
+.env
+.env.*
+!.env.example
+secrets.json
+credentials.json
+*.secret
+
+# Local development files
+.vscode/
+.idea/
+
+# Python build files
+build/
+dist/
+*.egg-info/
+
+# Operating system files
+.DS_Store
+Thumbs.db
