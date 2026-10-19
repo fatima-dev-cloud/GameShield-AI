@@ -364,3 +364,2787 @@ footer {
     white-space: pre-wrap;
     overflow-wrap: anywhere;
 }
+
+
+/* ==========================================
+   GAMESHIELD AI — NEON PINK SIDEBAR
+   STEP 3 — REFERENCE DESIGN
+   ========================================== */
+
+:root {
+    --gs-pink: #ff2d92;
+    --gs-pink-light: #ff75bc;
+    --gs-pink-glow: rgba(255, 45, 146, 0.28);
+    --gs-background: #080b15;
+    --gs-sidebar-bg: #0d101d;
+    --gs-border: #292238;
+    --gs-text: #f5f0f7;
+    --gs-muted: #9d94ad;
+}
+
+/* Main page background */
+
+body {
+    background: var(--gs-background);
+    color: var(--gs-text);
+    min-height: 100vh;
+}
+
+/* Left Sidebar */
+
+.gs-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: 265px;
+    height: 100vh;
+
+    background: linear-gradient(
+        180deg,
+        #11101f 0%,
+        #0b0d19 100%
+    );
+
+    border-right: 1px solid #36233d;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 26px 15px;
+
+    overflow-y: auto;
+    z-index: 100;
+}
+
+/* Brand / Logo */
+
+.gs-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 8px 8px 27px;
+    border-bottom: 1px solid #302238;
+}
+
+.gs-brand-icon {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 26px;
+
+    background: #291326;
+    border: 1px solid #80305c;
+    border-radius: 12px;
+
+    box-shadow: 0 0 18px var(--gs-pink-glow);
+}
+
+.gs-brand-title {
+    font-size: 21px;
+    font-weight: 800;
+    color: #ffffff;
+    white-space: nowrap;
+    letter-spacing: -0.6px;
+}
+
+.gs-brand-title span {
+    color: var(--gs-pink);
+}
+
+.gs-brand-subtitle {
+    margin-top: 5px;
+    color: var(--gs-muted);
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* Navigation */
+
+.gs-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 30px;
+}
+
+.gs-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    min-height: 47px;
+    padding: 12px 15px;
+
+    color: #b6afc3;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    border: 1px solid transparent;
+    border-radius: 10px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.gs-nav-link span {
+    width: 22px;
+    flex-shrink: 0;
+
+    font-size: 20px;
+    text-align: center;
+    color: #9f89ab;
+}
+
+.gs-nav-link:hover {
+    color: #ffffff;
+    background: #25152a;
+    border-color: #713052;
+}
+
+.gs-nav-link:hover span {
+    color: var(--gs-pink-light);
+}
+
+/* Active Pink Navigation */
+
+.gs-nav-link.gs-nav-active {
+    color: #ffffff;
+
+    background: linear-gradient(
+        90deg,
+        #a91860 0%,
+        #e52585 100%
+    );
+
+    border: 1px solid #ff54a7;
+
+    box-shadow:
+        0 0 16px rgba(255, 45, 146, 0.25),
+        inset 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.gs-nav-link.gs-nav-active span {
+    color: #ffffff;
+}
+
+/* Bottom Status Area */
+
+.gs-sidebar-bottom {
+    margin-top: auto;
+    padding-top: 35px;
+}
+
+.gs-platform-status,
+.gs-environment {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+
+    padding: 16px 12px;
+    margin-top: 12px;
+
+    background: #171321;
+    border: 1px solid #36263d;
+    border-radius: 12px;
+
+    color: #ddd4e4;
+    font-size: 12px;
+}
+
+.gs-platform-status > div,
+.gs-environment > div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.gs-platform-status strong {
+    color: #49e8a3;
+    font-size: 14px;
+}
+
+.gs-environment strong {
+    color: var(--gs-pink-light);
+    font-size: 13px;
+}
+
+.gs-platform-status small,
+.gs-environment small {
+    color: #95899f;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+.gs-status-icon {
+    color: #49e8a3;
+    font-size: 21px;
+}
+
+.gs-environment > span {
+    color: var(--gs-pink);
+    font-size: 20px;
+}
+
+/* Shift existing dashboard beside sidebar */
+
+.container {
+    width: calc(100% - 265px);
+    max-width: none;
+
+    margin-left: 265px;
+    margin-right: 0;
+
+    padding: 30px 35px;
+}
+
+/* Sidebar on smaller screens */
+
+@media (max-width: 900px) {
+
+    .gs-sidebar {
+        width: 220px;
+        padding: 20px 10px;
+    }
+
+    .gs-brand-title {
+        font-size: 18px;
+    }
+
+    .container {
+        width: calc(100% - 220px);
+        margin-left: 220px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .gs-sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        max-height: none;
+    }
+
+    .gs-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .gs-nav-link {
+        font-size: 12px;
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .gs-sidebar-bottom {
+        padding-top: 15px;
+    }
+
+    .container {
+        width: 100%;
+        margin-left: 0;
+        padding: 15px;
+    }
+}
+
+
+/* STEP 3B — Reference Sidebar Proportions */
+
+@media (min-width: 901px) {
+    .gs-sidebar {
+        width: 370px;
+        padding: 24px 31px;
+        overflow-y: auto;
+    }
+
+    .container {
+        width: calc(100% - 370px);
+        margin-left: 370px;
+        padding: 24px 12px;
+    }
+
+    .gs-brand {
+        min-height: 110px;
+        padding: 5px 10px 26px;
+        gap: 16px;
+    }
+
+    .gs-brand-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 39px;
+    }
+
+    .gs-brand-title {
+        font-size: 24px;
+    }
+
+    .gs-brand-subtitle {
+        font-size: 12px;
+    }
+
+    .gs-nav {
+        margin-top: 18px;
+        gap: 8px;
+    }
+
+    .gs-nav-link {
+        min-height: 57px;
+        padding: 12px 18px;
+        font-size: 16px;
+        gap: 18px;
+        border: 1px solid #34303e;
+        background: #1a1c29;
+    }
+
+    .gs-nav-link span {
+        width: 28px;
+        font-size: 26px;
+        color: #f274b3;
+    }
+
+    .gs-nav-link.gs-nav-active {
+        background: linear-gradient(
+            90deg,
+            #ed69aa,
+            #f277b9
+        );
+        color: #15111e;
+        border-color: #ff9bd0;
+    }
+
+    .gs-nav-link.gs-nav-active span {
+        color: #15111e;
+    }
+
+    .gs-sidebar-bottom {
+        padding-top: 18px;
+    }
+
+    .gs-platform-status {
+        min-height: 125px;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .gs-environment {
+        padding: 20px 12px;
+        background: transparent;
+        border: none;
+        border-top: 1px solid #39303d;
+        border-radius: 0;
+    }
+}
+
+
+/* ==========================================
+   STEP 3D — GAMESHIELD PINK SIDEBAR DETAILS
+   ========================================== */
+
+/* Sidebar background and scrollbar */
+
+.gs-sidebar {
+    background:
+        radial-gradient(
+            circle at 10% 100%,
+            rgba(255, 55, 145, 0.13),
+            transparent 36%
+        ),
+        linear-gradient(180deg, #171723, #10121d);
+
+    scrollbar-width: none;
+}
+
+.gs-sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Gaming shield logo */
+
+.gs-brand-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 76px;
+    height: 76px;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Large pink shield */
+
+.gs-brand-icon > svg:first-child {
+    width: 76px;
+    height: 76px;
+
+    color: #fa6eaf;
+    fill: #f36cae;
+    stroke: #ffacd3;
+    stroke-width: 1.5;
+
+    filter: drop-shadow(
+        0 0 12px rgba(255, 74, 159, 0.38)
+    );
+}
+
+/* Game controller inside shield */
+
+.gs-brand-icon > svg:last-child {
+    position: absolute;
+
+    width: 37px;
+    height: 37px;
+
+    color: #231527;
+    stroke-width: 3;
+
+    filter: drop-shadow(
+        0 1px 2px rgba(0, 0, 0, 0.25)
+    );
+}
+
+/* Brand text */
+
+.gs-brand {
+    gap: 13px;
+    padding-left: 0;
+    padding-right: 0;
+    align-items: center;
+}
+
+.gs-brand > div:last-child {
+    flex: 1;
+    min-width: 0;
+}
+
+.gs-brand-title {
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -0.7px;
+}
+
+.gs-brand-title span {
+    color: #fa74b4;
+}
+
+.gs-brand-subtitle {
+    font-size: 11px;
+    line-height: 1.4;
+    white-space: nowrap;
+    letter-spacing: -0.3px;
+}
+
+/* Navigation icons */
+
+.gs-nav-link {
+    font-weight: 500;
+    letter-spacing: 0;
+}
+
+.gs-nav-link > svg {
+    width: 26px;
+    height: 26px;
+    flex-shrink: 0;
+
+    color: #f47db9;
+    stroke-width: 2.2;
+}
+
+.gs-nav-link.gs-nav-active > svg {
+    color: #171321;
+    stroke-width: 2.4;
+}
+
+.gs-nav-link:hover > svg {
+    color: #ffb0d7;
+}
+
+.gs-nav-link.gs-nav-active:hover > svg {
+    color: #171321;
+}
+
+/* Platform status card */
+
+.gs-platform-status {
+    position: relative;
+    gap: 16px;
+
+    background: linear-gradient(
+        125deg,
+        #2b1a2c 0%,
+        #1b1d29 80%
+    );
+
+    border: 1px solid #65405b;
+    border-radius: 12px;
+}
+
+.gs-status-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 66px;
+    height: 66px;
+
+    color: #ff75b7;
+
+    border: 5px solid #f36bab;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 18px rgba(255, 65, 155, 0.22);
+}
+
+.gs-status-icon svg {
+    width: 35px;
+    height: 35px;
+    color: #ff75b7;
+    stroke-width: 3;
+}
+
+.gs-platform-status > div > div {
+    font-size: 13px;
+    color: #c5c0d4;
+}
+
+.gs-platform-status strong {
+    color: #fa75b6;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.gs-platform-status small {
+    font-size: 11px;
+    color: #aeb4cc;
+}
+
+/* Small green online indicator */
+
+.gs-platform-status::after {
+    content: "";
+    position: absolute;
+
+    top: 22px;
+    right: 18px;
+
+    width: 13px;
+    height: 13px;
+
+    background: #8ce7b9;
+    border-radius: 50%;
+
+    box-shadow: 0 0 13px rgba(80, 255, 160, 0.45);
+}
+
+/* Project Environment */
+
+.gs-environment {
+    align-items: center;
+    gap: 18px;
+    margin-top: 16px;
+}
+
+.gs-environment > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 62px;
+    flex-shrink: 0;
+}
+
+.gs-environment > span svg {
+    width: 38px;
+    height: 38px;
+
+    color: #fa75b6;
+    stroke-width: 1.8;
+}
+
+.gs-environment > div {
+    font-size: 13px;
+    color: #d5cfe0;
+}
+
+.gs-environment strong {
+    color: #f88ec2;
+    font-size: 13px;
+}
+
+.gs-environment small {
+    font-size: 12px;
+}
+
+/* Keep navigation comfortable on smaller screens */
+
+@media (max-width: 600px) {
+    .gs-brand-subtitle {
+        white-space: normal;
+    }
+
+    .gs-nav-link > svg {
+        width: 21px;
+        height: 21px;
+    }
+
+    .gs-platform-status {
+        min-height: 110px;
+    }
+}
+
+
+/* STEP 3E.2 — Custom GameShield AI Logo */
+
+.gs-brand-icon .gs-logo-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border: none;
+    border-radius: 0;
+    filter: none;
+}
+
+
+/* ==========================================
+   STEP 4A.2 — GAMESHIELD AI HERO BANNER
+   ========================================== */
+
+/* Top banner + right-side information cards */
+
+.gs-top-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 156px;
+    gap: 16px;
+    align-items: stretch;
+    margin-bottom: 14px;
+}
+
+/* Main pink gaming banner */
+
+.gs-hero-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    min-width: 0;
+    min-height: 164px;
+    margin: 0;
+    padding: 24px 28px;
+
+    overflow: hidden;
+    text-align: left;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(19, 17, 31, 0.98) 0%,
+            rgba(24, 17, 33, 0.94) 38%,
+            rgba(72, 24, 57, 0.46) 100%
+        ),
+        radial-gradient(
+            circle at 78% 45%,
+            rgba(255, 64, 155, 0.35),
+            transparent 55%
+        ),
+        #171421;
+
+    border: 1px solid #60405b;
+    border-radius: 12px;
+}
+
+/* Soft pink lighting */
+
+.gs-hero-banner::after {
+    content: "";
+    position: absolute;
+    right: -80px;
+    top: -90px;
+
+    width: 420px;
+    height: 300px;
+
+    background: radial-gradient(
+        ellipse,
+        rgba(255, 67, 153, 0.18),
+        transparent 70%
+    );
+
+    pointer-events: none;
+}
+
+/* Hero text */
+
+.gs-hero-content {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+}
+
+.gs-hero-content h1 {
+    margin: 0 0 8px;
+    color: #ffffff;
+
+    font-size: clamp(30px, 3vw, 46px);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.2px;
+}
+
+.gs-hero-content h1 span {
+    color: #f47cb9;
+}
+
+.gs-hero-content p {
+    margin: 0 0 15px;
+    color: #bdd0ee;
+
+    font-size: clamp(12px, 1.3vw, 17px);
+    line-height: 1.5;
+}
+
+/* Educational demo badge */
+
+.gs-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 8px 17px;
+
+    color: #f994c8;
+    background: rgba(19, 15, 29, 0.62);
+
+    border: 1px solid #ff69b2;
+    border-radius: 12px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.gs-hero-badge svg {
+    width: 21px;
+    height: 21px;
+    color: #fa7fba;
+}
+
+/* Right-side date and user cards */
+
+.gs-top-info {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    min-width: 0;
+}
+
+.gs-info-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+    padding: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #24202e,
+        #171d2a
+    );
+
+    border: 1px solid #51465c;
+    border-radius: 12px;
+}
+
+.gs-info-card > svg {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+
+    color: #f47cb9;
+    stroke-width: 2.2;
+}
+
+.gs-info-card > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.gs-info-card strong {
+    color: #f7f1fa;
+    font-size: 12px;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+}
+
+.gs-info-card small {
+    color: #b9c6df;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+/* Responsive layout */
+
+@media (max-width: 1200px) {
+    .gs-top-layout {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .gs-top-info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+    }
+
+    .gs-hero-banner {
+        min-height: 170px;
+    }
+}
+
+@media (max-width: 600px) {
+    .gs-hero-banner {
+        min-height: 190px;
+        padding: 22px 18px;
+    }
+
+    .gs-hero-content h1 {
+        font-size: 32px;
+    }
+
+    .gs-top-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================
+   STEP 4A.4 — PINK VR GAMING BANNER IMAGE
+   ========================================== */
+
+/* Display the custom gaming artwork */
+
+.gs-hero-banner {
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(15, 13, 26, 0.40) 0%,
+            rgba(15, 13, 26, 0.10) 48%,
+            rgba(15, 13, 26, 0.00) 100%
+        ),
+        url("/static/gameshield-banner.png");
+
+    background-size: cover;
+   background-position: center 38%;
+    background-repeat: no-repeat;
+
+    min-height: 164px;
+    border: 1px solid #865078;
+    border-radius: 12px;
+}
+
+/* Keep text above the background image */
+
+.gs-hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Ensure the decorative glow does not cover artwork */
+
+.gs-hero-banner::after {
+    opacity: 0.35;
+}
+
+/* Match the sample heading */
+
+.gs-hero-content h1 {
+    font-size: clamp(32px, 3.1vw, 46px);
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+/* Match the sample banner text */
+
+.gs-hero-content p {
+    color: #c0cdea;
+    font-size: 17px;
+}
+
+/* Improve text readability on smaller screens */
+
+@media (max-width: 900px) {
+    .gs-hero-banner {
+        background-position: 62% center;
+    }
+
+    .gs-hero-content h1 {
+        font-size: 34px;
+    }
+
+    .gs-hero-content p {
+        font-size: 14px;
+    }
+}
+
+
+/* ==========================================
+   STEP 4A.5 — BANNER FINAL ADJUSTMENTS
+   ========================================== */
+
+@media (min-width: 1201px) {
+
+    .gs-hero-banner {
+        height: 164px;
+        min-height: 164px;
+
+        padding: 22px 28px;
+
+        background-size: cover;
+        background-position: center 42%;
+    }
+
+    .gs-hero-content h1 {
+        font-size: 46px;
+        line-height: 1.08;
+        margin-bottom: 8px;
+    }
+
+    .gs-hero-content p {
+        font-size: 17px;
+        margin-bottom: 12px;
+    }
+
+    .gs-hero-badge {
+        padding: 7px 16px;
+    }
+
+    .gs-top-info {
+        gap: 14px;
+    }
+
+    .gs-info-card {
+        padding: 12px;
+    }
+}
+
+
+/* ==========================================
+   STEP 4A.6 — DATE/TIME AND USER CARDS
+   ========================================== */
+
+.gs-top-info {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    min-width: 0;
+}
+
+.gs-info-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-width: 0;
+    padding: 12px 14px;
+
+    background: linear-gradient(
+        135deg,
+        #24202e 0%,
+        #191d2a 100%
+    );
+
+    border: 1px solid #51465c;
+    border-radius: 12px;
+}
+
+.gs-info-card > svg {
+    width: 23px;
+    height: 23px;
+    flex-shrink: 0;
+    color: #f47cb9;
+    stroke-width: 2.2;
+}
+
+.gs-info-card > div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    min-width: 0;
+}
+
+.gs-info-card strong {
+    font-size: 12px;
+    font-weight: 500;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+.gs-info-card small {
+    font-size: 11px;
+    line-height: 1.4;
+    color: #c0cdea;
+    white-space: nowrap;
+}
+
+/* Desktop layout: cards beside banner */
+
+@media (min-width: 1201px) {
+    .gs-top-layout {
+        grid-template-columns: minmax(0, 1fr) 156px;
+        gap: 16px;
+    }
+}
+
+/* Tablet and mobile layout */
+
+@media (max-width: 1200px) {
+    .gs-top-info {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: auto;
+    }
+
+    .gs-info-card {
+        min-height: 75px;
+    }
+}
+
+@media (max-width: 600px) {
+    .gs-top-info {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ==========================================
+   STEP 4B.2 — PINK NEON SECURITY STATUS CARDS
+   ========================================== */
+
+/* Four cards in one horizontal row */
+.gs-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    width: 100%;
+    margin: 14px 0 16px;
+}
+
+/* Individual security status card */
+.gs-stats .gs-stat-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+    min-height: 110px;
+    padding: 16px 18px;
+
+    background: linear-gradient(
+        135deg,
+        #302430 0%,
+        #24232f 48%,
+        #191f2b 100%
+    );
+
+    border: 1px solid rgba(201, 165, 195, 0.24);
+    border-radius: 12px;
+
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.gs-stats .gs-stat-card:hover {
+    border-color: rgba(246, 116, 181, 0.65);
+    box-shadow: 0 0 16px rgba(237, 83, 155, 0.10);
+}
+
+/* Pink circular icon background */
+.gs-stats .gs-stat-icon {
+    width: 74px;
+    height: 74px;
+    flex: 0 0 74px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        145deg,
+        #85415f 0%,
+        #60304e 55%,
+        #47283f 100%
+    );
+}
+
+/* Lucide icon inside pink circle */
+.gs-stats .gs-stat-icon svg,
+.gs-stats .gs-stat-icon i {
+    width: 40px;
+    height: 40px;
+    color: #f58cc4;
+    stroke-width: 2.4;
+}
+
+/* Text beside icons */
+.gs-stats .gs-stat-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 4px;
+    min-width: 0;
+}
+
+/* Large pink value: 6 / Active / Demo / 2026 */
+.gs-stats .gs-stat-value {
+    display: block;
+    color: #f47bb7;
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.1;
+}
+
+/* Main card description */
+.gs-stats .gs-stat-label {
+    display: block;
+    color: #d4e0fa;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.3;
+}
+
+/* Small supporting text */
+.gs-stats .gs-stat-content small {
+    display: block;
+    color: #aebbd3;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+/* Medium desktop and laptop */
+@media (max-width: 1250px) {
+    .gs-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .gs-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .gs-stats .gs-stat-card {
+        min-height: 92px;
+        padding: 14px;
+    }
+
+    .gs-stats .gs-stat-icon {
+        width: 60px;
+        height: 60px;
+        flex-basis: 60px;
+    }
+
+    .gs-stats .gs-stat-icon svg,
+    .gs-stats .gs-stat-icon i {
+        width: 32px;
+        height: 32px;
+    }
+
+    .gs-stats .gs-stat-value {
+        font-size: 23px;
+    }
+}
+
+
+/* ==========================================
+   STEP 4B.3 — RESPONSIVE STATUS CARD FIX
+   ========================================== */
+
+@media (min-width: 901px) {
+
+    .gs-stats {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .gs-stats .gs-stat-card {
+        min-width: 0;
+        min-height: 110px;
+        padding: 12px 10px;
+        gap: 10px;
+    }
+
+    .gs-stats .gs-stat-icon {
+        width: 56px;
+        height: 56px;
+        flex: 0 0 56px;
+    }
+
+    .gs-stats .gs-stat-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .gs-stats .gs-stat-content {
+        min-width: 0;
+        gap: 4px;
+    }
+
+    .gs-stats .gs-stat-value {
+        font-size: 23px;
+    }
+
+    .gs-stats .gs-stat-label {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+
+    .gs-stats .gs-stat-content small {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+}
+
+
+/* STEP 4B.5 — Final Status Card Proportions */
+
+@media (min-width: 901px) {
+
+    .gs-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .gs-stats .gs-stat-card {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        min-height: 112px;
+        padding: 14px 12px;
+        gap: 12px;
+    }
+
+    .gs-stats .gs-stat-icon {
+        width: 62px;
+        height: 62px;
+        min-width: 62px;
+        flex-shrink: 0;
+    }
+
+    .gs-stats .gs-stat-icon svg {
+        width: 34px;
+        height: 34px;
+    }
+
+    .gs-stats .gs-stat-content {
+        min-width: 0;
+    }
+
+    .gs-stats .gs-stat-value {
+        font-size: 24px;
+        line-height: 1.1;
+    }
+
+    .gs-stats .gs-stat-label {
+        font-size: 12px;
+        line-height: 1.3;
+    }
+
+    .gs-stats .gs-stat-content small {
+        font-size: 10px;
+        line-height: 1.4;
+    }
+}
+
+
+/* ==========================================
+   STEP 4C.2 — PINK ANTI-CHEAT PANEL
+   ========================================== */
+
+.gs-anticheat-panel {
+    padding: 0 !important;
+    margin-top: 16px;
+    overflow: hidden;
+    background: #171c29;
+    border: 1px solid #ed6aa9;
+    border-radius: 12px;
+}
+
+/* Pink gaming header */
+
+
+/* STEP 4C.3.2 — Anti-Cheat Gaming Artwork */
+
+.gs-anticheat-header {
+    position: relative;
+    min-height: 94px;
+    display: flex;
+    align-items: center;
+    padding: 18px 24px;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(30, 26, 40, 0.98) 0%,
+            rgba(30, 26, 40, 0.88) 40%,
+            rgba(30, 26, 40, 0.15) 75%,
+            rgba(30, 26, 40, 0.05) 100%
+        ),
+        url("/static/anticheat_banner.png");
+
+    background-size: cover;
+    background-position: center 38%;
+    background-repeat: no-repeat;
+
+    border-bottom: 1px solid #3b3042;
+}
+
+/* Heading and icon */
+
+.gs-anticheat-heading {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.gs-anticheat-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f38abd;
+}
+
+.gs-anticheat-icon svg {
+    width: 45px;
+    height: 45px;
+    stroke-width: 2.4;
+}
+
+.gs-anticheat-heading h2 {
+    margin: 0 0 5px;
+    color: #f3a0d1;
+    font-size: 29px;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.gs-anticheat-heading p {
+    margin: 0;
+    color: #b9c9e9;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Two-column panel body */
+
+.gs-anticheat-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.28fr);
+    gap: 26px;
+    padding: 18px 24px;
+    align-items: stretch;
+}
+
+.gs-anticheat-controls {
+    min-width: 0;
+}
+
+.gs-anticheat-controls label {
+    margin: 0 0 9px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Player selection */
+
+.gs-anticheat-controls select {
+    width: 100%;
+    height: 43px;
+    padding: 9px 15px;
+    color: #f5f3fa;
+    background: #242b3a;
+    border: 1px solid #677086;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.gs-anticheat-controls select:focus {
+    outline: 2px solid #f16bac;
+    outline-offset: 2px;
+}
+
+/* Pink Analyze button */
+
+.gs-anticheat-controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    width: 247px;
+    max-width: 100%;
+    min-height: 46px;
+    margin-top: 13px;
+    padding: 10px 20px;
+
+    background: linear-gradient(90deg, #ed62a3, #eb5299);
+    border: 1px solid #f377b6;
+    border-radius: 7px;
+
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.gs-anticheat-controls button:hover {
+    background: linear-gradient(90deg, #fa79b6, #f263a6);
+}
+
+.gs-anticheat-controls button svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+/* Result box on the right */
+
+.gs-anticheat-panel .gs-anticheat-result {
+    display: flex;
+    align-items: center;
+
+    min-height: 122px;
+    min-width: 0;
+    margin: 0;
+    padding: 22px 26px;
+
+    background: linear-gradient(
+        135deg,
+        #252c3a,
+        #202633
+    );
+
+    border: 1px solid #505b70;
+    border-radius: 10px;
+
+    color: #c4d1e9;
+    font-size: 14px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* Responsive layout */
+
+@media (max-width: 1100px) {
+    .gs-anticheat-body {
+        grid-template-columns: 1fr;
+    }
+
+    .gs-anticheat-panel .gs-anticheat-result {
+        min-height: 90px;
+    }
+}
+
+@media (max-width: 600px) {
+    .gs-anticheat-header {
+        padding: 16px;
+    }
+
+    .gs-anticheat-heading {
+        gap: 12px;
+    }
+
+    .gs-anticheat-heading h2 {
+        font-size: 21px;
+    }
+
+    .gs-anticheat-heading p {
+        font-size: 13px;
+    }
+
+    .gs-anticheat-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .gs-anticheat-body {
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .gs-anticheat-controls button {
+        width: 100%;
+    }
+}
+
+
+/* ==========================================
+   STEP 4C.4 - ANTI-CHEAT FINAL STYLING
+   ========================================== */
+
+/* Anti-Cheat panel controls */
+#anti-cheat-panel {
+    --anti-cheat-pink: #ed5a9d;
+}
+
+/* Dropdown styling */
+#anti-cheat-panel #playerType {
+    width: 100%;
+    min-height: 42px;
+    padding: 10px 15px;
+    background: #222b3b;
+    color: #ffffff;
+    border: 1px solid #657087;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#anti-cheat-panel #playerType:focus {
+    outline: 2px solid #ed5a9d;
+    outline-offset: 2px;
+}
+
+/* Pink Analyze Player button */
+#anti-cheat-panel #analyzeButton {
+    min-height: 45px;
+    min-width: 185px;
+    padding: 11px 24px;
+    background: linear-gradient(
+        135deg,
+        #f36ca9,
+        #e94c94
+    );
+    color: #ffffff;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+#anti-cheat-panel #analyzeButton:hover {
+    background: linear-gradient(
+        135deg,
+        #ff80bb,
+        #ef5ba1
+    );
+    box-shadow: 0 4px 16px rgba(237, 90, 157, 0.2);
+}
+
+#anti-cheat-panel #analyzeButton:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* Result box styling */
+#anti-cheat-panel #result {
+    min-height: 95px;
+    padding: 20px 24px;
+    background: linear-gradient(
+        135deg,
+        #222c3c,
+        #202735
+    );
+    color: #cbd8ee;
+    border: 1px solid #48546a;
+    border-radius: 9px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* Smaller screens */
+@media (max-width: 700px) {
+    #anti-cheat-panel #analyzeButton {
+        max-width: 100%;
+    }
+
+    #anti-cheat-panel #result {
+        padding: 16px;
+    }
+}
+
+/* ==========================================
+   STEP 4D.3 - MARKETPLACE SECURITY PANEL
+   ========================================== */
+
+.marketplace-panel {
+    padding: 0;
+    overflow: hidden;
+    margin-top: 16px;
+    background: #171d2b;
+    border: 1px solid #ed69ad;
+    border-radius: 11px;
+}
+
+/* Marketplace Banner */
+
+
+.marketplace-banner {
+    min-height: 92px;
+    display: flex;
+    align-items: center;
+    padding: 18px 24px;
+    margin: 0;
+
+    background-image: url("/static/images/marketplace_banner.png");
+    background-size: cover;
+    background-position: center 45%;
+    background-repeat: no-repeat;
+
+    border-bottom: 0;
+}
+
+.marketplace-heading {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+}
+
+.marketplace-icon {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: rgba(236, 93, 157, 0.22);
+
+    color: #f58ac6;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.marketplace-heading h2 {
+    margin: 0 0 5px;
+    color: #f4a2d7;
+    font-size: 26px;
+    line-height: 1.2;
+}
+
+.marketplace-heading p {
+    margin: 0;
+    color: #bdd0ed;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Two-column Marketplace Content */
+
+.marketplace-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+    gap: 24px;
+    align-items: stretch;
+    padding: 17px 24px 14px;
+}
+
+.marketplace-controls {
+    min-width: 0;
+}
+
+.marketplace-controls label {
+    display: block;
+    margin: 0 0 9px;
+    color: #f5f5fb;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.marketplace-controls select {
+    width: 100%;
+    min-height: 42px;
+    margin: 0;
+
+    padding: 10px 14px;
+    background: #222b3a;
+    color: #ffffff;
+
+    border: 1px solid #58657a;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.marketplace-controls select:focus {
+    outline: 2px solid #ef69b1;
+    outline-offset: 2px;
+}
+
+/* Pink Analyze Button */
+
+.marketplace-panel #analyzeTransactionButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 240px;
+    min-height: 44px;
+    margin-top: 11px;
+    padding: 10px 22px;
+
+    background: linear-gradient(
+        135deg,
+        #f36aaa,
+        #e94d98
+    );
+
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.marketplace-panel #analyzeTransactionButton:hover {
+    background: linear-gradient(
+        135deg,
+        #fa82bc,
+        #ee60a4
+    );
+}
+
+/* Result Box */
+
+.marketplace-panel .marketplace-result {
+    display: flex;
+    align-items: center;
+
+    min-height: 112px;
+    margin: 0;
+    padding: 22px;
+
+    background: #232c3b;
+    border: 1px solid #4b586d;
+    border-radius: 9px;
+
+    color: #c7d7f0;
+    font-size: 14px;
+    line-height: 1.6;
+
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* Educational Note */
+
+.marketplace-panel > .demo-note {
+    margin: 0;
+    padding: 0 24px 14px;
+    color: #9eabc0;
+    font-size: 12px;
+}
+
+/* Responsive Layout */
+
+@media (max-width: 850px) {
+    .marketplace-content {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .marketplace-heading h2 {
+        font-size: 21px;
+    }
+
+    .marketplace-panel #analyzeTransactionButton {
+        min-width: 0;
+        width: 100%;
+    }
+}
+
+
+/* ==========================================
+   STEP 4E.3 — ASSET OWNERSHIP PANEL
+   ========================================== */
+
+.panel.gs-ownership-panel {
+    padding: 0;
+    margin-top: 16px;
+    overflow: hidden;
+    border: 1px solid #ed65ad;
+    border-radius: 11px;
+    background: #171d2b;
+}
+
+/* Banner */
+.gs-ownership-panel .gs-ownership-banner {
+    display: flex;
+    align-items: center;
+    min-height: 86px;
+    padding: 16px 22px;
+    background: linear-gradient(
+        90deg,
+        #241b2b 0%,
+        #302033 65%,
+        #43243c 100%
+    );
+    border-bottom: 1px solid #513047;
+}
+
+.gs-ownership-panel .gs-ownership-heading {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+
+.gs-ownership-panel .gs-ownership-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #63304d;
+    color: #f58ac4;
+    font-size: 35px;
+}
+
+.gs-ownership-panel .gs-ownership-heading h2 {
+    margin: 0 0 5px;
+    padding: 0;
+    color: #f49ad0;
+    font-size: 23px;
+    line-height: 1.25;
+}
+
+.gs-ownership-panel .gs-ownership-heading p {
+    margin: 0;
+    color: #c7d6f4;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Panel content */
+.gs-ownership-panel .gs-ownership-content {
+    padding: 14px 22px 20px;
+}
+
+.gs-ownership-panel .gs-ownership-group {
+    margin-bottom: 22px;
+}
+
+.gs-ownership-panel .gs-ownership-group h3 {
+    margin: 0 0 12px;
+    padding: 0;
+    border: 0;
+    color: #f58ac4;
+    font-size: 17px;
+}
+
+/* Four input fields in one row */
+.gs-ownership-panel .gs-asset-fields {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.gs-ownership-panel .gs-verify-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gs-ownership-panel .gs-asset-field {
+    min-width: 0;
+}
+
+.gs-ownership-panel .gs-asset-field label {
+    display: block;
+    margin: 0 0 7px;
+    color: #f4f4fa;
+    font-size: 13px;
+}
+
+.gs-ownership-panel .gs-asset-field input,
+.gs-ownership-panel .gs-asset-field select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    margin: 0;
+    padding: 9px 12px;
+    border: 1px solid #59677e;
+    border-radius: 7px;
+    background: #222c3d;
+    color: #f4f4fa;
+    font-size: 13px;
+}
+
+/* Pink action buttons */
+.gs-ownership-panel button {
+    margin-top: 14px;
+    padding: 11px 25px;
+    border: 0;
+    border-radius: 7px;
+    background: linear-gradient(90deg, #f16aab, #e84998);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.gs-ownership-panel button:hover {
+    background: linear-gradient(90deg, #fa80ba, #f05ba5);
+}
+
+/* Result boxes */
+.gs-ownership-panel .result {
+    margin: 14px 0 0;
+    padding: 16px;
+    border: 1px solid #48566e;
+    border-radius: 8px;
+    background: #242d3d;
+    color: #c7d6f4;
+    line-height: 1.6;
+}
+
+/* Demo note */
+.gs-ownership-panel .demo-note {
+    margin: 10px 0 0;
+    color: #aab9d1;
+    font-size: 12px;
+}
+
+/* Responsive layout */
+@media (max-width: 1100px) {
+    .gs-ownership-panel .gs-asset-fields {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .gs-ownership-panel .gs-asset-fields,
+    .gs-ownership-panel .gs-verify-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .gs-ownership-panel .gs-ownership-banner {
+        padding: 15px;
+    }
+
+    .gs-ownership-panel .gs-ownership-content {
+        padding: 15px;
+    }
+
+    .gs-ownership-panel .gs-ownership-heading h2 {
+        font-size: 19px;
+    }
+}
+
+/* ==========================================
+   STEP 4E.4.5
+   ASSET OWNERSHIP BANNER - FINAL FIX
+   ========================================== */
+
+#gs-assets.gs-ownership-panel {
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ed65ad;
+    border-radius: 10px;
+    background: #171d2b;
+}
+
+/* Original image colors, no transparency */
+#gs-assets .gs-ownership-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 160px;
+    margin: 0;
+    padding: 16px 22px;
+
+    background-image: url("/static/images/asset_ownership_banner.png");
+    background-size: cover;
+    background-position: center 45%;
+    background-repeat: no-repeat;
+
+    opacity: 1;
+    filter: none;
+
+    border-bottom: 1px solid #493044;
+}
+
+/* Keep heading and description visible */
+#gs-assets .gs-ownership-heading {
+    position: relative;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+}
+
+#gs-assets .gs-ownership-heading h2 {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+
+    margin: 0 0 5px;
+    padding: 0;
+
+    background: transparent;
+    color: #f49ad0;
+
+    font-size: 23px;
+    line-height: 1.2;
+}
+
+#gs-assets .gs-ownership-heading p {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+    color: #c7d6f4;
+    font-size: 14px;
+}
+
+/* Content begins immediately after banner */
+#gs-assets .gs-ownership-content {
+    padding: 16px 20px 20px;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    #gs-assets .gs-ownership-banner {
+        min-height: 100px;
+        padding: 16px;
+        background-position: 65% center;
+    }
+
+    #gs-assets .gs-ownership-heading h2 {
+        font-size: 19px;
+    }
+
+    #gs-assets .gs-ownership-heading p {
+        font-size: 12px;
+    }
+}
+
+
+/* ==========================================
+   STEP 4F.4 - METAVERSE IDENTITY BANNER
+   ========================================== */
+
+   #gs-identity.identity-panel {
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ed65ad;
+    border-radius: 10px;
+    background: #171d2b;
+}
+
+
+/* ==========================================
+   STEP 4F.7.1 - IDENTITY REGISTRATION FORM
+   ========================================== */
+
+/* Registration section heading */
+#gs-identity > h3:first-of-type {
+    color: #ff83bf;
+    font-size: 17px;
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    padding-top: 0;
+    border-top: none;
+}
+
+/* Registration labels */
+#gs-identity > h3:first-of-type ~ label {
+    color: #e6e8f2;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* Identity form input fields */
+#gs-identity input {
+    min-height: 40px;
+    background: #242d3d;
+    color: #ffffff;
+    border: 1px solid #59657a;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+#gs-identity input:focus {
+    outline: 2px solid #f16bad;
+    outline-offset: 1px;
+    border-color: #f16bad;
+}
+
+/* Register Identity button */
+#gs-identity button {
+    min-height: 39px;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #ef69ac, #e94d97);
+    color: #ffffff;
+    border: 1px solid #f478b5;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#gs-identity button:hover {
+    background: linear-gradient(90deg, #ff82bd, #f361a6);
+}
+
+/* Registration and other result boxes */
+#gs-identity .result {
+    background: #242d3d;
+    color: #d2def4;
+    border: 1px solid #4e5b72;
+    border-radius: 7px;
+    padding: 18px 22px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#gs-identity .gs-identity-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    min-height: 160px;
+    margin: 0;
+    padding: 16px 22px;
+
+    background-image: url("/static/images/identity_security_banner.png");
+    background-size: cover;
+    background-position: center 45%;
+    background-repeat: no-repeat;
+
+    opacity: 1;
+    filter: none;
+
+    border-bottom: 1px solid #ed65ad;
+}
+
+#gs-identity .gs-identity-heading {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 65%;
+}
+
+#gs-identity .gs-identity-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(237, 101, 173, 0.24);
+    color: #ff82c5;
+}
+
+#gs-identity .gs-identity-heading h2 {
+    margin: 0 0 5px;
+    padding: 0;
+    color: #ff91cf;
+    font-size: 23px;
+    line-height: 1.2;
+    border: none;
+    background: transparent;
+}
+
+#gs-identity .gs-identity-heading p {
+    margin: 0;
+    padding: 0;
+    color: #d6e2ff;
+    font-size: 13px;
+    line-height: 1.4;
+    background: transparent;
+}
+
+#gs-identity > h3,
+#gs-identity > label,
+#gs-identity > input,
+#gs-identity > select,
+#gs-identity > button,
+#gs-identity > .result,
+#gs-identity > p {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#gs-identity > h3:first-of-type {
+    margin-top: 20px;
+}
+
+@media (max-width: 700px) {
+    #gs-identity .gs-identity-banner {
+        min-height: 110px;
+        padding: 14px;
+        background-position: 65% center;
+    }
+
+    #gs-identity .gs-identity-heading {
+        max-width: 85%;
+    }
+
+    #gs-identity .gs-identity-heading h2 {
+        font-size: 18px;
+    }
+}
+
+
+/* ==========================================
+   STEP 4F.7.2 - IDENTITY SECURITY PINK TEXT
+   ========================================== */
+
+/* All four section headings */
+#gs-identity > h3 {
+    color: #ff79bd;
+}
+
+/* All field labels */
+#gs-identity label {
+    color: #ff91cb;
+}
+
+/* Input and dropdown text */
+#gs-identity input,
+#gs-identity select {
+    color: #ff9bd2;
+}
+
+/* Placeholder text */
+#gs-identity input::placeholder {
+    color: #d98bb8;
+    opacity: 1;
+}
+
+/* Result box text */
+#gs-identity .result,
+#gs-identity .result * {
+    color: #ff9bd2;
+}
+
+/* Section descriptions and safety note */
+#gs-identity > p,
+#gs-identity small {
+    color: #ff9bd2;
+}
+
+/* Dropdown options */
+#gs-identity select option {
+    color: #ff9bd2;
+    background: #242d3d;
+}
+
+
+/* ==========================================
+   STEP 4F.7.3 - ONLY FOUR HEADINGS PINK
+   ========================================== */
+
+/* Only the four section headings */
+#gs-identity > h3 {
+    color: #ff79bd;
+}
+
+/* All field labels stay white */
+#gs-identity label {
+    color: #ffffff;
+}
+
+/* Input and dropdown text stay white */
+#gs-identity input,
+#gs-identity select {
+    color: #ffffff;
+}
+
+/* Placeholder text */
+#gs-identity input::placeholder {
+    color: #b8c2d5;
+    opacity: 1;
+}
+
+/* Result messages stay white */
+#gs-identity .result,
+#gs-identity .result * {
+    color: #ffffff;
+}
+
+/* Descriptions and safety note stay white */
+#gs-identity > p,
+#gs-identity small {
+    color: #ffffff;
+}
+
+/* Dropdown options */
+#gs-identity select option {
+    color: #ffffff;
+    background: #242d3d;
+}
+
+
+/* ==========================================
+   STEP 4G.4 - GAMING INFRASTRUCTURE BANNER
+   ========================================== */
+
+/* Main infrastructure panel */
+#gs-infrastructure {
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ed65ad;
+    border-radius: 10px;
+    background: #171d2b;
+}
+
+/* Neon-pink Cyber Network Defense banner */
+#gs-infrastructure .gs-infrastructure-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 160px;
+    margin: 0;
+    padding: 16px 22px;
+
+    background-image: url("/static/images/infrastructure_security_banner.png");
+    background-size: cover;
+    background-position: center 45%;
+    background-repeat: no-repeat;
+
+    border-bottom: 1px solid #ed65ad;
+}
+
+/* Heading container */
+#gs-infrastructure .gs-infrastructure-heading {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 65%;
+}
+
+/* Circular server icon */
+#gs-infrastructure .gs-infrastructure-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    background: rgba(237, 101, 173, 0.24);
+    color: #ff82c5;
+}
+
+/* Banner title */
+#gs-infrastructure .gs-infrastructure-heading h2 {
+    margin: 0 0 5px;
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: #ff91cf;
+    font-size: 23px;
+    line-height: 1.2;
+}
+
+/* Banner description */
+#gs-infrastructure .gs-infrastructure-heading p {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Keep existing form content padded */
+#gs-infrastructure > h3,
+#gs-infrastructure > label,
+#gs-infrastructure > input,
+#gs-infrastructure > select,
+#gs-infrastructure > button,
+#gs-infrastructure > .result,
+#gs-infrastructure > p {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#gs-infrastructure > h3:first-of-type {
+    margin-top: 20px;
+}
+
+/* Mobile screens */
+@media (max-width: 700px) {
+    #gs-infrastructure .gs-infrastructure-banner {
+        min-height: 160px;
+        padding: 14px;
+        background-position: 65% center;
+    }
+
+    #gs-infrastructure .gs-infrastructure-heading {
+        max-width: 85%;
+    }
+
+    #gs-infrastructure .gs-infrastructure-heading h2 {
+        font-size: 18px;
+    }
+}
+
+
+/* ==========================================
+   STEP 4G.5 - INFRASTRUCTURE PINK TEXT
+   ========================================== */
+
+/* Three security subsection headings */
+#gs-infrastructure > h3 {
+    color: #ff79bd;
+}
+
+/* Three security action buttons - text only */
+
+/* Gaming Infrastructure Security - Pink Buttons */
+#gs-infrastructure button {
+    background: #ec65ac;
+    color: #ffffff;
+    border: 1px solid #f178b8;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Pink button hover effect */
+#gs-infrastructure button:hover {
+    background: #ff79bd;
+    color: #ffffff;
+    border-color: #ff9bd0;
+}
+
+
+/* ==========================================
+   STEP 4H.4 - AI CONTENT MODERATION BANNER
+   ========================================== */
+
+/* Main moderation panel */
+#moderation-panel {
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ed65ad;
+    border-radius: 10px;
+    background: #171d2b;
+}
+
+/* Neon-pink gaming chat banner */
+#moderation-panel .gs-moderation-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 160px;
+    margin: 0;
+    padding: 20px 22px;
+
+    background-image: url("/static/images/content_moderation_banner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-bottom: 1px solid #ed65ad;
+}
+
+/* Heading container */
+#moderation-panel .gs-moderation-heading {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 65%;
+}
+
+/* Circular chat icon */
+#moderation-panel .gs-moderation-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    background: rgba(237, 101, 173, 0.24);
+    color: #ff82c5;
+}
+
+/* Banner heading */
+#moderation-panel .gs-moderation-heading h2 {
+    margin: 0 0 5px;
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: #ff91cf;
+    font-size: 23px;
+    line-height: 1.2;
+}
+
+/* Banner description */
+#moderation-panel .gs-moderation-heading p {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Keep existing form content padded */
+#moderation-panel > h3,
+#moderation-panel > label,
+#moderation-panel > input,
+#moderation-panel > select,
+#moderation-panel > textarea,
+#moderation-panel > button,
+#moderation-panel > .result,
+#moderation-panel > p {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#moderation-panel > h3:first-of-type {
+    margin-top: 20px;
+}
+
+/* Mobile screens */
+@media (max-width: 700px) {
+    #moderation-panel .gs-moderation-banner {
+        min-height: 160px;
+        padding: 14px;
+        background-position: 65% center;
+    }
+
+    #moderation-panel .gs-moderation-heading {
+        max-width: 85%;
+    }
+
+    #moderation-panel .gs-moderation-heading h2 {
+        font-size: 18px;
+    }
+}
+
+
+/* ==========================================
+   STEP 4H.5 - AI CONTENT MODERATION STYLING
+   ========================================== */
+
+/* Only the three subsection headings */
+#moderation-panel > h3 {
+    color: #ff79bd;
+}
+
+/* Three moderation buttons - pink background, white text */
+#moderation-panel > button {
+    background: #ec65ac;
+    color: #ffffff;
+    border: 1px solid #f178b8;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Button hover effect */
+#moderation-panel > button:hover {
+    background: #ff79bd;
+    color: #ffffff;
+    border-color: #ff9bd0;
+}
+
+
+/* ==========================================
+   STEP 4I.4 - DEVSECOPS SECURITY BANNER
+   ========================================== */
+
+/* Main DevSecOps panel */
+#devsecops-panel {
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid #ed65ad;
+    border-radius: 10px;
+    background: #171d2b;
+}
+
+/* Neon-pink Infinity Loop banner */
+#devsecops-panel .gs-devsecops-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    width: 100%;
+    min-height: 160px;
+    margin: 0;
+    padding: 20px 22px;
+
+    background-image: url("/static/images/devsecops_banner.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    border-bottom: 1px solid #ed65ad;
+}
+
+/* Heading container */
+#devsecops-panel .gs-devsecops-heading {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    max-width: 65%;
+}
+
+/* Circular workflow icon */
+#devsecops-panel .gs-devsecops-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+
+    background: rgba(237, 101, 173, 0.24);
+    color: #ff82c5;
+}
+
+/* Banner heading */
+#devsecops-panel .gs-devsecops-heading h2 {
+    margin: 0 0 5px;
+    padding: 0;
+    border: none;
+    background: transparent;
+
+    color: #ff91cf;
+    font-size: 23px;
+    line-height: 1.2;
+}
+
+/* Banner description */
+#devsecops-panel .gs-devsecops-heading p {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+
+    color: #ffffff;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Existing content spacing */
+#devsecops-panel > button,
+#devsecops-panel > .result,
+#devsecops-panel > p {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#devsecops-panel > button:first-of-type {
+    margin-top: 20px;
+}
+
+/* Mobile screens */
+@media (max-width: 700px) {
+    #devsecops-panel .gs-devsecops-banner {
+        min-height: 160px;
+        padding: 14px;
+        background-position: 65% center;
+    }
+
+    #devsecops-panel .gs-devsecops-heading {
+        max-width: 85%;
+    }
+
+    #devsecops-panel .gs-devsecops-heading h2 {
+        font-size: 18px;
+    }
+}
+
+
+/* ==========================================
+   STEP 4I.5 - DEVSECOPS PINK BUTTON
+   ========================================== */
+
+#devsecops-panel #loadDevsecopsReportButton {
+    background: #ec65ac;
+    color: #ffffff;
+    border: 1px solid #f178b8;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#devsecops-panel #loadDevsecopsReportButton:hover {
+    background: #ff79bd;
+    color: #ffffff;
+    border-color: #ff9bd0;
+}

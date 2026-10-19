@@ -8,170 +8,485 @@
     <link rel="stylesheet" href="/static/dashboard.css">
 </head>
 <body>
+
+
+<!-- GameShield AI Pink Sidebar -->
+<aside class="gs-sidebar" aria-label="Security navigation">
+
+    
+<div class="gs-brand">
+
+    <div class="gs-brand-icon">
+          <img
+             src="/static/gameshield-logo.png"
+             alt="GameShield AI Gaming Shield Logo"
+             class="gs-logo-image"
+             width="76"
+             height="76"
+         >
+    </div>
+
+
+    <div>
+        <div class="gs-brand-title">
+            GameShield <span>AI</span>
+        </div>
+
+        <div class="gs-brand-subtitle">
+            Gaming &amp; VR/AR Security Platform
+        </div>
+    </div>
+
+</div>
+   
+<nav class="gs-nav" aria-label="Dashboard sections">
+
+    <a href="#gs-overview" class="gs-nav-link">
+        <i data-lucide="house" aria-hidden="true"></i>
+        Overview
+    </a>
+
+    <a href="#gs-anticheat" class="gs-nav-link gs-nav-active">
+        <i data-lucide="crosshair" aria-hidden="true"></i>
+        AI Anti-Cheat
+    </a>
+
+    <a href="#gs-assets" class="gs-nav-link">
+        <i data-lucide="box" aria-hidden="true"></i>
+        Asset Security
+    </a>
+
+    <a href="#gs-identity" class="gs-nav-link">
+        <i data-lucide="fingerprint" aria-hidden="true"></i>
+        Identity Security
+    </a>
+
+    <a href="#gs-infrastructure" class="gs-nav-link">
+        <i data-lucide="server" aria-hidden="true"></i>
+        Infrastructure Security
+    </a>
+
+    <a href="#moderation-panel" class="gs-nav-link">
+        <i data-lucide="message-square" aria-hidden="true"></i>
+        Content Moderation
+    </a>
+
+    <a href="#devsecops-panel" class="gs-nav-link">
+        <i data-lucide="settings" aria-hidden="true"></i>
+        DevSecOps
+    </a>
+
+</nav>
+
+
+    <div class="gs-sidebar-bottom">
+        <div class="gs-platform-status">
+            <span class="gs-status-icon">
+                <i data-lucide="check" aria-hidden="true"></i>
+            </span>
+            <div>
+                <div>Platform Status</div>
+                <strong>Online</strong>
+                <small>Educational demo environment</small>
+            </div>
+        </div>
+
+        <div class="gs-environment">
+            <span>
+                <i data-lucide="monitor" aria-hidden="true"></i>
+            </span>
+            <div>
+                Project Environment
+                <strong>Educational Demo</strong>
+                <small>Synthetic Data Only</small>
+            </div>
+        </div>
+    </div>
+
+</aside>
+
     <main class="container">
-        <header>
-            <h1>GameShield AI</h1>
-            <p>Advanced Gaming & VR/AR Security Platform</p>
-            <span class="badge">Educational Security Demo</span>
-        </header>
+        
+<!-- STEP 4A — Main Dashboard Hero Banner -->
 
-        <section class="modules">
-            <div class="module active">AI Anti-Cheat</div>
-            <div class="module">Asset Security</div>
-            <div class="module">Identity Security</div>
-            <div class="module">Infrastructure Security</div>
-            <div class="module">Content Moderation</div>
-            <div class="module">DevSecOps</div>
-        </section>
+<div class="gs-top-layout" id="gs-overview">
 
-        <section class="panel">
-            <h2>AI-Powered Anti-Cheat</h2>
-            <p>Analyze sample player behavior using the trained ML model.</p>
+    <header class="gs-hero-banner">
 
+        <div class="gs-hero-content">
+
+            <h1>
+                GameShield <span>AI</span>
+            </h1>
+
+            <p>
+                Advanced Gaming &amp; VR/AR Security Platform
+            </p>
+
+            <span class="gs-hero-badge">
+                <i data-lucide="graduation-cap"
+                   aria-hidden="true"></i>
+                Educational Security Demo
+            </span>
+
+        </div>
+
+    </header>
+
+    <div class="gs-top-info">
+
+        <div class="gs-info-card">
+
+            <i data-lucide="calendar-days"
+               aria-hidden="true"></i>
+
+            <div>
+                <strong id="gs-current-date">
+                    Demo Dashboard
+                </strong>
+
+                <small id="gs-current-time">
+                    Local Time
+                </small>
+            </div>
+
+        </div>
+
+        <div class="gs-info-card">
+
+            <i data-lucide="user-round"
+               aria-hidden="true"></i>
+
+            <div>
+                <strong>Demo User</strong>
+                <small>Local Environment</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+        
+<!-- STEP 4B — Four Security Status Cards -->
+
+<section class="gs-stats" aria-label="Security platform overview">
+
+    <!-- Card 1: Security Modules -->
+    <div class="gs-stat-card">
+        <div class="gs-stat-icon">
+            <i data-lucide="box" aria-hidden="true"></i>
+        </div>
+
+        <div class="gs-stat-content">
+            <strong class="gs-stat-value">6</strong>
+            <span class="gs-stat-label">Security Modules</span>
+            <small>Complete &amp; Integrated</small>
+        </div>
+    </div>
+
+    <!-- Card 2: Platform Status -->
+    <div class="gs-stat-card">
+        <div class="gs-stat-icon">
+            <i data-lucide="shield-check" aria-hidden="true"></i>
+        </div>
+
+        <div class="gs-stat-content">
+            <strong class="gs-stat-value">Active</strong>
+            <span class="gs-stat-label">Platform Status</span>
+            <small>All Systems Operational</small>
+        </div>
+    </div>
+
+    <!-- Card 3: Demo Environment -->
+    <div class="gs-stat-card">
+        <div class="gs-stat-icon">
+            <i data-lucide="users-round" aria-hidden="true"></i>
+        </div>
+
+        <div class="gs-stat-content">
+            <strong class="gs-stat-value">Demo</strong>
+            <span class="gs-stat-label">Environment</span>
+            <small>Educational Use Only</small>
+        </div>
+    </div>
+
+    <!-- Card 4: Project Year -->
+    <div class="gs-stat-card">
+        <div class="gs-stat-icon">
+            <i data-lucide="chart-no-axes-column-increasing"
+               aria-hidden="true"></i>
+        </div>
+
+        <div class="gs-stat-content">
+            <strong class="gs-stat-value">2026</strong>
+            <span class="gs-stat-label">Project Year</span>
+            <small>GameShield AI v1.0</small>
+        </div>
+    </div>
+
+</section>
+
+   
+<section class="panel gs-anticheat-panel" id="gs-anticheat">
+
+    <div class="gs-anticheat-header">
+        <div class="gs-anticheat-heading">
+            <span class="gs-anticheat-icon">
+                <i data-lucide="crosshair" aria-hidden="true"></i>
+            </span>
+
+            <div>
+                <h2>AI-Powered Anti-Cheat</h2>
+                <p>Analyze sample player behavior using the trained ML model.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="gs-anticheat-body">
+
+        <div class="gs-anticheat-controls">
             <label for="playerType">Choose a player:</label>
+
             <select id="playerType">
                 <option value="legit">Legitimate Player</option>
                 <option value="cheater">Suspicious Player</option>
             </select>
 
             <button id="analyzeButton" type="button">
+                <i data-lucide="play" aria-hidden="true"></i>
                 Analyze Player
             </button>
+        </div>
 
-            <div id="result" class="result" role="status" aria-live="polite">
-                Select a player and click Analyze Player.
+        <div id="result"
+             class="result gs-anticheat-result"
+             role="status"
+             aria-live="polite">
+            Select a player and click Analyze Player.
+        </div>
+
+    </div>
+
+</section>
+     
+<section class="panel asset-panel marketplace-panel">
+
+    <div class="marketplace-banner">
+        <div class="marketplace-heading">
+            <span class="marketplace-icon" aria-hidden="true">
+                ◇
+            </span>
+
+            <div>
+                <h2>Virtual Asset & Marketplace Security</h2>
+
+                <p>
+                    Analyze sample in-game marketplace transactions
+                    for suspicious activity.
+                </p>
             </div>
-        </section>
+        </div>
+    </div>
 
-<section class="panel asset-panel">
-    <h2>Virtual Asset & Marketplace Security</h2>
-    <p>
-        Analyze sample in-game marketplace transactions
-        for suspicious activity.
-    </p>
+    <div class="marketplace-content">
 
-    <label for="transactionType">
-        Choose a transaction:
-    </label>
+        <div class="marketplace-controls">
 
-    <select id="transactionType">
-        <option value="normal">
-            Normal Marketplace Transaction
-        </option>
-        <option value="suspicious">
-            Suspicious Marketplace Transaction
-        </option>
-    </select>
+            <label for="transactionType">
+                Choose a transaction:
+            </label>
 
-    <button id="analyzeTransactionButton" type="button">
-        Analyze Transaction
-    </button>
+            <select id="transactionType">
+                <option value="normal">
+                    Normal Marketplace Transaction
+                </option>
 
-    <div id="transactionResult"
-         class="result"
-         role="status"
-         aria-live="polite">
-        Select a transaction and click Analyze Transaction.
+                <option value="suspicious">
+                    Suspicious Marketplace Transaction
+                </option>
+            </select>
+
+            <button
+                id="analyzeTransactionButton"
+                type="button"
+            >
+                Analyze Transaction
+            </button>
+
+        </div>
+
+        <div
+            id="transactionResult"
+            class="result marketplace-result"
+            role="status"
+            aria-live="polite"
+        >
+            Select a transaction and click Analyze Transaction.
+        </div>
+
     </div>
 
     <p class="demo-note">
         Educational demonstration using synthetic transaction data.
     </p>
+
 </section>
 
 
-<section class="panel asset-panel">
-    <h2>Virtual Asset Ownership & Duplication Protection</h2>
-    <p>
-        Register a sample gaming asset, verify its owner,
-        and scan the asset registry for duplicates.
-    </p>
+<section class="panel asset-panel gs-ownership-panel" id="gs-assets">
 
-    <h3>1. Register Virtual Asset</h3>
+    <!-- Asset Ownership Banner -->
+    <div class="gs-ownership-banner">
+        <div class="gs-ownership-heading">
+            <span class="gs-ownership-icon" aria-hidden="true">⬡</span>
 
-    <label for="assetName">Asset Name</label>
-    <input id="assetName" type="text"
-           value="Legendary Dragon Sword"
-           maxlength="100">
-
-    <label for="assetOwner">Owner ID</label>
-    <input id="assetOwner" type="text"
-           value="demo_player_001"
-           maxlength="100">
-
-    <label for="assetType">Asset Type</label>
-    <select id="assetType">
-        <option value="weapon">Weapon</option>
-        <option value="skin">Skin</option>
-        <option value="collectible">Collectible</option>
-    </select>
-
-    <label for="assetValue">Asset Value</label>
-    <input id="assetValue" type="number"
-           value="500" min="0" max="100000"
-           step="0.01">
-
-    <button id="registerAssetButton" type="button">
-        Register Asset
-    </button>
-
-    <div id="assetRegisterResult"
-         class="result"
-         role="status"
-         aria-live="polite">
-        Register a sample asset to begin.
+            <div>
+                <h2>Virtual Asset Ownership &amp; Duplication Protection</h2>
+                <p>
+                    Register a sample gaming asset, verify its owner,
+                    and scan the asset registry for duplicates.
+                </p>
+            </div>
+        </div>
     </div>
 
-    <h3>2. Verify Asset Ownership</h3>
+    <div class="gs-ownership-content">
 
-    <label for="verifyAssetId">Asset ID</label>
-    <input id="verifyAssetId" type="text"
-           placeholder="Asset ID from registration">
+        <!-- 1. Register Virtual Asset -->
+        <div class="gs-ownership-group">
+            <h3>1. Register Virtual Asset</h3>
 
-    <label for="verifyOwnerId">Owner ID</label>
-    <input id="verifyOwnerId" type="text"
-           value="demo_player_001">
+            <div class="gs-asset-fields">
 
-    <button id="verifyAssetButton" type="button">
-        Verify Ownership
-    </button>
+                <div class="gs-asset-field">
+                    <label for="assetName">Asset Name</label>
+                    <input id="assetName" type="text"
+                           value="Legendary Dragon Sword"
+                           maxlength="100">
+                </div>
 
-    <div id="assetVerifyResult"
-         class="result"
-         role="status"
-         aria-live="polite">
-        Register an asset first, then verify ownership.
+                <div class="gs-asset-field">
+                    <label for="assetOwner">Owner ID</label>
+                    <input id="assetOwner" type="text"
+                           value="demo_player_001"
+                           maxlength="100">
+                </div>
+
+                <div class="gs-asset-field">
+                    <label for="assetType">Asset Type</label>
+                    <select id="assetType">
+                        <option value="weapon">Weapon</option>
+                        <option value="skin">Skin</option>
+                        <option value="collectible">Collectible</option>
+                    </select>
+                </div>
+
+                <div class="gs-asset-field">
+                    <label for="assetValue">Asset Value</label>
+                    <input id="assetValue" type="number"
+                           value="500"
+                           min="0"
+                           max="100000"
+                           step="0.01">
+                </div>
+
+            </div>
+
+            <button id="registerAssetButton" type="button">
+                Register Asset
+            </button>
+
+            <div id="assetRegisterResult"
+                 class="result"
+                 role="status"
+                 aria-live="polite">
+                Register a sample asset to begin.
+            </div>
+        </div>
+
+        <!-- 2. Verify Asset Ownership -->
+        <div class="gs-ownership-group">
+            <h3>2. Verify Asset Ownership</h3>
+
+            <div class="gs-asset-fields gs-verify-fields">
+
+                <div class="gs-asset-field">
+                    <label for="verifyAssetId">Asset ID</label>
+                    <input id="verifyAssetId"
+                           type="text"
+                           placeholder="Asset ID from registration">
+                </div>
+
+                <div class="gs-asset-field">
+                    <label for="verifyOwnerId">Owner ID</label>
+                    <input id="verifyOwnerId"
+                           type="text"
+                           value="demo_player_001">
+                </div>
+
+            </div>
+
+            <button id="verifyAssetButton" type="button">
+                Verify Ownership
+            </button>
+
+            <div id="assetVerifyResult"
+                 class="result"
+                 role="status"
+                 aria-live="polite">
+                Register an asset first, then verify ownership.
+            </div>
+        </div>
+
+        <!-- 3. Asset Duplication Scan -->
+        <div class="gs-ownership-group">
+            <h3>3. Asset Duplication Scan</h3>
+
+            <p>Check the existing registry for duplicate assets.</p>
+
+            <button id="scanDuplicatesButton" type="button">
+                Scan for Duplicates
+            </button>
+
+            <div id="duplicationResult"
+                 class="result"
+                 role="status"
+                 aria-live="polite">
+                Click Scan for Duplicates to begin.
+            </div>
+        </div>
+
+        <p class="demo-note">
+            Educational prototype. Use synthetic demo assets only.
+            This is not a live blockchain ownership verification.
+        </p>
+
     </div>
-
-    <h3>3. Asset Duplication Scan</h3>
-    <p>Check the existing registry for duplicate assets.</p>
-
-    <button id="scanDuplicatesButton" type="button">
-        Scan for Duplicates
-    </button>
-
-    <div id="duplicationResult"
-         class="result"
-         role="status"
-         aria-live="polite">
-        Click Scan for Duplicates to begin.
-    </div>
-
-    <p class="demo-note">
-        Educational prototype. Use synthetic demo assets only.
-        This is not a live blockchain ownership verification.
-    </p>
 </section>
 
 
 <!-- METAVERSE IDENTITY SECURITY DASHBOARD -->
-<section class="panel identity-panel">
+<section class="panel identity-panel" id="gs-identity">
 
-    <h2>Metaverse Identity Security</h2>
-    <p>
-        Test secure authentication, avatar identity,
-        biometric protection and privacy controls.
-    </p>
+    
+<!-- STEP 4F.3 - Metaverse Identity Security Banner -->
+<div class="gs-identity-banner">
+    <div class="gs-identity-heading">
+        <span class="gs-identity-icon" aria-hidden="true">
+            <i data-lucide="fingerprint"></i>
+        </span>
+
+        <div>
+            <h2>Metaverse Identity Security</h2>
+            <p>
+                Test secure authentication, avatar identity,
+                biometric protection and privacy controls.
+            </p>
+        </div>
+    </div>
+</div>
 
     <!-- USER REGISTRATION -->
     <h3>1. Register Demo User</h3>
@@ -275,13 +590,27 @@
 
 
 <!-- GAMING INFRASTRUCTURE SECURITY -->
-<section class="panel infrastructure-panel">
+<section class="panel infrastructure-panel" id="gs-infrastructure">
 
-    <h2>Gaming Infrastructure Security</h2>
-    <p>
-        Test server-side validation, secure netcode,
-        and automated threat response.
-    </p>
+    
+<!-- STEP 4G.3 - Gaming Infrastructure Security Banner -->
+<div class="gs-infrastructure-banner">
+    <div class="gs-infrastructure-heading">
+
+        <span class="gs-infrastructure-icon" aria-hidden="true">
+            <i data-lucide="server"></i>
+        </span>
+
+        <div>
+            <h2>Gaming Infrastructure Security</h2>
+            <p>
+                Test server-side validation, secure netcode,
+                and automated threat response.
+            </p>
+        </div>
+
+    </div>
+</div>
 
     <h3>1. Server-Side Action Validation</h3>
 
@@ -357,11 +686,25 @@
 <!-- CONTENT MODERATION DASHBOARD -->
 <section class="panel moderation-panel" id="moderation-panel">
 
-    <h2>AI Content Moderation & Child Safety</h2>
-    <p>
-        Test gaming chat moderation, age-based content
-        filtering and multiplayer safety.
-    </p>
+    
+<!-- STEP 4H.3 - AI Content Moderation Banner -->
+<div class="gs-moderation-banner">
+    <div class="gs-moderation-heading">
+
+        <span class="gs-moderation-icon" aria-hidden="true">
+            <i data-lucide="messages-square"></i>
+        </span>
+
+        <div>
+            <h2>AI Content Moderation &amp; Child Safety</h2>
+            <p>
+                Test gaming chat moderation, age-based content
+                filtering and multiplayer safety.
+            </p>
+        </div>
+
+    </div>
+</div>
 
     <h3>1. AI Text Moderation</h3>
 
@@ -437,12 +780,25 @@
 <!-- DEVSECOPS SECURITY DASHBOARD -->
 <section class="panel devsecops-panel" id="devsecops-panel">
 
-    <h2>DevSecOps Security Pipeline</h2>
+    
+<!-- STEP 4I.3 - DevSecOps Security Pipeline Banner -->
+<div class="gs-devsecops-banner">
+    <div class="gs-devsecops-heading">
 
-    <p>
-        View the latest automated security testing report
-        generated by the GameShield AI security pipeline.
-    </p>
+        <span class="gs-devsecops-icon" aria-hidden="true">
+            <i data-lucide="workflow"></i>
+        </span>
+
+        <div>
+            <h2>DevSecOps Security Pipeline</h2>
+            <p>
+                View the latest automated security testing report
+                generated by the GameShield AI security pipeline.
+            </p>
+        </div>
+
+    </div>
+</div>
 
     <button type="button" id="loadDevsecopsReportButton">
         Load Security Report
@@ -469,5 +825,48 @@
     </main>
 
     <script src="/static/dashboard.js"></script>
+
+    <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+    <script>
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+</script>
+
+
+<!-- STEP 4A.6 — Live Date and Time -->
+
+<script>
+(function () {
+    "use strict";
+
+    const dateElement = document.getElementById("gs-current-date");
+    const timeElement = document.getElementById("gs-current-time");
+
+    if (!dateElement || !timeElement) {
+        return;
+    }
+
+    function updateDashboardClock() {
+        const now = new Date();
+
+        dateElement.textContent = now.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+        });
+
+        timeElement.textContent = now.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
+        });
+    }
+
+    updateDashboardClock();
+    setInterval(updateDashboardClock, 30000);
+})();
+</script>
+
 </body>
 </html>
