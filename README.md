@@ -1,4 +1,4 @@
-﻿# GameShield AI
+# GameShield AI
 ## Advanced Gaming and VR/AR Security Platform
 
 **AI-Powered Anti-Cheat, Virtual Asset Protection, Metaverse Identity Security, Gaming Infrastructure Protection, Content Moderation and DevSecOps**
@@ -82,43 +82,43 @@ The development computer did not require an Ubuntu virtual machine. Linux deploy
 
 ```text
 CyberSecurityProject/
-â”œâ”€â”€ .github/
-â”‚   â””â”€â”€ workflows/
-â”‚       â””â”€â”€ security.yml
-â”œâ”€â”€ config/
-â”œâ”€â”€ data/
-â”‚   â”œâ”€â”€ player_behavior.csv
-â”‚   â””â”€â”€ moderation_dataset.csv
-â”œâ”€â”€ docs/
-â”‚   â”œâ”€â”€ architecture/
-â”‚   â””â”€â”€ diagrams/
-â”œâ”€â”€ logs/
-â”œâ”€â”€ models/
-â”œâ”€â”€ screenshots/
-â”œâ”€â”€ src/
-â”‚   â”œâ”€â”€ anti_cheat/
-â”‚   â”œâ”€â”€ asset_security/
-â”‚   â”œâ”€â”€ content_moderation/
-â”‚   â”œâ”€â”€ devsecops/
-â”‚   â”œâ”€â”€ identity_security/
-â”‚   â”œâ”€â”€ infrastructure_security/
-â”‚   â”œâ”€â”€ static/
-â”‚   â”œâ”€â”€ templates/
-â”‚   â””â”€â”€ app.py
-â”œâ”€â”€ tests/
-â”‚   â”œâ”€â”€ test_api.py
-â”‚   â””â”€â”€ test_security.py
-â”œâ”€â”€ .gitignore
-â”œâ”€â”€ README.md
-â”œâ”€â”€ requirements.txt
-â””â”€â”€ requirements-dev.txt
+├── .github/
+│   └── workflows/
+│       └── security.yml
+├── config/
+├── data/
+│   ├── player_behavior.csv
+│   └── moderation_dataset.csv
+├── docs/
+│   ├── architecture/
+│   └── diagrams/
+├── logs/
+├── models/
+├── screenshots/
+├── src/
+│   ├── anti_cheat/
+│   ├── asset_security/
+│   ├── content_moderation/
+│   ├── devsecops/
+│   ├── identity_security/
+│   ├── infrastructure_security/
+│   ├── static/
+│   ├── templates/
+│   └── app.py
+├── tests/
+│   ├── test_api.py
+│   └── test_security.py
+├── .gitignore
+├── README.md
+├── requirements.txt
+└── requirements-dev.txt
 ```
 
 Generated model files, local identity records, secrets and private keys are excluded from version control.
 
 ## 6. Step-by-Step Windows Installation
 
-### Step 1 â€” Clone the repository
+### Step 1 — Clone the repository
 
 Open PowerShell and run:
 
@@ -130,13 +130,13 @@ cd D:\CyberSecurityProject
 
 If the project directory already exists, open the existing directory rather than cloning over it.
 
-### Step 2 â€” Create a Python virtual environment
+### Step 2 — Create a Python virtual environment
 
 ```powershell
 python -m venv .venv
 ```
 
-### Step 3 â€” Activate the virtual environment
+### Step 3 — Activate the virtual environment
 
 ```powershell
 .\.venv\Scripts\Activate.ps1
@@ -144,7 +144,7 @@ python -m venv .venv
 
 The PowerShell prompt should display `(.venv)`.
 
-### Step 4 â€” Install project dependencies
+### Step 4 — Install project dependencies
 
 ```powershell
 python -m pip install --upgrade pip
@@ -193,7 +193,7 @@ Both datasets are educational samples rather than production datasets.
 
 ## 8. AI Anti-Cheat Model Training
 
-### Step 1 â€” Run the training script
+### Step 1 — Run the training script
 
 From the project root:
 
@@ -201,7 +201,7 @@ From the project root:
 python src\anti_cheat\train_model.py
 ```
 
-### Step 2 â€” Load and prepare data
+### Step 2 — Load and prepare data
 
 The script reads `data/player_behavior.csv` and uses the following features:
 
@@ -216,13 +216,13 @@ FEATURES = [
 ]
 ```
 
-### Step 3 â€” Train the model
+### Step 3 — Train the model
 
 The project uses `RandomForestClassifier` with 100 estimators.
 
 The dataset is divided into training and testing portions using a 70/30 split.
 
-### Step 4 â€” Evaluate the model
+### Step 4 — Evaluate the model
 
 The script generates:
 
@@ -230,7 +230,7 @@ The script generates:
 - Classification report
 - Legitimate and cheater class predictions
 
-### Step 5 â€” Save the trained model
+### Step 5 — Save the trained model
 
 The generated model is saved to:
 
@@ -238,7 +238,7 @@ The generated model is saved to:
 models/anti_cheat_model.joblib
 ```
 
-### Step 6 â€” Demonstrate suspicious behavior detection
+### Step 6 — Demonstrate suspicious behavior detection
 
 The dashboard allows sample gameplay characteristics to be analyzed.
 
@@ -359,13 +359,13 @@ src/content_moderation/realtime_moderation.py
 src/content_moderation/train_moderation_model.py
 ```
 
-### Step 1 â€” Train the moderation model
+### Step 1 — Train the moderation model
 
 ```powershell
 python src\content_moderation\train_moderation_model.py
 ```
 
-### Step 2 â€” Process the dataset
+### Step 2 — Process the dataset
 
 The script loads:
 
@@ -373,7 +373,7 @@ The script loads:
 data/moderation_dataset.csv
 ```
 
-### Step 3 â€” Train the NLP classifier
+### Step 3 — Train the NLP classifier
 
 The training pipeline uses:
 
@@ -381,13 +381,13 @@ The training pipeline uses:
 - Logistic Regression classification
 - A 70/30 train/test split
 
-### Step 4 â€” Save the model
+### Step 4 — Save the model
 
 ```text
 models/content_moderation_model.joblib
 ```
 
-### Step 5 â€” Demonstrate moderation
+### Step 5 — Demonstrate moderation
 
 Submit safe and toxic sample messages through the dashboard.
 
@@ -469,7 +469,7 @@ These tests demonstrate coverage of selected application functionality. Passing 
 
 ## 15. Security Scanning
 
-### Bandit â€” Python static analysis
+### Bandit — Python static analysis
 
 ```powershell
 python -m bandit -r src -ll
@@ -556,7 +556,7 @@ Flask Application
 GameShield AI Security Modules
 ```
 
-### Step 1 â€” Provision the EC2 instance
+### Step 1 — Provision the EC2 instance
 
 An Ubuntu EC2 instance was configured with:
 
@@ -566,11 +566,11 @@ An Ubuntu EC2 instance was configured with:
 - Expanded EBS storage
 - Swap space to support the limited-memory instance
 
-### Step 2 â€” Connect through SSH
+### Step 2 — Connect through SSH
 
 The Windows development machine used PuTTY to connect to the Ubuntu server.
 
-### Step 3 â€” Obtain the project
+### Step 3 — Obtain the project
 
 On the Ubuntu server:
 
@@ -581,28 +581,28 @@ cd GameShield-AI
 
 For an existing deployment, update the repository with the appropriate reviewed commit.
 
-### Step 4 â€” Create the Linux virtual environment
+### Step 4 — Create the Linux virtual environment
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### Step 5 â€” Install dependencies
+### Step 5 — Install dependencies
 
 ```bash
 python -m pip install -r requirements.txt
 python -m pip check
 ```
 
-### Step 6 â€” Train the demonstration models
+### Step 6 — Train the demonstration models
 
 ```bash
 python src/anti_cheat/train_model.py
 python src/content_moderation/train_moderation_model.py
 ```
 
-### Step 7 â€” Configure Gunicorn
+### Step 7 — Configure Gunicorn
 
 The deployed Gunicorn service runs the Flask application from the `src` directory and listens on:
 
@@ -612,7 +612,7 @@ The deployed Gunicorn service runs the Flask application from the `src` director
 
 The deployment uses one Gunicorn worker.
 
-### Step 8 â€” Configure systemd
+### Step 8 — Configure systemd
 
 The application is managed by a systemd service named:
 
@@ -628,7 +628,7 @@ sudo systemctl restart gameshield-ai
 sudo systemctl enable gameshield-ai
 ```
 
-### Step 9 â€” Configure Nginx
+### Step 9 — Configure Nginx
 
 Nginx acts as a reverse proxy and forwards requests to Gunicorn.
 
@@ -638,7 +638,7 @@ Example proxy destination:
 http://127.0.0.1:8000
 ```
 
-### Step 10 â€” Verify deployment
+### Step 10 — Verify deployment
 
 The deployment was checked using:
 
@@ -650,7 +650,7 @@ The deployment was checked using:
 
 These endpoints previously returned successful HTTP responses through Nginx.
 
-### Step 11 â€” Access the dashboard
+### Step 11 — Access the dashboard
 
 The dashboard was opened from a Windows browser using the EC2 public IPv4 address and `/dashboard` path.
 
