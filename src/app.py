@@ -489,6 +489,42 @@ def api_protect_biometric():
             "user_id and biometric_data required."
         }), 400
 
+
+    user_id = str(data["user_id"]).strip()
+    biometric_data = data["biometric_data"]
+
+    if not user_id or not isinstance(biometric_data, dict):
+        return jsonify({
+            "error": "Valid user_id and biometric_data required."
+        }), 400
+
+    required_permissions = []
+
+    if "eye_tracking" in biometric_data:
+        required_permissions.append("eye_tracking")
+
+    if (
+        "motion_tracking" in biometric_data
+        or "motion_pattern" in biometric_data
+    ):
+        required_permissions.append("motion_tracking")
+
+    if not required_permissions:
+        return jsonify({
+            "error": "Recognized biometric data type required."
+        }), 400
+
+    denied_permissions = [
+        permission
+        for permission in required_permissions
+        if check_data_access(user_id, permission)["access"] != "ALLOWED"
+    ]
+
+    if denied_permissions:
+        return jsonify({
+            "error": "Biometric privacy consent required.",
+            "denied_permissions": denied_permissions
+        }), 403
     result = encrypt_biometric_data(
         str(data["user_id"]),
         data["biometric_data"]
@@ -530,10 +566,16 @@ def api_update_privacy():
             "missing_fields": missing
         }), 400
 
+
+    if type(data["allowed"]) is not bool:
+        return jsonify({
+            "error": "allowed must be a JSON boolean (true or false)."
+        }), 400
+
     result = update_privacy_setting(
         str(data["user_id"]),
         str(data["data_type"]),
-        bool(data["allowed"])
+        data["allowed"]
     )
 
     return jsonify({
@@ -541,7 +583,7 @@ def api_update_privacy():
         "module": "Metaverse Privacy Controls",
         "result": result
     })
- 
+
 
 @app.route(
     "/api/infrastructure/validate-action",
@@ -791,7 +833,7 @@ def api_devsecops_report():
 @app.route("/dashboard")
 def dashboard():
     return render_template("dashboard.html")
-            
+
 if __name__ == "__main__":
     app.run(
         host="127.0.0.1",
