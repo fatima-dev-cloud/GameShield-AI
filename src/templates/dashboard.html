@@ -269,6 +269,90 @@
 
     </div>
 
+
+<!-- Behavioral Anti-Cheat Security -->
+<div class="gs-behavioral-security">
+
+    <h3>Behavioral Account Security</h3>
+    <p>
+        Detect suspicious account sharing and
+        unusual rank boosting activity.
+    </p>
+
+    <div class="gs-behavioral-grid">
+
+        <!-- Account Sharing Detection -->
+        <div class="gs-behavioral-card">
+
+            <h4>Account Sharing Detection</h4>
+
+            <label for="sharingScenario">
+                Select Login Activity
+            </label>
+
+            <select id="sharingScenario">
+                <option value="legitimate">
+                    Legitimate Login
+                </option>
+                <option value="suspicious">
+                    Suspicious Account Sharing
+                </option>
+            </select>
+
+            <button
+                id="sharingAnalyzeButton"
+                type="button">
+                Analyze Account Sharing
+            </button>
+
+            <div
+                id="sharingResult"
+                class="result"
+                role="status"
+                aria-live="polite">
+                Select an activity and analyze.
+            </div>
+
+        </div>
+
+        <!-- Rank Boosting Detection -->
+        <div class="gs-behavioral-card">
+
+            <h4>Rank Boosting Detection</h4>
+
+            <label for="boostingScenario">
+                Select Player Activity
+            </label>
+
+            <select id="boostingScenario">
+                <option value="legitimate">
+                    Legitimate Rank Progress
+                </option>
+                <option value="suspicious">
+                    Suspicious Rank Boosting
+                </option>
+            </select>
+
+            <button
+                id="boostingAnalyzeButton"
+                type="button">
+                Analyze Rank Boosting
+            </button>
+
+            <div
+                id="boostingResult"
+                class="result"
+                role="status"
+                aria-live="polite">
+                Select an activity and analyze.
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 </section>
      
 <section class="panel asset-panel marketplace-panel">

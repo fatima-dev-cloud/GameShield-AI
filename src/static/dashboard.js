@@ -944,3 +944,120 @@ document.getElementById("loadDevsecopsReportButton")
             button.disabled = false;
         }
     });
+
+
+/* ==========================================
+   Behavioral Anti-Cheat Detection
+   ========================================== */
+
+const sharingScenarios = {
+    legitimate: {
+        distance_km: 10,
+        time_difference_minutes: 120,
+        device_changed: false,
+        behavior_change_score: 0.10
+    },
+    suspicious: {
+        distance_km: 5000,
+        time_difference_minutes: 20,
+        device_changed: true,
+        behavior_change_score: 0.90
+    }
+};
+
+const boostingScenarios = {
+    legitimate: {
+        previous_win_rate: 0.45,
+        current_win_rate: 0.50,
+        rank_increase: 1,
+        matches_played: 25,
+        performance_change_score: 0.10
+    },
+    suspicious: {
+        previous_win_rate: 0.35,
+        current_win_rate: 0.90,
+        rank_increase: 7,
+        matches_played: 8,
+        performance_change_score: 0.85
+    }
+};
+
+async function runBehavioralAnalysis(url, payload, resultBox) {
+    resultBox.textContent = "Analyzing activity...";
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Analysis failed.");
+        }
+
+        const signals = data.signals.length
+            ? data.signals.join(", ")
+            : "No suspicious signals";
+
+        resultBox.textContent =
+            `Risk Level: ${data.risk_level}\n` +
+            `Risk Score: ${data.risk_score}/100\n` +
+            `Suspicious: ${data.suspicious ? "Yes" : "No"}\n` +
+            `Signals: ${signals}\n\n` +
+            `${data.note}`;
+
+        resultBox.style.whiteSpace = "pre-line";
+
+    } catch (error) {
+        resultBox.textContent = `Error: ${error.message}`;
+    }
+}
+
+const sharingButton = document.getElementById(
+    "sharingAnalyzeButton"
+);
+
+if (sharingButton) {
+    sharingButton.addEventListener("click", async () => {
+        const scenario = document.getElementById(
+            "sharingScenario"
+        ).value;
+
+        const resultBox = document.getElementById(
+            "sharingResult"
+        );
+
+        await runBehavioralAnalysis(
+            "/api/anti-cheat/account-sharing",
+            sharingScenarios[scenario],
+            resultBox
+        );
+    });
+}
+
+const boostingButton = document.getElementById(
+    "boostingAnalyzeButton"
+);
+
+if (boostingButton) {
+    boostingButton.addEventListener("click", async () => {
+        const scenario = document.getElementById(
+            "boostingScenario"
+        ).value;
+
+        const resultBox = document.getElementById(
+            "boostingResult"
+        );
+
+        await runBehavioralAnalysis(
+            "/api/anti-cheat/rank-boosting",
+            boostingScenarios[scenario],
+            resultBox
+        );
+    });
+}

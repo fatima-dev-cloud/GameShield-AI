@@ -5,6 +5,11 @@ from flask import Flask, jsonify, request, render_template
 
 from anti_cheat.detector import analyze_player
 
+from anti_cheat.behavioral_security import (
+    detect_account_sharing,
+    detect_rank_boosting,
+)
+
 from asset_security.asset_registry import (
     register_asset,
     verify_asset
@@ -167,6 +172,50 @@ def anti_cheat_analysis():
     except (TypeError, ValueError):
         return jsonify({
             "error": "All player behavior values must be numeric."
+        }), 400
+
+
+@app.route(
+    "/api/anti-cheat/account-sharing",
+    methods=["POST"]
+)
+def api_detect_account_sharing():
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({
+            "error": "A valid JSON object is required"
+        }), 400
+
+    try:
+        result = detect_account_sharing(data)
+        return jsonify(result), 200
+
+    except (ValueError, TypeError, KeyError, OverflowError) as error:
+        return jsonify({
+            "error": str(error)
+        }), 400
+
+
+@app.route(
+    "/api/anti-cheat/rank-boosting",
+    methods=["POST"]
+)
+def api_detect_rank_boosting():
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({
+            "error": "A valid JSON object is required"
+        }), 400
+
+    try:
+        result = detect_rank_boosting(data)
+        return jsonify(result), 200
+
+    except (ValueError, TypeError, KeyError, OverflowError) as error:
+        return jsonify({
+            "error": str(error)
         }), 400
 
 @app.route("/api/assets/register", methods=["POST"])

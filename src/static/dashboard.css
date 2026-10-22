@@ -3148,3 +3148,115 @@ body {
     color: #ffffff;
     border-color: #ff9bd0;
 }
+
+
+/* =========================================
+   Behavioral Anti-Cheat Security
+   ========================================= */
+
+.gs-behavioral-security {
+    margin-top: 28px;
+    padding: 24px;
+    border: 1px solid rgba(255, 75, 160, 0.24);
+    border-radius: 16px;
+    background: rgba(18, 22, 38, 0.65);
+}
+
+.gs-behavioral-security h3 {
+    margin: 0 0 10px;
+    color: #ff70b7;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.gs-behavioral-security > p {
+    margin: 0 0 24px;
+    color: #aebbd0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.gs-behavioral-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.gs-behavioral-card {
+    min-width: 0;
+    padding: 22px;
+    border: 1px solid rgba(255, 75, 160, 0.25);
+    border-radius: 14px;
+    background: rgba(29, 35, 54, 0.85);
+}
+
+.gs-behavioral-card h4 {
+    margin: 0 0 20px;
+    color: #ffffff;
+    font-size: 17px;
+    font-weight: 650;
+}
+
+.gs-behavioral-card label {
+    display: block;
+    margin-bottom: 10px;
+    color: #d5dbea;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.gs-behavioral-card select {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 9px;
+    background: #202a3e;
+    color: #ffffff;
+    font-size: 13px;
+}
+
+.gs-behavioral-card button {
+    width: 100%;
+    padding: 13px 16px;
+    border: 0;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #ff4fa3, #b945ff);
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.gs-behavioral-card button:hover {
+    transform: translateY(-2px);
+    opacity: 0.92;
+}
+
+.gs-behavioral-card .result {
+    margin-top: 18px;
+    padding: 18px;
+    min-height: 125px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: rgba(12, 18, 32, 0.8);
+    color: #e7edf8;
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 900px) {
+    .gs-behavioral-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gs-behavioral-security {
+        padding: 16px;
+    }
+
+    .gs-behavioral-card {
+        padding: 16px;
+    }
+}
