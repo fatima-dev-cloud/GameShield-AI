@@ -1212,3 +1212,95 @@ cheatTypeButtonBindings.forEach(binding => {
         });
     }
 });
+
+
+// ==========================================
+// Blockchain-Style Asset Ledger Verification
+// ==========================================
+
+const verifyBlockchainLedgerButton = document.getElementById(
+    "verifyBlockchainLedgerButton"
+);
+
+const blockchainLedgerResult = document.getElementById(
+    "blockchainLedgerResult"
+);
+
+if (verifyBlockchainLedgerButton && blockchainLedgerResult) {
+    verifyBlockchainLedgerButton.addEventListener(
+        "click",
+        async () => {
+            verifyBlockchainLedgerButton.disabled = true;
+
+            blockchainLedgerResult.textContent =
+                "Verifying blockchain-style asset ledger...";
+
+            try {
+                const response = await fetch(
+                    "/api/assets/blockchain-ledger",
+                    {
+                        method: "GET",
+                        cache: "no-store"
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Ledger verification request failed. HTTP " +
+                        response.status
+                    );
+                }
+
+                const data = await response.json();
+                const verification = data.verification;
+
+                if (!verification) {
+                    throw new Error(
+                        "Invalid ledger verification response."
+                    );
+                }
+
+                const resultLines = [
+                    "Status: " + verification.status,
+                    "Ledger Valid: " + (
+                        verification.ledger_valid ? "YES" : "NO"
+                    ),
+                    "Records Checked: " +
+                        verification.records_checked
+                ];
+
+                if (verification.failed_record !== undefined) {
+                    resultLines.push(
+                        "Failed Record: " +
+                        verification.failed_record
+                    );
+                }
+
+                if (verification.ledger_type) {
+                    resultLines.push(
+                        "Ledger Type: " +
+                        verification.ledger_type
+                    );
+                }
+
+                if (verification.note) {
+                    resultLines.push(
+                        "",
+                        "Note: " + verification.note
+                    );
+                }
+
+                blockchainLedgerResult.textContent =
+                    resultLines.join("\n");
+
+            } catch (error) {
+                blockchainLedgerResult.textContent =
+                    "Ledger Verification Error: " +
+                    error.message;
+
+            } finally {
+                verifyBlockchainLedgerButton.disabled = false;
+            }
+        }
+    );
+}

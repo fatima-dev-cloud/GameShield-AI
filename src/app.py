@@ -25,6 +25,8 @@ from asset_security.duplication_detector import (
     detect_duplicate_assets
 )
 
+from asset_security.blockchain_ledger import verify_ledger
+
 from identity_security.authentication import (
     register_user,
     authenticate_user
@@ -339,6 +341,15 @@ def api_duplication_scan():
         "analysis": result
     })
 
+@app.route("/api/assets/blockchain-ledger", methods=["GET"])
+def api_blockchain_ledger():
+    result = verify_ledger()
+
+    return jsonify({
+        "platform": "GameShield AI",
+        "module": "Blockchain-Style Asset Ledger",
+        "verification": result
+    }), 200
 
 @app.route("/api/marketplace/analyze", methods=["POST"])
 def api_marketplace_analysis():

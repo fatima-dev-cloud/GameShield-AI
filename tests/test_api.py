@@ -70,8 +70,6 @@ def test_moderation_rejects_missing_message(client: FlaskClient):
     )
 
     assert response.status_code == 400
-    
-
 def test_rate_limiter_blocks_excessive_requests(client: FlaskClient):
     # Enable real rate limiting only for this security test.
     previous_value = app.config.get(
