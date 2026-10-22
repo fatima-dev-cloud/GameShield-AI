@@ -353,6 +353,139 @@
 
 </div>
 
+
+<!-- Cheating Category Detection -->
+<div class="gs-behavioral-security gs-cheat-types-security">
+
+    <h3>Advanced Cheating Category Detection</h3>
+
+    <p>
+        Analyze simulated gameplay behavior for aimbot,
+        wallhack, and automated cheating indicators.
+    </p>
+
+    <div class="gs-behavioral-grid">
+
+        <!-- Aimbot Detection -->
+        <div class="gs-behavioral-card">
+
+            <h4>Aimbot Detection</h4>
+
+            <p>
+                Check suspicious aiming accuracy,
+                headshot frequency, and reaction speed.
+            </p>
+
+            <label for="aimbotScenario">
+                Select Gameplay Scenario
+            </label>
+
+            <select id="aimbotScenario">
+                <option value="legit">
+                    Legitimate Player
+                </option>
+                <option value="aimbot">
+                    Suspicious Aimbot Behavior
+                </option>
+            </select>
+
+            <button type="button" id="aimbotAnalyzeButton">
+                Analyze Aimbot Indicators
+            </button>
+
+            <div
+                id="aimbotResult"
+                class="result"
+                role="status"
+                aria-live="polite">
+                Select a scenario and click Analyze.
+            </div>
+
+        </div>
+
+        <!-- Wallhack Detection -->
+        <div class="gs-behavioral-card">
+
+            <h4>Wallhack Detection</h4>
+
+            <p>
+                Detect repeated suspicious tracking
+                of enemies hidden from the player.
+            </p>
+
+            <label for="wallhackScenario">
+                Select Gameplay Scenario
+            </label>
+
+            <select id="wallhackScenario">
+                <option value="legit">
+                    Legitimate Player
+                </option>
+                <option value="wallhack">
+                    Suspicious Wallhack Behavior
+                </option>
+            </select>
+
+            <button type="button" id="wallhackAnalyzeButton">
+                Analyze Wallhack Indicators
+            </button>
+
+            <div
+                id="wallhackResult"
+                class="result"
+                role="status"
+                aria-live="polite">
+                Select a scenario and click Analyze.
+            </div>
+
+        </div>
+
+        <!-- Automated Cheating Detection -->
+        <div class="gs-behavioral-card">
+
+            <h4>Automated Cheating Detection</h4>
+
+            <p>
+                Analyze impossible gameplay actions
+                and repetitive automated input patterns.
+            </p>
+
+            <label for="automationScenario">
+                Select Gameplay Scenario
+            </label>
+
+            <select id="automationScenario">
+                <option value="legit">
+                    Legitimate Player
+                </option>
+                <option value="automation">
+                    Suspicious Automated Behavior
+                </option>
+            </select>
+
+            <button type="button" id="automationAnalyzeButton">
+                Analyze Automation Indicators
+            </button>
+
+            <div
+                id="automationResult"
+                class="result"
+                role="status"
+                aria-live="polite">
+                Select a scenario and click Analyze.
+            </div>
+
+        </div>
+
+    </div>
+
+    <p class="gs-cheat-types-note">
+        Educational demonstration using synthetic gameplay
+        signals. Suspicious indicators are not proof of cheating.
+    </p>
+
+</div>
+
 </section>
      
 <section class="panel asset-panel marketplace-panel">

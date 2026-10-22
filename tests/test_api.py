@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 
+from flask.testing import FlaskClient
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -27,14 +28,14 @@ def client():
     blocked_clients.clear()
 
 
-def test_homepage(client):
+def test_homepage(client: FlaskClient):
     response = client.get("/")
 
     assert response.status_code == 200
     assert b"GameShield AI" in response.data
 
 
-def test_status_api(client):
+def test_status_api(client: FlaskClient):
     response = client.get("/api/status")
 
     assert response.status_code == 200
@@ -44,7 +45,7 @@ def test_status_api(client):
     assert data["status"] == "online"
 
 
-def test_anticheat_rejects_missing_data(client):
+def test_anticheat_rejects_missing_data(client: FlaskClient):
     response = client.post(
         "/api/anti-cheat/analyze",
         json={},
@@ -53,7 +54,7 @@ def test_anticheat_rejects_missing_data(client):
     assert response.status_code == 400
 
 
-def test_registration_rejects_missing_data(client):
+def test_registration_rejects_missing_data(client: FlaskClient):
     response = client.post(
         "/api/identity/register",
         json={},
@@ -62,20 +63,33 @@ def test_registration_rejects_missing_data(client):
     assert response.status_code == 400
 
 
-def test_moderation_rejects_missing_message(client):
+def test_moderation_rejects_missing_message(client: FlaskClient):
     response = client.post(
         "/api/moderation/text",
         json={},
     )
 
     assert response.status_code == 400
+    
 
+def test_rate_limiter_blocks_excessive_requests(client: FlaskClient):
+    # Enable real rate limiting only for this security test.
+    previous_value = app.config.get(
+        "TEST_RATE_LIMITER", False
+    )
 
-def test_rate_limiter_blocks_excessive_requests(client):
-    responses = []
+    app.config["TEST_RATE_LIMITER"] = True
 
-    for _ in range(12):
-        response = client.get("/api/status")
-        responses.append(response.status_code)
+    try:
+        responses = []
 
-    assert 429 in responses
+        for _ in range(12):
+            response = client.get("/api/status")
+            responses.append(response.status_code)
+
+        assert 200 in responses
+        assert 429 in responses
+
+    finally:
+        # Restore configuration for other tests.
+        app.config["TEST_RATE_LIMITER"] = previous_value

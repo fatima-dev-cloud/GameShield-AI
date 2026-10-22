@@ -1061,3 +1061,154 @@ if (boostingButton) {
         );
     });
 }
+
+
+/* ==========================================
+   GameShield AI - Cheating Category Detection
+   Educational simulated gameplay scenarios
+   ========================================== */
+
+const cheatTypeBasePlayer = {
+    accuracy: 0.48,
+    headshot_rate: 0.22,
+    reaction_time: 280,
+    impossible_actions: 0,
+    hidden_enemy_tracking_events: 0,
+    repetitive_input_score: 0.20
+};
+
+const cheatTypeScenarios = {
+    legit: cheatTypeBasePlayer,
+
+    aimbot: {
+        ...cheatTypeBasePlayer,
+        accuracy: 0.98,
+        headshot_rate: 0.96,
+        reaction_time: 40
+    },
+
+    wallhack: {
+        ...cheatTypeBasePlayer,
+        hidden_enemy_tracking_events: 9
+    },
+
+    automation: {
+        ...cheatTypeBasePlayer,
+        impossible_actions: 12,
+        repetitive_input_score: 0.98
+    }
+};
+
+async function runCheatTypeAnalysis(
+    scenarioSelectId,
+    resultId,
+    buttonId
+) {
+    const scenarioSelect = document.getElementById(
+        scenarioSelectId
+    );
+
+    const resultBox = document.getElementById(resultId);
+    const button = document.getElementById(buttonId);
+
+    if (!scenarioSelect || !resultBox || !button) {
+        return;
+    }
+
+    const selectedScenario = scenarioSelect.value;
+    const payload = cheatTypeScenarios[selectedScenario];
+
+    if (!payload) {
+        resultBox.textContent = "Invalid scenario selected.";
+        return;
+    }
+
+    button.disabled = true;
+    resultBox.textContent = "Analyzing gameplay indicators...";
+
+    try {
+        const response = await fetch(
+            "/api/anti-cheat/cheat-types",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error
+                    ? String(data.error)
+                    : "Analysis request failed."
+            );
+        }
+
+        const categories = data.detected_categories.length
+            ? data.detected_categories.join(", ")
+            : "None";
+
+        const signals = data.detections.flatMap(
+            item => item.signals
+        );
+
+        resultBox.textContent = [
+            "Risk Level: " + data.risk_level,
+            "Suspicious: " + (
+                data.suspicious ? "YES" : "NO"
+            ),
+            "Detected Categories: " + categories,
+            "Signals: " + (
+                signals.length
+                    ? signals.join(", ")
+                    : "No suspicious indicators"
+            ),
+            "",
+            data.note
+        ].join("\n");
+
+    } catch (error) {
+        resultBox.textContent =
+            "Analysis Error: " + error.message;
+    } finally {
+        button.disabled = false;
+    }
+}
+
+const cheatTypeButtonBindings = [
+    {
+        buttonId: "aimbotAnalyzeButton",
+        selectId: "aimbotScenario",
+        resultId: "aimbotResult"
+    },
+    {
+        buttonId: "wallhackAnalyzeButton",
+        selectId: "wallhackScenario",
+        resultId: "wallhackResult"
+    },
+    {
+        buttonId: "automationAnalyzeButton",
+        selectId: "automationScenario",
+        resultId: "automationResult"
+    }
+];
+
+cheatTypeButtonBindings.forEach(binding => {
+    const button = document.getElementById(
+        binding.buttonId
+    );
+
+    if (button) {
+        button.addEventListener("click", () => {
+            runCheatTypeAnalysis(
+                binding.selectId,
+                binding.resultId,
+                binding.buttonId
+            );
+        });
+    }
+});

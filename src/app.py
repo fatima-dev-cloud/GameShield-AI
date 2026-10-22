@@ -10,6 +10,8 @@ from anti_cheat.behavioral_security import (
     detect_rank_boosting,
 )
 
+from anti_cheat.cheat_type_detector import analyze_cheat_types
+
 from asset_security.asset_registry import (
     register_asset,
     verify_asset
@@ -68,8 +70,17 @@ from content_moderation.realtime_moderation import (
 
 app = Flask(__name__)
 
+
 @app.before_request
 def infrastructure_rate_limit():
+    # Automated tests must not consume the shared demo rate limit.
+    # Real requests remain protected when TESTING is False.
+    if (
+        app.config.get("TESTING", False)
+        and not app.config.get("TEST_RATE_LIMITER", False)
+    ):
+         return None
+
     if request.endpoint == "static":
         return None
 
@@ -211,6 +222,32 @@ def api_detect_rank_boosting():
 
     try:
         result = detect_rank_boosting(data)
+        return jsonify(result), 200
+
+    except (ValueError, TypeError, KeyError, OverflowError) as error:
+        return jsonify({
+            "error": str(error)
+        }), 400
+
+
+# ==========================================
+# Cheating Category Detection API
+# ==========================================
+
+@app.route(
+    "/api/anti-cheat/cheat-types",
+    methods=["POST"]
+)
+def api_detect_cheat_types():
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({
+            "error": "A valid JSON object is required"
+        }), 400
+
+    try:
+        result = analyze_cheat_types(data)
         return jsonify(result), 200
 
     except (ValueError, TypeError, KeyError, OverflowError) as error:
