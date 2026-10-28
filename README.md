@@ -248,6 +248,41 @@ The anti-cheat module returns a prediction and associated risk information.
 
 > High accuracy on a small synthetic dataset must not be interpreted as real-world anti-cheat performance.
 
+### Educational kernel-event simulation API
+
+GameShield AI includes a user-space educational simulation of
+kernel-like security events. It does not collect real kernel telemetry,
+load kernel modules, attach eBPF programs or enforce anti-cheat actions.
+
+The isolated endpoint is:
+
+    POST /api/anti-cheat/kernel-simulation/analyze
+
+The endpoint is disabled by default. To enable it in a controlled
+demonstration environment, supply both settings through environment
+or application configuration:
+
+    KERNEL_SIMULATION_ENABLED=true
+    KERNEL_SIMULATION_API_TOKEN=<strong test-only token>
+
+The token must not be hardcoded in source control, logs or screenshots.
+Requests use the Authorization: Bearer <token> header. Bearer
+credentials must not be transmitted over the public HTTP deployment
+because HTTP does not provide transport encryption. Keep the endpoint
+disabled until HTTPS and appropriate access controls are available.
+
+Every successful result remains audit-only and explicitly reports:
+
+    simulation=true
+    kernel_observed=false
+    enforcement=DISABLED
+    decision=AUDIT_ONLY
+
+Detailed Day 3 documentation:
+
+- [Kernel-Event Simulation Architecture and Evidence Report](docs/day3_kernel_event_simulation_evidence.md)
+- [Kernel-Event Simulation Architecture Diagram](docs/diagrams/kernel_event_simulation_architecture.md)
+
 ## 9. Virtual Asset and Marketplace Security
 
 The virtual asset security module demonstrates:

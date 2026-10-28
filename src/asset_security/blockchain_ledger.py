@@ -10,12 +10,20 @@ or decentralized consensus network.
 """
 
 from asset_security.asset_registry import (
+    AssetDataError,
+    calculate_asset_hash,
     load_database,
-    create_asset_hash,
 )
 
 def verify_ledger():
     database = load_database()
+    if not isinstance(database, dict):
+        return {
+            "ledger_valid": False,
+            "records_checked": 0,
+            "status": "INVALID LEDGER FORMAT",
+        }
+
     assets = database.get("assets", [])
 
     if not isinstance(assets, list):
@@ -47,13 +55,30 @@ def verify_ledger():
                 "failed_record": index + 1,
             }
 
-        expected_hash = create_asset_hash(
-            asset["asset_id"],
-            asset["asset_name"],
-            asset["owner_id"],
-            asset["created_at"],
-            asset["previous_hash"],
-        )
+        stored_hash = asset.get("asset_hash")
+        if not isinstance(stored_hash, str) or not stored_hash:
+            return {
+                "ledger_valid": False,
+                "records_checked": index,
+                "status": "INVALID ASSET RECORD",
+                "failed_record": index + 1,
+            }
+
+        try:
+            expected_hash = calculate_asset_hash(asset)
+        except (
+            AssetDataError,
+            TypeError,
+            ValueError,
+            OverflowError,
+            UnicodeError,
+        ):
+            return {
+                "ledger_valid": False,
+                "records_checked": index,
+                "status": "INVALID ASSET RECORD",
+                "failed_record": index + 1,
+            }
 
         if asset["previous_hash"] != previous_hash:
             return {
@@ -63,7 +88,7 @@ def verify_ledger():
                 "failed_record": index + 1,
             }
 
-        if asset["asset_hash"] != expected_hash:
+        if stored_hash != expected_hash:
             return {
                 "ledger_valid": False,
                 "records_checked": index + 1,
@@ -71,7 +96,7 @@ def verify_ledger():
                 "failed_record": index + 1,
             }
 
-        previous_hash = asset["asset_hash"]
+        previous_hash = stored_hash
 
     return {
         "ledger_valid": True,

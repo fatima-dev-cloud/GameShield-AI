@@ -1,4 +1,3 @@
-
 """
 GameShield AI - Behavioral Account Security
 
@@ -7,6 +6,8 @@ and rank boosting based on synthetic activity signals.
 
 Results indicate risk, not proof of misconduct.
 """
+
+import math
 
 
 def detect_account_sharing(activity):
@@ -21,12 +22,35 @@ def detect_account_sharing(activity):
         if field not in activity:
             raise ValueError(f"Missing field: {field}")
 
-    distance = float(activity["distance_km"])
-    minutes = float(activity["time_difference_minutes"])
-    behavior = float(activity["behavior_change_score"])
+    numeric_fields = [
+        "distance_km",
+        "time_difference_minutes",
+        "behavior_change_score",
+    ]
+
+    for field in numeric_fields:
+        if isinstance(activity[field], bool):
+            raise ValueError(f"{field} must be a valid number")
+
+    try:
+        distance = float(activity["distance_km"])
+        minutes = float(activity["time_difference_minutes"])
+        behavior = float(activity["behavior_change_score"])
+    except (TypeError, ValueError, OverflowError):
+        raise ValueError("Numeric fields must contain valid numbers")
+
+    if not all(
+        math.isfinite(value)
+        for value in (distance, minutes, behavior)
+    ):
+        raise ValueError(
+            "Numeric fields must contain finite numbers"
+        )
 
     if distance < 0 or minutes < 0:
-        raise ValueError("Distance and time cannot be negative")
+        raise ValueError(
+            "Distance and time cannot be negative"
+        )
 
     if not 0 <= behavior <= 1:
         raise ValueError(
@@ -34,7 +58,9 @@ def detect_account_sharing(activity):
         )
 
     if not isinstance(activity["device_changed"], bool):
-        raise ValueError("device_changed must be a boolean")
+        raise ValueError(
+            "device_changed must be a boolean"
+        )
 
     signals = []
 
@@ -95,14 +121,79 @@ def detect_rank_boosting(activity):
         if field not in activity:
             raise ValueError(f"Missing field: {field}")
 
-    previous = float(activity["previous_win_rate"])
-    current = float(activity["current_win_rate"])
-    rank_increase = int(activity["rank_increase"])
-    matches = int(activity["matches_played"])
-    performance = float(activity["performance_change_score"])
+    numeric_fields = [
+        "previous_win_rate",
+        "current_win_rate",
+        "rank_increase",
+        "matches_played",
+        "performance_change_score",
+    ]
+
+    for field in numeric_fields:
+        if isinstance(activity[field], bool):
+            raise ValueError(
+                f"{field} must be a valid number"
+            )
+
+    try:
+        previous = float(
+            activity["previous_win_rate"]
+        )
+
+        current = float(
+            activity["current_win_rate"]
+        )
+
+        rank_increase_value = float(
+            activity["rank_increase"]
+        )
+
+        matches_value = float(
+            activity["matches_played"]
+        )
+
+        performance = float(
+            activity["performance_change_score"]
+        )
+
+    except (TypeError, ValueError, OverflowError):
+        raise ValueError(
+            "Numeric fields must contain valid numbers"
+        ) from None
+
+    numeric_values = [
+        previous,
+        current,
+        rank_increase_value,
+        matches_value,
+        performance,
+    ]
+
+    if not all(
+        math.isfinite(value)
+        for value in numeric_values
+    ):
+        raise ValueError(
+            "Numeric fields must contain finite numbers"
+        )
+
+    if not rank_increase_value.is_integer():
+        raise ValueError(
+            "rank_increase must be a whole number"
+        )
+
+    if not matches_value.is_integer():
+        raise ValueError(
+            "matches_played must be a whole number"
+        )
+
+    rank_increase = int(rank_increase_value)
+    matches = int(matches_value)
 
     if not 0 <= previous <= 1 or not 0 <= current <= 1:
-        raise ValueError("Win rates must be between 0 and 1")
+        raise ValueError(
+            "Win rates must be between 0 and 1"
+        )
 
     if rank_increase < 0 or matches < 0:
         raise ValueError(

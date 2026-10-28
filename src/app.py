@@ -1,4 +1,6 @@
+import hmac
 import json
+import os
 from pathlib import Path
 
 from flask import Flask, jsonify, request, render_template
@@ -11,6 +13,10 @@ from anti_cheat.behavioral_security import (
 )
 
 from anti_cheat.cheat_type_detector import analyze_cheat_types
+
+from anti_cheat.kernel_event_simulation import (
+    analyze_simulated_kernel_event,
+)
 
 from asset_security.asset_registry import (
     register_asset,
@@ -71,6 +77,19 @@ from content_moderation.realtime_moderation import (
 )
 
 app = Flask(__name__)
+
+KERNEL_SIMULATION_MAX_BODY_BYTES = 8192
+
+app.config["KERNEL_SIMULATION_ENABLED"] = (
+    os.environ.get(
+        "KERNEL_SIMULATION_ENABLED",
+        "",
+    ).lower()
+    in {"1", "true", "yes", "on"}
+)
+app.config["KERNEL_SIMULATION_API_TOKEN"] = os.environ.get(
+    "KERNEL_SIMULATION_API_TOKEN"
+)
 
 
 @app.before_request
@@ -257,6 +276,76 @@ def api_detect_cheat_types():
             "error": str(error)
         }), 400
 
+
+@app.route(
+    "/api/anti-cheat/kernel-simulation/analyze",
+    methods=["POST"]
+)
+def api_analyze_simulated_kernel_event():
+    if not app.config.get("KERNEL_SIMULATION_ENABLED", False):
+        return jsonify({
+            "error": "Simulation endpoint is unavailable"
+        }), 404
+
+    configured_token = app.config.get(
+        "KERNEL_SIMULATION_API_TOKEN"
+    )
+
+    if (
+        not isinstance(configured_token, str)
+        or not configured_token
+    ):
+        return jsonify({
+            "error": "Simulation endpoint is unavailable"
+        }), 503
+
+    authorization = request.headers.get("Authorization", "")
+    scheme, separator, supplied_token = authorization.partition(" ")
+
+    if (
+        scheme.lower() != "bearer"
+        or not separator
+        or not supplied_token
+    ):
+        return jsonify({
+            "error": "Bearer authorization is required"
+        }), 401
+
+    if not hmac.compare_digest(
+        supplied_token,
+        configured_token,
+    ):
+        return jsonify({
+            "error": "Authorization failed"
+        }), 403
+
+    content_length = request.content_length
+
+    if (
+        content_length is None
+        or content_length > KERNEL_SIMULATION_MAX_BODY_BYTES
+    ):
+        return jsonify({
+            "error": "Request body exceeds the simulation limit"
+        }), 413
+
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({
+            "error": "A valid JSON object is required"
+        }), 400
+
+    try:
+        result = analyze_simulated_kernel_event(data)
+        return jsonify(result), 200
+
+    except (ValueError, TypeError, KeyError, OverflowError) as error:
+        return jsonify({
+            "error": str(error)
+        }), 400
+
+
 @app.route("/api/assets/register", methods=["POST"])
 def api_register_asset():
     data = request.get_json(silent=True)
@@ -285,6 +374,9 @@ def api_register_asset():
         }), 400
 
     try:
+        if isinstance(data["value"], bool):
+            raise ValueError
+
         asset = register_asset(
             asset_name=str(data["asset_name"]),
             owner_id=str(data["owner_id"]),
@@ -692,6 +784,7 @@ def api_threat_response():
     "/api/moderation/text",
     methods=["POST"]
 )
+
 def api_moderate_text():
     data = request.get_json(silent=True)
 
@@ -705,16 +798,18 @@ def api_moderate_text():
             "error": "message is required."
         }), 400
 
-    result = moderate_text(
-        str(data["message"])
-    )
+    if not isinstance(data["message"], str):
+        return jsonify({
+            "error": "message must be a string."
+        }), 400
+
+    result = moderate_text(data["message"])
 
     return jsonify({
         "platform": "GameShield AI",
         "module": "AI Content Moderation",
         "analysis": result
     })
-
 
 @app.route(
     "/api/moderation/child-safety",
