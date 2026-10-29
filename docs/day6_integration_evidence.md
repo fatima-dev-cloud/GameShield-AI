@@ -370,13 +370,20 @@ A trusted download checksum has not been verified.
 
 ## 7. Original Topic 137 Objectives
 
-The original authoritative 18-objective tracker was not found in the current repository, local branches, or local Git history.
+The original Topic 137 requirements were subsequently supplied
+and assessed against the existing GameShield AI implementation.
 
-Consequently, objective-by-objective compliance cannot yet be verified.
+The authoritative assessment is recorded in:
+docs/day6_topic137_objective_tracker.md
 
-The original Topic 137 PDF or an equivalent authoritative requirements document is required to complete Task 6.3.
+Assessment results:
+- VERIFIED: 5
+- PARTIAL: 13
+- MISSING: 0
+- NOT ASSESSABLE: 0
 
-No objective should be marked fully verified without its original wording and corresponding evidence.
+Task 6.3 assessment is complete. Full academic compliance
+has not been established, and feature freeze remains pending.
 
 ---
 
@@ -402,7 +409,7 @@ Production deployment of these changes has not been verified.
 
 **Task 6.2 — Missing API endpoints and dashboard connections:** VERIFIED
 
-**Task 6.3 — Original 18-objective tracker review:** BLOCKED — Original requirements document unavailable
+**Task 6.3 — Original 18-objective tracker review:** ASSESSED — 5 VERIFIED, 13 PARTIAL; see docs/day6_topic137_objective_tracker.md
 
 **Task 6.4 — Critical feature bug verification:** VERIFIED — No unresolved critical integration bug identified
 
