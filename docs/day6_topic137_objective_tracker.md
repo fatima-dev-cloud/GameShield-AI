@@ -37,7 +37,7 @@ PARTIAL indicates that related functionality exists but does not demonstrate the
 | 12 | Configure automated threat response for gaming infrastructure attacks | PARTIAL | `src/infrastructure_security/threat_response.py` | Indirect regression coverage | Response decisions exist; infrastructure-level enforcement and focused evidence are missing. |
 | 13 | Deploy AI-driven content moderation for toxic behavior and harassment detection | VERIFIED | `src/content_moderation/moderator.py` | Text moderation unit/API/benchmark tests | Synthetic dataset; production accuracy and bias evaluation not demonstrated. |
 | 14 | Implement automated child safety controls and age-appropriate content filtering | VERIFIED | `src/content_moderation/child_safety.py` | Child safety tests | Add allow/block screenshots; no formal regulatory compliance claim. |
-| 15 | Configure real-time voice and text moderation for multiplayer environments | PARTIAL | Realtime text moderation, voice moderation pipeline and APIs | Voice, Vosk, realtime, integration tests | Voice uses WAV upload rather than live streaming; real WAV transcription demonstration pending. |
+| 15 | Configure real-time voice and text moderation for multiplayer environments | PARTIAL | Realtime text moderation, voice moderation pipeline and APIs | Voice, Vosk, realtime, integration tests | Real synthetic-WAV transcription, moderation, and Flask API integration verified on 29 October 2026 (HTTP 200, ALLOW). Live-streaming voice moderation and production deployment remain unverified. |
 | 16 | Deploy secure development practices for game engines and live service updates | PARTIAL | Security modules, dependency management, GitHub workflow | Automated tests and security workflow | No game-engine build, signed update, rollback, or live-update demonstration. |
 | 17 | Implement automated security testing for game clients, servers, and APIs | PARTIAL | Pytest, Bandit, pip-audit, Flask API tests | 268-test regression suite | No actual game client/server executable or client-server integration testing. |
 | 18 | Configure CI/CD security integration for continuous game content deployment | PARTIAL | `.github/workflows/security.yml` | CI training, tests and security checks | CI security exists; continuous game-content deployment and rollback are not demonstrated. |
@@ -60,9 +60,9 @@ Existing screenshots support selected capabilities but do not demonstrate every 
 4. Spatial audio, gesture, and behavioral-biometric privacy controls.
 5. Child-safety allow/block results.
 6. Infrastructure threat-response decisions.
-7. Real synthetic-WAV transcription and moderation.
+7. Live-streaming voice moderation remains unverified. Real synthetic-WAV transcription, moderation, and Flask API integration have been demonstrated.
 8. Kernel/server validation performance evidence with clearly stated measurement scope.
-9. Clean-environment dependency installation and CI verification.
+9. GitHub Actions Security Pipeline #15 succeeded on development at commit adf4e73. A separate clean-clone setup, including external Vosk model acquisition, remains unverified.
 10. Explicit architecture and limitations for kernel protection, public blockchain, DDoS, game-engine updates, and continuous content deployment.
 
 ## Scope Limitations
@@ -84,8 +84,65 @@ These limitations must be stated accurately during the oral presentation.
 
 **Task 6.3:** Assessment completed; 5 VERIFIED and 13 PARTIAL.
 
-**Task 6.5:** PARTIAL — Real-audio demonstration and clean-environment reproducibility verification remain pending.
+**Task 6.5:** VERIFIED FOR TESTED SCOPE — Real synthetic-WAV
+transcription, moderation, Flask API integration, and
+GitHub Actions Security Pipeline #15 succeeded.
+Full clean-clone setup and live-streaming behavior
+were not independently verified.
 
-**Task 6.6:** PENDING — Feature freeze requires resolution or explicit acceptance of remaining scope and evidence gaps.
+**Task 6.6:** APPROVED — Controlled feature freeze approved on
+29 October 2026, with application code frozen at commit adf4e73.
+
+Documentation corrections and examiner-evidence collection remain
+permitted. The 13 PARTIAL objectives retain their classifications.
+
+Implementation changes require a confirmed critical/high-severity
+security defect or an explicitly approved requirement change.
+
+This decision does not establish full Topic 137 compliance or
+production readiness.
 
 Passing automated tests does not establish full compliance with all 18 Topic 137 requirements.
+
+## Controlled Feature Freeze Record
+
+**Decision:** APPROVE CONTROLLED FEATURE FREEZE
+
+**Assessment date:** 29 October 2026
+
+**Frozen application baseline:** adf4e73
+
+**Branch:** development
+
+**Regression evidence:** 268 tests passed.
+
+**CI evidence:** GitHub Actions Security Pipeline #15 — SUCCESS.
+
+**Voice evidence:** Real synthetic-WAV transcription, moderation,
+and Flask test-client API verification — PASS.
+
+**Objective classifications:**
+- VERIFIED: 5
+- PARTIAL: 13
+- MISSING: 0
+
+### Permitted During Freeze
+
+- Documentation corrections.
+- Examiner-evidence collection.
+- Screenshots and presentation preparation.
+- Read-only verification.
+
+### Restricted During Freeze
+
+- New application features.
+- Unapproved API or dashboard modifications.
+- Dependency or model behavior changes.
+- Production deployment.
+
+### Academic Limitations
+
+Controlled feature freeze does not mean that all 18 Topic 137
+requirements have been fully demonstrated.
+
+The 13 PARTIAL requirements remain open academic limitations.
