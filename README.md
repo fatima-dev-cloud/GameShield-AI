@@ -773,3 +773,66 @@ The project provides practical experience in:
 **Repository:** https://github.com/fatima-dev-cloud/GameShield-AI
 
 **Project Type:** Educational cybersecurity prototype for gaming and VR/AR environments.
+
+## 22. Day 8 — Final AWS Deployment Verification
+
+GameShield AI was deployed to an existing AWS EC2
+Ubuntu instance using Nginx, Gunicorn and systemd.
+
+### Public demonstration
+
+http://3.115.183.249/dashboard
+
+The dashboard was successfully opened from an
+external Windows Chrome browser on 30 October 2026.
+
+The public IP may change if the EC2 instance is
+stopped and started without an Elastic IP.
+
+### Verified deployment
+
+- Homepage: HTTP 200
+- Dashboard: HTTP 200
+- API status: HTTP 200
+- Dashboard CSS and JavaScript: HTTP 200
+- Gunicorn: active
+- Nginx: active
+
+### Latest CI/CD verification
+
+GitHub Actions Security Pipeline Run #17:
+
+- Branch: development
+- Commit: dc3ce5c
+- Result: SUCCESS
+- Duration: 44 seconds
+
+### Voice moderation status
+
+Prerecorded WAV voice moderation was implemented
+and verified in the development environment.
+
+Production voice moderation requires a separately
+installed Vosk speech recognition model and a
+configured VOSK_MODEL_PATH.
+
+See [Voice Setup](docs/voice_setup.md).
+
+### Deployment security limitations
+
+The public demonstration currently uses HTTP,
+not HTTPS.
+
+Do not submit real credentials, biometric data
+or sensitive personal information.
+
+This educational prototype is not a fully
+hardened production security service.
+
+### Day 8 evidence
+
+See [Day 8 Deployment Evidence](docs/day8_deployment_evidence.md).
+
+### Architecture diagrams
+
+See [AWS Network Architecture](docs/diagrams/aws_network_architecture.md).
