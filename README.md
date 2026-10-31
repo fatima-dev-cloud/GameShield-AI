@@ -267,9 +267,9 @@ or application configuration:
 
 The token must not be hardcoded in source control, logs or screenshots.
 Requests use the Authorization: Bearer <token> header. Bearer
-credentials must not be transmitted over the public HTTP deployment
-because HTTP does not provide transport encryption. Keep the endpoint
-disabled until HTTPS and appropriate access controls are available.
+credentials must be transmitted only over HTTPS. Transport encryption alone
+does not make a public endpoint production-ready; keep the endpoint disabled
+until appropriate authentication and access controls are also available.
 
 Every successful result remains audit-only and explicitly reports:
 
@@ -574,7 +574,7 @@ GameShield AI was deployed on an AWS EC2 instance running Ubuntu 24.04 LTS.
 ```text
 User Browser
     |
-    | HTTP Port 80
+    | HTTPS Port 443
     v
 AWS Security Group
     |
@@ -691,7 +691,9 @@ The dashboard was opened from a Windows browser using the EC2 public IPv4 addres
 
 ![AWS EC2 Deployment](screenshots/GameShield_AI_AWS_EC2_Deployment.png)
 
-**Security limitation:** The demonstration currently uses HTTP rather than HTTPS. Real credentials, real biometric data and other sensitive information must not be submitted over this deployment.
+The final Day 8 deployment uses HTTPS, with HTTP redirected to HTTPS. This
+educational public API is not fully production-hardened; real credentials,
+biometric data, and other sensitive information must not be submitted.
 
 ## 18. Architecture Documentation
 
@@ -748,7 +750,7 @@ GameShield AI currently demonstrates important cybersecurity concepts, but sever
 | Identity | Simulated identity and biometric protection | Real VR/AR device integration |
 | Infrastructure | Rate limiting and validation | Cloud DDoS mitigation and WAF |
 | Moderation | Text and transcript analysis | Live audio processing |
-| Cloud Security | HTTP-based demonstration | HTTPS/TLS and stronger access controls |
+| Cloud Security | HTTPS with automatic certificate renewal | Stronger public API controls and hardening evidence |
 | DevSecOps | Automated CI checks | Controlled automated deployment |
 | Scalability | Single EC2 instance | Load balancing and scalable infrastructure |
 
@@ -776,12 +778,14 @@ The project provides practical experience in:
 
 ## 22. Day 8 — Final AWS Deployment Verification
 
-GameShield AI was deployed to an existing AWS EC2
-Ubuntu instance using Nginx, Gunicorn and systemd.
+GameShield AI was deployed to an existing AWS EC2 Ubuntu instance using an
+independent release at `/home/ubuntu/gameshield-release-day8`. Nginx and the
+Gunicorn/systemd service remained active, while the original production
+repository on `main` remained clean.
 
 ### Public demonstration
 
-http://3.115.183.249/dashboard
+https://3.115.183.249/dashboard
 
 The dashboard was successfully opened from an
 external Windows Chrome browser on 30 October 2026.
@@ -789,14 +793,14 @@ external Windows Chrome browser on 30 October 2026.
 The public IP may change if the EC2 instance is
 stopped and started without an Elastic IP.
 
-### Verified deployment
+### Final verified status
 
-- Homepage: HTTP 200
-- Dashboard: HTTP 200
-- API status: HTTP 200
-- Dashboard CSS and JavaScript: HTTP 200
-- Gunicorn: active
-- Nginx: active
+- HTTP redirects to HTTPS with HTTP 301.
+- The HTTPS dashboard returns HTTP 200 and validates publicly with `curl`.
+- A Let's Encrypt IP-address certificate was issued, expiring 6 November 2026.
+- Certbot's renewal timer is enabled; the dry run succeeded and the ACME HTTP
+  challenge remains accessible.
+- Nginx and Gunicorn/systemd are running.
 
 ### Latest CI/CD verification
 
@@ -809,25 +813,20 @@ GitHub Actions Security Pipeline Run #17:
 
 ### Voice moderation status
 
-Prerecorded WAV voice moderation was implemented
-and verified in the development environment.
-
-Production voice moderation requires a separately
-installed Vosk speech recognition model and a
-configured VOSK_MODEL_PATH.
+Production has `vosk-model-small-en-us-0.15` installed and configured through
+`VOSK_MODEL_PATH`. A one-second silent PCM WAV request returned HTTP 200, an
+empty transcription, and `BLOCK` for the empty message. Actual spoken-word
+transcription has not yet been verified in production.
 
 See [Voice Setup](docs/voice_setup.md).
 
 ### Deployment security limitations
 
-The public demonstration currently uses HTTP,
-not HTTPS.
-
-Do not submit real credentials, biometric data
-or sensitive personal information.
-
-This educational prototype is not a fully
-hardened production security service.
+Full EC2 disaster recovery has not been verified. The running root EBS volume
+remains unencrypted, although encrypted backup artifacts exist. The short-lived
+IP certificate depends on reliable automatic renewal. Public API security,
+production hardening, and all 18 original Topic 137 objectives must not be
+claimed as fully verified without further evidence.
 
 ### Day 8 evidence
 
@@ -835,4 +834,5 @@ See [Day 8 Deployment Evidence](docs/day8_deployment_evidence.md).
 
 ### Architecture diagrams
 
-See [AWS Network Architecture](docs/diagrams/aws_network_architecture.md).
+See [AWS Network Architecture](docs/diagrams/aws_network_architecture.md) and
+[Security Architecture](docs/diagrams/security_architecture.md).

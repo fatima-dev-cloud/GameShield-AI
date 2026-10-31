@@ -18,7 +18,7 @@ flowchart TD
     K["Security Analysis Result"]
 
     A -->|"Demo Input"| B
-    B -->|"HTTP API Request"| C
+    B -->|"HTTPS API Request"| C
     C --> D
 
     D --> E
@@ -54,5 +54,5 @@ flowchart TD
 - Security analysis uses demonstration data.
 - Biometric information should not be exposed in logs.
 - Sensitive identity data must be protected.
-- Production systems require encrypted transport and stronger access controls.
-```
+- The deployed public transport uses HTTPS, but stronger access controls and
+  production-hardening evidence are still required.
