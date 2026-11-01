@@ -164,3 +164,20 @@ but they do not establish full disaster recovery or root-volume encryption.
 Certificate renewal, production spoken-word transcription, disaster recovery,
 public API hardening, and the remaining Topic 137 evidence gaps are explicitly
 documented rather than claimed as complete.
+
+## Day 8 — Isolated Application Recovery Verification
+
+- File-level backup and isolated restore: PASS
+- Backup and restored files comparison: PASS
+- Restored application entry point: PASS
+- Restored persistent data: PASS
+- Isolated Flask smoke test:
+  - GET /: HTTP 200
+  - GET /dashboard: HTTP 200
+  - GET /api/status: HTTP 200
+- Production gameshield-ai.service: active
+- Production nginx: active
+
+Scope: Application-level recovery verification on the existing EC2.
+Limitations: Full EC2 disaster recovery, complete functional testing,
+and recovery of all infrastructure components were not verified.
