@@ -1,4 +1,4 @@
-# Day 8 — AWS Deployment and Final Documentation Evidence
+# Day 8 â€” AWS Deployment and Final Documentation Evidence
 
 Date: 31 October 2026
 
@@ -29,8 +29,7 @@ persistent application data were retained.
 The systemd application service was updated to use
 the isolated release directory.
 
-The original production repository remained on `main` and its worktree
-remained clean. An independent final Nginx configuration backup was created
+The production repository was initially verified on `main`. During Day 8 documentation work, its checkout was subsequently observed on `development` at commit `565afea`. The deployed application uses the separate release directory. An independent final Nginx configuration backup was created
 at `/etc/nginx/gameshield-ai.day8-final-backup`.
 
 ## 2. Deployment Verification
