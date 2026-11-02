@@ -269,3 +269,18 @@ Temporary data was removed. Static checks confirmed six-module API references,
 a viewport declaration, `aria-live` regions and CSS media queries. Browser
 automation was unavailable, so visual, keyboard, contrast and rendered
 accessibility acceptance remain unverified and Task 9.2 remains **PARTIAL**.
+
+
+## Final automated browser acceptance — 2 November 2026
+
+A genuine Playwright 1.64.1 / Chrome 156 session opened the disposable loopback
+dashboard. Desktop and mobile layouts had no horizontal overflow; navigation,
+keyboard focus and representative API-backed workflows across all six modules
+passed; and the final run had zero console errors, page errors, failed requests
+or HTTP errors. Eight screenshots are under `screenshots/day9/`; structured
+results are in `docs/day9_submission_package/browser_acceptance_results.json`.
+
+This supersedes the earlier browser-tooling limitation for the executed scope.
+Examiner acceptance, exhaustive accessibility, production behavior and live
+voice streaming remain outside scope. Task 9.2 is **PASS for automated
+development-browser scope**.

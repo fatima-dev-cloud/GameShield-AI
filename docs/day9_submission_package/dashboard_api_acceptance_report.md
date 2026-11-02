@@ -21,10 +21,15 @@ The authoritative detailed record is `docs/day9_dashboard_testing_evidence.md`.
 | Moderation/voice | Text, child, realtime component, Vosk and voice tests | No live voice stream |
 | DevSecOps | Report/API, workflow and security evidence | CI only; no deployment |
 
-The repository contains bounded prior human-browser observations and
-`screenshots/Day9_Real_Voice_Transcription_Moderation_PASSED.png`. No browser
-executable, Playwright or Selenium was available during closeout.
+## Real Playwright browser execution
 
-**BROWSER VISUAL VERIFICATION NOT PERFORMED.** Flask/API and syntax checks are
-not represented as rendered-browser, responsive, accessibility or console
-evidence.
+Playwright 1.64.1 / Chrome 156 opened the actual loopback dashboard. Desktop and
+mobile had no horizontal overflow; seven navigation links and keyboard focus
+checks passed; representative API-backed workflows across all six modules
+succeeded; and there were zero console, page, request or HTTP errors.
+
+Structured results are in
+`docs/day9_submission_package/browser_acceptance_results.json`; eight genuine
+screenshots are under `screenshots/day9/`. This verifies the executed automated
+scope, not production behavior, exhaustive WCAG compliance, live voice streaming
+or examiner acceptance.

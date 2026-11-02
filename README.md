@@ -846,8 +846,10 @@ transcription has not yet been verified in production.
 
 For a clean clone, train the generated Joblib models using the documented
 training scripts and obtain the Vosk model separately as described below. The
-Vosk model is not tracked in Git, and a trusted checksum for the downloaded
-model has not been verified.
+Vosk model is not tracked in Git. On 2 November 2026, the exact official
+`vosk-model-small-en-us-0.15.zip` archive was verified as SHA256
+`30f26242c4eb449f948e42cb302dd7a686cb29a3423a8367f99ff41780942498`.
+All 14 configured local model files matched the extracted official archive.
 
 See [Voice Setup](docs/voice_setup.md).
 

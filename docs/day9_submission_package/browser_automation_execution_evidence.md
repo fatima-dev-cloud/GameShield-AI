@@ -1,48 +1,37 @@
 # Browser Automation Execution Evidence
 
 **Execution date:** 2 November 2026
-**Target:** Isolated development dashboard at `127.0.0.1:18765`
+**Target:** Disposable dashboard at `127.0.0.1:18766`
 **Production accessed:** No
 
-## Installation attempt
+## Isolated runtime
 
-No browser, Playwright or Selenium installation was initially available.
-Playwright **1.64.1** and its Chrome for Testing **156.0.8078.4** binaries were
-downloaded into isolated `/tmp` locations. No repository dependency or system
-package was changed.
+Playwright 1.64.1 and Chrome for Testing 156.0.8078.4 ran from `/tmp`. Four
+official Ubuntu Noble packages were extracted under `/tmp` without sudo or
+system installation. `ldd` reported no missing dependencies through the
+isolated `LD_LIBRARY_PATH`.
 
-## Launch result
+## Result
 
-The genuine Chromium launch attempt failed before page creation because the EC2
-image lacks required GUI runtime libraries:
+**AUTOMATED BROWSER DASHBOARD ACCEPTANCE: PASS.**
 
-```text
-error while loading shared libraries: libatk-1.0.so.0:
-cannot open shared object file: No such file or directory
-```
+- dashboard HTTP 200 and seven working navigation links;
+- desktop 1440 x 1000 and mobile 390 x 844 without horizontal overflow;
+- keyboard focus traversed navigation and form controls;
+- representative API-backed workflows across all six modules succeeded;
+- zero console errors, page errors, failed requests or HTTP errors.
 
-`ldd` identified four missing libraries:
+The initial burst attempt correctly encountered the documented rate limit. The
+final runner paces requests at 1.1 seconds and grants both required biometric
+consents before protection.
 
-- `libatk-1.0.so.0`
-- `libatk-bridge-2.0.so.0`
-- `libXdamage.so.1`
-- `libatspi.so.0`
+## Evidence
 
-All four correspond to packages available from the configured Ubuntu Noble
-repository. A proposed user-space-only download/extraction into `/tmp` was not
-authorized, so no system installation or privilege escalation was attempted.
+- `docs/day9_submission_package/day9_browser_acceptance_runner.js`
+- `docs/day9_submission_package/browser_acceptance_results.json`
+- eight genuine PNG files under `screenshots/day9/`
 
-## Feasible nonvisual evidence completed
-
-The isolated Gunicorn deployment returned HTTP 200 for the dashboard, CSS,
-JavaScript, status and DevSecOps report before and after controlled recovery.
-The existing closeout regression passed 269/269 tests in 4.22 seconds, and
-dashboard JavaScript syntax passed. These results verify HTTP availability,
-static delivery and automated integration behavior, not visual rendering.
-
-## Result and boundary
-
-**AUTOMATED BROWSER VISUAL VERIFICATION: BLOCKED BY MISSING RUNTIME LIBRARIES.**
-No browser page loaded, no console/layout/responsiveness interaction ran, and no
-new browser screenshot was generated. HTTP checks and existing screenshots are
-not relabelled as new browser evidence.
+The silent WAV upload returned HTTP 200 with an empty transcript and expected
+empty-message rejection. This is not spoken-word or live-streaming evidence.
+Production behavior, exhaustive WCAG compliance and examiner acceptance remain
+outside scope.

@@ -18,6 +18,24 @@ Download the English model:
 
 **Official model directory:** https://alphacephei.com/vosk/models
 
+**Verified archive URL:**
+https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip
+
+**Verified SHA256 (2 November 2026):**
+
+```text
+30f26242c4eb449f948e42cb302dd7a686cb29a3423a8367f99ff41780942498
+```
+
+Verify after download:
+
+```bash
+echo "30f26242c4eb449f948e42cb302dd7a686cb29a3423a8367f99ff41780942498  vosk-model-small-en-us-0.15.zip" | sha256sum -c -
+```
+
+The official archive passed ZIP integrity, and all 14 extracted files matched
+the configured development model byte-for-byte.
+
 Extract the model into:
 
 ```text
