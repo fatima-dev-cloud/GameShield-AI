@@ -3,8 +3,8 @@
 **Verification date:** 2 November 2026
 **Environment:** Development AWS EC2 only
 **Repository:** `/home/ubuntu/GameShield-AI`
-**Branch and commit:** `development` at `6fe3693`
-**Remote-tracking state:** `development` synchronized with `origin/development` at `6fe3693`
+**Branch and commit:** `development` at `7f1495e`
+**Remote-tracking state:** synchronized with `origin/development` at `7f1495e` before this update
 **Production accessed:** No
 
 ## Environment record
@@ -76,17 +76,18 @@ changed during Day 9.
   local-ledger, identity/biometric, moderation and voice-pipeline behaviours.
 - `pip check` assessed installed-package dependency consistency.
 - Bandit statically analysed Python source under `src/`.
-- Git inspection confirmed `development` and its local `origin/development`
-  remote-tracking ref both point to `6fe3693`.
+- Git inspection confirmed local, tracking and remote `development` at
+  `7f1495e` before this documentation update.
 - Thirty-eight `screenshots/Day8_*.png` files were present after synchronization.
 - A subsequent local development Gunicorn voice request, launched with
   `VOSK_MODEL_PATH` and `PYTHONPATH` configured, returned HTTP 200 for the
   prerecorded phrase "Hello everyone, good game." Vosk produced the imperfect
   transcript "the when good game"; moderation returned ALLOW, LOW risk and
   40.86% toxicity probability. The manually verified local-browser result is
-  evidenced by the untracked PNG
-  `screenshots/Day9_Real_Voice_Transcription_Moderation_PASSED.png` (21,087
-  bytes, approximately 21 KB). The screenshot is not committed or pushed.
+  evidenced by `screenshots/Day9_Real_Voice_Transcription_Moderation_PASSED.png`
+  (21,087 bytes, approximately 21 KB). Initially recorded as untracked, the
+  screenshot is now tracked in commit `7f1495e` and was pushed to
+  `origin/development` after explicit human authorization.
 
 ## Limitations
 
@@ -171,3 +172,13 @@ Conclusion: The stereo-WAV exception-handling fix was verified
 against the running development Gunicorn server.
 
 Production deployment was not modified or verified.
+
+## Final autonomous acceptance checks
+
+- Cross-module pytest: **235 passed in 4.19s**; 5.35 seconds wall time.
+- Actual-model moderation/child-safety/API script: PASS in 2.17 seconds.
+- Isolated restore: 167 tracked files, zero checksum mismatches, two successful
+  model regenerations and four HTTP 200 smoke routes in 5.51 seconds.
+
+These are development-only results and do not change the 5 VERIFIED / 13
+PARTIAL objective assessment.

@@ -1,8 +1,8 @@
 # Day 9 Task 9.3 — Deployment, Backup and Recovery Evidence Verification
 
-**Verification date:** 1 November 2026
-**Method:** Development-repository review only
-**Branch/commit:** `development` at `6fe3693`
+**Verification date:** 2 November 2026
+**Method:** Repository review plus isolated temporary restore
+**Branch/commit:** `development` at `7f1495e`, synchronized with `origin/development`
 **Production accessed:** No
 
 ## Scope and safety boundary
@@ -13,8 +13,8 @@ production EC2 host, public URL, AWS APIs, GitHub, services, certificates, AMI,
 snapshot, Nginx, Gunicorn or systemd. No deployment, recovery operation,
 service check or external traffic test was performed during Day 9.
 
-This report therefore verifies repository evidence, not current production or
-AWS state.
+This report verifies repository evidence and a disposable repository-level
+restore, not current production or AWS state.
 
 ## Evidence inspected
 
@@ -46,7 +46,7 @@ rg -n -i "backup|restore|recovery|AMI|snapshot|certificate|https|production" \
 | HTTPS/certificate evidence | **PARTIAL** | Day 8 records HTTP 301, HTTPS 200, certificate validation, renewal timer and dry-run success | Recorded expiry was 6 November 2026. Day 9 did not contact the host or certificate authority. |
 | Voice deployment evidence | **PARTIAL** | Day 8 records a silent WAV returning HTTP 200 through the configured Vosk pipeline | Spoken-word recognition and live voice streaming were not demonstrated. |
 | Backup artifact record | **PARTIAL** | Day 8 records encrypted AMI `ami-0382db79c8d33e33f` and snapshot `snap-08e5ee70d7f2e1c81` | AWS existence, encryption and restorability were not checked on Day 9. The running root volume was documented as unencrypted. |
-| File-level isolated recovery | **PASS for recorded Day 8 scope** | Day 8 records file comparison, restored entry point/data and Flask 200 responses for `/`, `/dashboard` and `/api/status` | No command transcript or dedicated recovery screenshot was identified. Full EC2 recovery remains unverified. |
+| File-level isolated recovery | **PASS for repository-snapshot scope** | Day 9 restored `7f1495e` temporarily, verified 167 tracked files with zero checksum mismatches, regenerated both demonstration models and received HTTP 200 from `/`, `/dashboard`, `/api/status` and `/api/devsecops/report` | Ignored runtime data, services, networking, EC2 volumes, AMIs and snapshots were not restored. Full EC2 recovery remains unverified. |
 | Full disaster recovery | **UNVERIFIED** | Day 8 explicitly says it was not verified | No instance-level restore, network recovery or complete functional recovery evidence exists. |
 | CI evidence | **PARTIAL** | Day 8 text records Run #17 as successful. Day 7 text plus matching Run 16 screenshots authenticate an earlier successful CI run. A Run 19-named file is present. | Run 16 supports the general CI-capability claim but does not prove Run 17. Run 19 content remains unverified. Neither substitutes for the missing Run 17 screenshot. No external GitHub check was performed. |
 
@@ -76,3 +76,13 @@ recovery claims are documented with a substantial local screenshot inventory.
 Day 9 confirms those repository artifacts without touching production. Full
 disaster recovery, current production/certificate state, AWS backup existence
 and the specifically cited Run 17 screenshot remain unverified.
+
+## Day 9 isolated restore demonstration
+
+A temporary `git archive HEAD` restore of `7f1495e` verified **167 tracked
+files** with **zero checksum mismatches**. Both ignored demonstration models
+were regenerated successfully. Flask `test_client` returned HTTP 200 for `/`,
+`/dashboard`, `/api/status` and `/api/devsecops/report`. The archive, restore and
+regenerated temporary models were removed. This is repository-snapshot evidence,
+not live-service, runtime-data, AWS backup or full disaster-recovery evidence.
+Task 9.3 remains **PARTIAL**.

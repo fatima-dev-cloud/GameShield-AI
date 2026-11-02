@@ -2,7 +2,7 @@
 
 **Assessment date:** 2 November 2026
 **Repository:** `/home/ubuntu/GameShield-AI`
-**Branch/commit:** `development` at `6fe3693`, synchronized with `origin/development`
+**Branch/commit:** `development` at `7f1495e`, synchronized with `origin/development` before this update
 **Scope:** Development repository only
 
 ## Day 9 task status
@@ -10,8 +10,8 @@
 | Task | Status | Evidence | Decision basis |
 |---|---|---|---|
 | 9.1 Final evidence matrix | **PASS for assessed prototype scope** | `docs/day9_final_evidence_matrix.md` | All 18 objectives are mapped: 5 VERIFIED and 13 PARTIAL. Kernel simulation and local-ledger limitations are explicit. Full Topic 137 compliance is not claimed. |
-| 9.2 End-to-end dashboard testing | **PARTIAL** | `docs/day9_dashboard_testing_evidence.md` | Focused isolated run: 126/126 passed in 3.62 seconds; JavaScript syntax passed. A real local prerecorded-WAV request returned HTTP 200 through Vosk and moderation. Bounded actual-browser checks passed; complete visual/accessibility and remaining moderation/report acceptance stay PARTIAL. The stereo-WAV HTTP 500 bug was fixed and verified as HTTP 400 on development Gunicorn; full regression: 269 passed. |
-| 9.3 Deployment/backup/recovery verification | **PARTIAL** | `docs/day9_deployment_recovery_verification.md`; `docs/day8_deployment_evidence.md` | Repository evidence was checked without production access. Full disaster recovery/current external state remain unverified, and one cited CI screenshot filename is absent. |
+| 9.2 End-to-end dashboard testing | **PARTIAL** | `docs/day9_dashboard_testing_evidence.md` | 235/235 cross-module tests passed; actual-model moderation, child-safety and DevSecOps API checks passed. Rendered browser/accessibility evidence remains incomplete. |
+| 9.3 Deployment/backup/recovery verification | **PARTIAL** | `docs/day9_deployment_recovery_verification.md`; `docs/day8_deployment_evidence.md` | Temporary restore verified 167 tracked files, zero mismatches and four HTTP 200 routes. Full EC2/runtime recovery remains unverified; one cited CI screenshot is absent. |
 | 9.4 Repository audit | **PARTIAL** | `docs/day9_repository_audit.md` | Branch, source, tests, requirements, corrected README, screenshots, diagrams and `.gitignore` are evidenced. Submission/reproducibility artifacts remain incomplete. |
 | 9.5 AI-use disclosure | **PARTIAL — human confirmation required** | `docs/day9_ai_use_disclosure.md`; `docs/day9_ai_use_disclosure_addendum.md` | Primary disclosure now includes verified Codex testing work without invented percentages. Exact historical ChatGPT scope and final attribution require human confirmation. |
 | 9.6 Final blocker review | **PARTIAL** | This report | Documentation recovery is complete for verified evidence, but manual/browser, assessment-source and submission-artifact blockers remain. |
@@ -24,6 +24,7 @@
 | Final approval-gate full regression | 269 passed in 4.38 seconds |
 | Broad focused acceptance selection | 108 passed in 4.88 seconds |
 | Final narrow moderation/biometric/voice/API selection | 54 passed in 3.07 seconds |
+| Final cross-module acceptance selection | 235 passed in 4.19 seconds |
 | DevSecOps report endpoint | HTTP 200 with expected JSON keys |
 | Automated visual browser tooling | Unavailable; no Playwright, Selenium or browser executable found |
 | Focused dashboard/API selection | 126 passed in 3.62 seconds; no failures/errors |
@@ -31,7 +32,8 @@
 | Real local voice moderation | HTTP 200; transcript "the when good game"; ALLOW; LOW risk; 40.86% toxicity probability |
 | Dependency consistency | PASS — no broken requirements |
 | Bandit | 0 High, 0 Medium, 6 Low |
-| Development synchronization | `development` and `origin/development` at `6fe3693` |
+| Development synchronization | local, tracking and remote at `7f1495e` before this update |
+| Isolated repository restore | 167 files; 0 mismatches; four HTTP 200 routes |
 | Day 8 screenshots | 38 PNG files present |
 | Objective assessment | 5 VERIFIED, 13 PARTIAL |
 
@@ -65,8 +67,9 @@
    report, complete biometric display and visual/accessibility checks remain.
 4. Full EC2 disaster recovery and current production/certificate/AWS backup
    state were not verified during Day 9.
-5. The Day 8 report cites a Run 17 screenshot filename that is absent; other CI
-   screenshots cannot be assumed to be the same evidence.
+5. The Day 8 report cites a Run 17 screenshot filename that is absent. The
+   Run 19-named screenshot remains unverified; neither may substitute for the
+   missing Run 17 evidence.
 6. Clean-clone Vosk acquisition and trusted checksum evidence are unresolved.
 7. Model cards, dataset provenance, licence, contribution/security policies and
    an explicit submission checklist/presentation were not found.
@@ -76,8 +79,8 @@
     streaming, game-engine update security and continuous content deployment.
 10. Final AI-use wording and historical ChatGPT attribution require the human
     author to confirm accuracy and institutional compliance.
-11. Day 9 documents are untracked and require human review before any separately
-    approved commit or push.
+11. The reviewed Day 9 set was committed and pushed at `7f1495e`; these final
+    documentation updates require separate human review and Git approval.
 
 ## Essential manual steps only
 

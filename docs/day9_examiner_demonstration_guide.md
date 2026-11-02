@@ -6,9 +6,9 @@
 
 ## Recommended demonstration sequence
 
-1. **Repository and tests** — show `development`, the latest 269/269 regression,
-   108/108 focused acceptance run, JavaScript syntax PASS, pip check PASS and
-   Bandit 0 High / 0 Medium / 6 Low.
+1. **Repository and tests** — show synchronized `7f1495e`, the recorded
+   269/269 full regression, final 235/235 cross-module run, JavaScript syntax
+   PASS, pip check PASS and Bandit 0 High / 0 Medium / 6 Low.
 2. **Anti-cheat and marketplace** — demonstrate synthetic legitimate and
    suspicious cases. Explain that generic suspicious behavior uses a small ML
    model while named cheat categories and fraud decisions are bounded prototype
@@ -33,6 +33,9 @@
    CI has no deployment job and that Run 17 evidence, Run 19 authentication,
    full disaster recovery, Vosk checksum reproducibility and current production
    status remain unverified.
+9. **Recovery boundary** — show 167 restored tracked files, zero checksum
+   mismatches, regenerated models and four HTTP 200 routes; state explicitly
+   that this is not EC2 disaster recovery.
 
 ## Evidence boundaries
 

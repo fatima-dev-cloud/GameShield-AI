@@ -32,12 +32,20 @@ documentation activities across multiple days. For this Day 9 task, Codex:
   syntax and Bandit results of 0 High, 0 Medium and 6 Low findings;
 - assisted with diagnosing and implementing the two-line voice import-namespace
   fix and permanent stereo-WAV endpoint regression test; and
-- did not access production, deploy, delete files, commit or push.
+- did not access production, deploy or delete project files; after separate
+  explicit human authorization, staged the reviewed 17-file set, created commit
+  `7f1495e`, authenticated through GitHub's device flow and pushed only the
+  `development` branch.
 
 Earlier evidence files describe Codex assistance with bounded implementation,
 test preparation, security review and evidence drafting. Those descriptions
 should be read with their recorded dates, commits, commands and limitations. No
 contribution percentage is assigned.
+
+Codex later ran the 235-test cross-module selection, actual-model moderation/API
+checks and disposable repository restore, then prepared these documentation
+updates. No production access, `main` merge or deployment occurred. These new
+updates remain uncommitted pending separate human Git approval.
 
 ## Human/manual contributions
 

@@ -3,7 +3,7 @@
 **Date:** 2 November 2026
 **Environment:** Development EC2 only
 **Repository:** `/home/ubuntu/GameShield-AI`
-**Branch/commit:** `development` at `6fe3693`
+**Branch/commit:** `development` at `7f1495e`, synchronized with `origin/development`
 **Production accessed:** No
 
 ## 1. Purpose and method
@@ -117,8 +117,9 @@ showing that transcription was imperfect.
 
 The user manually verified this result in the local browser dashboard. The
 evidence file `screenshots/Day9_Real_Voice_Transcription_Moderation_PASSED.png`
-is present in the development repository working tree as an untracked 702 x 457
-PNG (21,087 bytes, approximately 21 KB). It has not been committed or pushed.
+was initially recorded as an untracked 702 x 457 PNG (21,087 bytes,
+approximately 21 KB). It is now tracked in commit `7f1495e` and was pushed to
+`origin/development` after explicit human authorization.
 
 An earlier stereo WAV request exposed HTTP 500 because the endpoint and voice
 pipeline loaded the transcription exception through different Python module
@@ -194,7 +195,7 @@ contains fetch integrations for the APIs listed below.
 | Text moderation | `POST /api/moderation/text` | Sixteen API validation/success/toxic cases passed in `test_text_moderation_api_day5.py` | **PARTIAL** | Safe/toxic dashboard rendering requires browser demonstration. Tests use controlled model behavior and do not establish production accuracy. |
 | Child safety | `POST /api/moderation/child-safety` | Allow/block component tests passed in `test_security.py` | **PARTIAL** | Dashboard age/rating combinations and displayed API response require browser demonstration. No regulatory compliance is claimed. |
 | Real-time multiplayer text moderation | `POST /api/moderation/realtime` | Route and JavaScript wiring were inspected | **MANUAL REQUIRED** | No focused named realtime-endpoint test was in the approved suite; browser safe/toxic channel demonstrations remain required. |
-| Uploaded WAV voice moderation | `POST /api/moderation/voice` | Fourteen integration tests passed; a real local Gunicorn request returned HTTP 200, transcript "the when good game", ALLOW, LOW risk and 40.86% toxicity probability for "Hello everyone, good game." The user manually verified the displayed result in the local browser; evidence is present at `screenshots/Day9_Real_Voice_Transcription_Moderation_PASSED.png`. | **PARTIAL** | The real local prerecorded-WAV API and browser display are evidenced, but transcription was imperfect. Stereo rejection is now verified as sanitized HTTP 400; the screenshot remains untracked. This is not live voice streaming or production evidence. |
+| Uploaded WAV voice moderation | `POST /api/moderation/voice` | Fourteen integration tests passed; a real local Gunicorn request returned HTTP 200, transcript "the when good game", ALLOW, LOW risk and 40.86% toxicity probability for "Hello everyone, good game." The user manually verified the displayed result in the local browser; evidence is present at `screenshots/Day9_Real_Voice_Transcription_Moderation_PASSED.png`. | **PARTIAL** | The real local prerecorded-WAV API and browser display are evidenced, but transcription was imperfect. Stereo rejection is now verified as sanitized HTTP 400; the screenshot is tracked in commit `7f1495e` and pushed to `origin/development`. This is not live voice streaming or production evidence. |
 | DevSecOps report | `GET /api/devsecops/report` | Flask test-client returned HTTP 200, `application/json`, and the expected top-level report keys; JavaScript fetch/result wiring was inspected | **PARTIAL** | Backend report availability and static wiring are verified. Actual browser rendering of the report remains unrecorded. |
 
 The local browser voice-result display and the bounded controls listed above
@@ -255,3 +256,16 @@ syntax validation, and a real local prerecorded-WAV request completed the Vosk
 and moderation path with HTTP 200. Complete end-to-end browser acceptance
 remains **PARTIAL** until the remaining visual, accessibility, moderation and
 report checks are performed and recorded.
+
+## Final autonomous acceptance supplement
+
+On 2 November 2026, an isolated cross-module selection passed **235/235 tests
+in 4.19 seconds** (5.35 seconds wall time). An actual-model Flask `test_client`
+check used temporary logs and verified: safe text HTTP 200, ALLOW, LOW, 39.18%;
+abusive synthetic text HTTP 200, BLOCK, HIGH, 72.35%; missing text HTTP 400;
+child-safety EVERYONE/MATURE HTTP 200 with ALLOWED/BLOCKED; invalid age HTTP
+400; and DevSecOps report, dashboard, JavaScript and stylesheet HTTP 200.
+Temporary data was removed. Static checks confirmed six-module API references,
+a viewport declaration, `aria-live` regions and CSS media queries. Browser
+automation was unavailable, so visual, keyboard, contrast and rendered
+accessibility acceptance remain unverified and Task 9.2 remains **PARTIAL**.

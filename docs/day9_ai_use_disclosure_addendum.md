@@ -24,10 +24,12 @@ routes and test isolation, and created:
 - `docs/day9_deployment_recovery_verification.md`
 - `docs/day9_final_acceptance_report.md`
 
-The safety disclosure remains unchanged: Codex did not access production,
-deploy, restart services, delete files, modify application code, commit or push.
-No contribution percentage is claimed. Historical ChatGPT scope and final human
-attribution still require confirmation by the student/author.
+The earlier statement reflected the pre-approval state. Codex later modified
+the two approved stereo-WAV source/test files and, only after explicit human
+authorization, created and pushed `7f1495e` to `development`. Codex did not
+access production, deploy, merge `main` or delete project files. No contribution
+percentage is claimed. Historical ChatGPT scope and final human attribution
+still require confirmation by the student/author.
 
 Consolidation status: **PRIMARY DISCLOSURE CORRECTED**.
 
