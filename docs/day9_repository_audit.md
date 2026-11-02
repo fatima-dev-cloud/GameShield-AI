@@ -3,7 +3,7 @@
 
 **Audit date:** 2 November 2026
 **Scope:** Local development repository only. No production access, deployment or service restart was performed.
-**Checked-out state:** `development` at `7f1495e`, synchronized with `origin/development` before this update.
+**Checked-out state:** `development` at `796d8b1a9f171e9c02789ed06e8abcaea7ef427f`, synchronized with `origin/development`.
 
 ## Status rules
 
@@ -15,7 +15,7 @@
 
 | Area | Status | Evidence checked | Findings, gaps and limitations |
 |---|---|---|---|
-| Git branches and repository status | **PASS** | Git status/hash and verified push output | Local, tracking and remote `development` were verified at `7f1495e`. The reviewed 17-file commit was pushed only after explicit human authorization. This final documentation update remains uncommitted. |
+| Git branches and repository status | **PASS** | Git status/hash and verified push output | Local, tracking and remote `development` were verified at `796d8b1a9f171e9c02789ed06e8abcaea7ef427f`. The final documentation commit was pushed only after explicit human authorization. |
 | README and setup instructions | **PASS** | `README.md`; `docs/voice_setup.md`; `docs/day9_readme_corrections_required.md` | Day 9 corrected the tracked structure description, test inventory/results, Bandit status, historical Day 8 deployment wording and clean-clone model limitations. Clean-clone Vosk acquisition and trusted checksum verification remain an explicitly documented evidence limitation. |
 | `requirements.txt` | **PASS** | `requirements.txt`; `requirements-dev.txt`; `.github/workflows/security.yml`; `docs/day9_final_testing_evidence.md` | Runtime dependencies are pinned and development dependencies are separated. Day 9 `pip check` returned `No broken requirements found.` This verifies installed dependency consistency, not vulnerability-free status or successful installation in a fresh environment. |
 | Source code | **PASS** | `src/`; Flask routes in `src/app.py` | Six documented security domains and REST API/dashboard integration are present. PASS indicates source presence and organization, not production security certification. |
@@ -43,7 +43,7 @@ The historical and latest results below were recorded on the development EC2 ins
 | Bandit High findings | **0** |
 | Bandit Medium findings | **0** |
 | Bandit Low findings | **6** |
-| Git branch synchronization | **PASS — `7f1495e` before this update** |
+| Git branch synchronization | **PASS — `796d8b1a9f171e9c02789ed06e8abcaea7ef427f`** |
 | Day 8 screenshot inventory | **38 PNG files present** |
 
 Detailed testing evidence is documented in `docs/day9_final_testing_evidence.md`.

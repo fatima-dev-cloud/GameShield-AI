@@ -43,9 +43,10 @@ should be read with their recorded dates, commits, commands and limitations. No
 contribution percentage is assigned.
 
 Codex later ran the 235-test cross-module selection, actual-model moderation/API
-checks and disposable repository restore, then prepared these documentation
-updates. No production access, `main` merge or deployment occurred. These new
-updates remain uncommitted pending separate human Git approval.
+checks and disposable repository restore, then prepared the final documentation
+updates. After explicit human authorization, those four documentation reports
+were committed as `796d8b1a9f171e9c02789ed06e8abcaea7ef427f` and pushed to
+`origin/development`. No production access, `main` merge or deployment occurred.
 
 ## Human/manual contributions
 
