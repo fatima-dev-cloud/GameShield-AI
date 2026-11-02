@@ -81,19 +81,15 @@ The development computer did not require an Ubuntu virtual machine. Linux deploy
 ## 5. Project Structure
 
 ```text
-CyberSecurityProject/
+GameShield-AI/
 ├── .github/
 │   └── workflows/
 │       └── security.yml
-├── config/
 ├── data/
 │   ├── player_behavior.csv
 │   └── moderation_dataset.csv
 ├── docs/
-│   ├── architecture/
 │   └── diagrams/
-├── logs/
-├── models/
 ├── screenshots/
 ├── src/
 │   ├── anti_cheat/
@@ -106,15 +102,21 @@ CyberSecurityProject/
 │   ├── templates/
 │   └── app.py
 ├── tests/
+│   ├── conftest.py
 │   ├── test_api.py
-│   └── test_security.py
+│   ├── test_security.py
+│   └── test_*.py
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
 └── requirements-dev.txt
 ```
 
-Generated model files, local identity records, secrets and private keys are excluded from version control.
+Generated model files, local identity records, logs, secrets and private keys
+are excluded from version control. Local `config/`, `logs/` and `models/`
+directories may be created during setup or execution but are not tracked
+submission artifacts. Use `git ls-files` for the authoritative tracked-file
+inventory.
 
 ## 6. Step-by-Step Windows Installation
 
@@ -471,11 +473,15 @@ The dashboard communicates with Flask REST APIs.
 
 ## 14. Automated Testing
 
-The project includes automated tests in:
+The project includes unit, API, integration and security tests under `tests/`,
+including:
 
 ```text
 tests/test_api.py
 tests/test_security.py
+tests/test_day6_integration.py
+tests/test_rate_limiting_day5.py
+tests/test_vosk_transcriber_day5.py
 ```
 
 ### Run all tests
@@ -490,13 +496,24 @@ python -m pytest -q
 python -m pytest tests -v
 ```
 
-### Verified local result
+### Verified Day 9 development result
 
-A verified Windows test run returned:
+The initial verified Ubuntu development-EC2 run on 1 November 2026 returned:
 
 ```text
-13 passed in 2.80s
+268 tests collected
+268 passed in 5.16 seconds
 ```
+
+After the stereo-WAV exception-handling regression was added, an earlier full
+run on 2 November 2026 returned **269 passed in 4.57 seconds**. The final
+approval-gate run returned **269 passed in 4.38 seconds**. A broad focused
+identity, moderation, voice, dashboard and API selection returned **108 passed
+in 4.88 seconds**, and the final narrow acceptance selection returned **54
+passed in 3.07 seconds**. The earlier focused dashboard/API selection returned 126
+passed in 3.62 seconds and is retained as historical evidence.
+See [Day 9 Final Testing Evidence](docs/day9_final_testing_evidence.md) and
+[Day 9 Dashboard Testing Evidence](docs/day9_dashboard_testing_evidence.md).
 
 ![Automated Tests](screenshots/final_automated_tests_ss_99.png)
 
@@ -523,6 +540,10 @@ python -m pip check
 ```
 
 The project uses these tools to help identify security and dependency problems.
+
+The verified Day 9 Bandit result was 0 High, 0 Medium and 6 Low findings.
+The Low findings are documented residual risks; they were reviewed, not fixed.
+See [Day 9 Bandit Risk Review](docs/day9_bandit_low_findings_review.md).
 
 Security scan results are time-dependent and should be rerun when dependencies or source code change.
 
@@ -687,7 +708,9 @@ These endpoints previously returned successful HTTP responses through Nginx.
 
 ### Step 11 — Access the dashboard
 
-The dashboard was opened from a Windows browser using the EC2 public IPv4 address and `/dashboard` path.
+The dashboard was opened from a Windows browser during the recorded Day 8
+deployment verification using the EC2 public IPv4 address and `/dashboard`
+path. This is historical evidence, not a Day 9 live-service check.
 
 ![AWS EC2 Deployment](screenshots/GameShield_AI_AWS_EC2_Deployment.png)
 
@@ -778,26 +801,29 @@ The project provides practical experience in:
 
 ## 22. Day 8 — Final AWS Deployment Verification
 
-GameShield AI was deployed to an existing AWS EC2 Ubuntu instance using an
-independent release at `/home/ubuntu/gameshield-release-day8`. Nginx and the
-Gunicorn/systemd service remained active, while the original production
-repository on `main` remained clean.
+The Day 8 evidence records deployment to an existing AWS EC2 Ubuntu instance
+using an independent release at `/home/ubuntu/gameshield-release-day8`. It also
+records that Nginx and the Gunicorn/systemd service remained active. The
+production repository was initially checked on `main` and was later observed
+on `development` at `565afea`; the deployed application used the separate
+release directory. Day 9 did not access production or revalidate service state.
 
-### Public demonstration
+### Recorded Day 8 public demonstration
 
 https://3.115.183.249/dashboard
 
-The dashboard was successfully opened from an
-external Windows Chrome browser on 30 October 2026.
+The dashboard was recorded as successfully opened from an external Windows
+Chrome browser during Day 8. Current availability was not checked during Day 9.
 
 The public IP may change if the EC2 instance is
 stopped and started without an Elastic IP.
 
-### Final verified status
+### Day 8 recorded status
 
 - HTTP redirects to HTTPS with HTTP 301.
 - The HTTPS dashboard returns HTTP 200 and validates publicly with `curl`.
-- A Let's Encrypt IP-address certificate was issued, expiring 6 November 2026.
+- A Let's Encrypt IP-address certificate was recorded as issued with an expiry
+  of 6 November 2026; current validity requires a separately authorized check.
 - Certbot's renewal timer is enabled; the dry run succeeded and the ACME HTTP
   challenge remains accessible.
 - Nginx and Gunicorn/systemd are running.
@@ -817,6 +843,11 @@ Production has `vosk-model-small-en-us-0.15` installed and configured through
 `VOSK_MODEL_PATH`. A one-second silent PCM WAV request returned HTTP 200, an
 empty transcription, and `BLOCK` for the empty message. Actual spoken-word
 transcription has not yet been verified in production.
+
+For a clean clone, train the generated Joblib models using the documented
+training scripts and obtain the Vosk model separately as described below. The
+Vosk model is not tracked in Git, and a trusted checksum for the downloaded
+model has not been verified.
 
 See [Voice Setup](docs/voice_setup.md).
 

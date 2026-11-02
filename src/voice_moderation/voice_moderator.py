@@ -1,7 +1,7 @@
-from src.audio_transcription.vosk_transcriber import (
+from audio_transcription.vosk_transcriber import (
     transcribe_wav,
 )
-from src.content_moderation.moderator import (
+from content_moderation.moderator import (
     moderate_text,
 )
 

@@ -347,3 +347,50 @@ def test_voice_api_rejects_request_before_processing(client):
     }
     temporary_file.assert_not_called()
     moderate.assert_not_called()
+
+def test_voice_api_real_stereo_wav_returns_400(client, tmp_path):
+    import wave
+
+    model_dir = tmp_path / "vosk-model"
+    model_dir.mkdir()
+    app.config["VOSK_MODEL_PATH"] = str(model_dir)
+
+    audio = BytesIO()
+    with wave.open(audio, "wb") as wav:
+        wav.setnchannels(2)
+        wav.setsampwidth(2)
+        wav.setframerate(16000)
+        wav.writeframes(bytes(640))
+
+    captured_paths = []
+    from voice_moderation.voice_moderator import moderate_voice
+
+    def capture_and_moderate(audio_path, model_path):
+        captured_paths.append(audio_path)
+        return moderate_voice(audio_path, model_path)
+
+    with (
+        patch(
+            "app.moderate_voice",
+            side_effect=capture_and_moderate,
+        ),
+        patch(
+            "audio_transcription.vosk_transcriber.Model"
+        ) as model,
+    ):
+        response = client.post(
+            "/api/moderation/voice",
+            data=_voice_upload(audio.getvalue()),
+            content_type="multipart/form-data",
+        )
+
+    assert len(captured_paths) == 1
+    assert not captured_paths[0].exists()
+    assert response.status_code == 400
+    assert response.get_json() == {
+        "error": (
+            "Audio must be an uncompressed 16-bit "
+            "mono PCM WAV file."
+        )
+    }
+    model.assert_not_called()
