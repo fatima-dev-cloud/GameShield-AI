@@ -1,7 +1,12 @@
+import hmac
 import json
+import os
+import tempfile
 from pathlib import Path
 
 from flask import Flask, jsonify, request, render_template
+
+from werkzeug.exceptions import RequestEntityTooLarge
 
 from anti_cheat.detector import analyze_player
 
@@ -11,6 +16,10 @@ from anti_cheat.behavioral_security import (
 )
 
 from anti_cheat.cheat_type_detector import analyze_cheat_types
+
+from anti_cheat.kernel_event_simulation import (
+    analyze_simulated_kernel_event,
+)
 
 from asset_security.asset_registry import (
     register_asset,
@@ -70,8 +79,44 @@ from content_moderation.realtime_moderation import (
     moderate_multiplayer_message
 )
 
+from audio_transcription.vosk_transcriber import (
+    AudioFileTooLargeError,
+    AudioTranscriptionError,
+    InvalidWavFormatError,
+    MAX_AUDIO_SIZE_BYTES,
+    SpeechModelNotFoundError,
+)
+
+from voice_moderation.voice_moderator import (
+    VoiceModerationError,
+    moderate_voice,
+)
+
 app = Flask(__name__)
 
+KERNEL_SIMULATION_MAX_BODY_BYTES = 8192
+
+VOICE_MULTIPART_OVERHEAD_BYTES = 64 * 1024
+
+VOICE_MAX_REQUEST_BYTES = (
+    MAX_AUDIO_SIZE_BYTES
+    + VOICE_MULTIPART_OVERHEAD_BYTES
+)
+
+app.config["KERNEL_SIMULATION_ENABLED"] = (
+    os.environ.get(
+        "KERNEL_SIMULATION_ENABLED",
+        "",
+    ).lower()
+    in {"1", "true", "yes", "on"}
+)
+app.config["KERNEL_SIMULATION_API_TOKEN"] = os.environ.get(
+    "KERNEL_SIMULATION_API_TOKEN"
+)
+
+app.config["VOSK_MODEL_PATH"] = os.environ.get(
+    "VOSK_MODEL_PATH"
+)
 
 @app.before_request
 def infrastructure_rate_limit():
@@ -257,6 +302,76 @@ def api_detect_cheat_types():
             "error": str(error)
         }), 400
 
+
+@app.route(
+    "/api/anti-cheat/kernel-simulation/analyze",
+    methods=["POST"]
+)
+def api_analyze_simulated_kernel_event():
+    if not app.config.get("KERNEL_SIMULATION_ENABLED", False):
+        return jsonify({
+            "error": "Simulation endpoint is unavailable"
+        }), 404
+
+    configured_token = app.config.get(
+        "KERNEL_SIMULATION_API_TOKEN"
+    )
+
+    if (
+        not isinstance(configured_token, str)
+        or not configured_token
+    ):
+        return jsonify({
+            "error": "Simulation endpoint is unavailable"
+        }), 503
+
+    authorization = request.headers.get("Authorization", "")
+    scheme, separator, supplied_token = authorization.partition(" ")
+
+    if (
+        scheme.lower() != "bearer"
+        or not separator
+        or not supplied_token
+    ):
+        return jsonify({
+            "error": "Bearer authorization is required"
+        }), 401
+
+    if not hmac.compare_digest(
+        supplied_token,
+        configured_token,
+    ):
+        return jsonify({
+            "error": "Authorization failed"
+        }), 403
+
+    content_length = request.content_length
+
+    if (
+        content_length is None
+        or content_length > KERNEL_SIMULATION_MAX_BODY_BYTES
+    ):
+        return jsonify({
+            "error": "Request body exceeds the simulation limit"
+        }), 413
+
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({
+            "error": "A valid JSON object is required"
+        }), 400
+
+    try:
+        result = analyze_simulated_kernel_event(data)
+        return jsonify(result), 200
+
+    except (ValueError, TypeError, KeyError, OverflowError) as error:
+        return jsonify({
+            "error": str(error)
+        }), 400
+
+
 @app.route("/api/assets/register", methods=["POST"])
 def api_register_asset():
     data = request.get_json(silent=True)
@@ -285,6 +400,9 @@ def api_register_asset():
         }), 400
 
     try:
+        if isinstance(data["value"], bool):
+            raise ValueError
+
         asset = register_asset(
             asset_name=str(data["asset_name"]),
             owner_id=str(data["owner_id"]),
@@ -692,6 +810,7 @@ def api_threat_response():
     "/api/moderation/text",
     methods=["POST"]
 )
+
 def api_moderate_text():
     data = request.get_json(silent=True)
 
@@ -705,16 +824,18 @@ def api_moderate_text():
             "error": "message is required."
         }), 400
 
-    result = moderate_text(
-        str(data["message"])
-    )
+    if not isinstance(data["message"], str):
+        return jsonify({
+            "error": "message must be a string."
+        }), 400
+
+    result = moderate_text(data["message"])
 
     return jsonify({
         "platform": "GameShield AI",
         "module": "AI Content Moderation",
         "analysis": result
     })
-
 
 @app.route(
     "/api/moderation/child-safety",
@@ -797,6 +918,108 @@ def api_realtime_moderation():
         "analysis": result
     })
 
+@app.route("/api/moderation/voice", methods=["POST"])
+def api_voice_moderation():
+    # Limit the HTTP request before multipart parsing.
+    request.max_content_length = VOICE_MAX_REQUEST_BYTES
+
+    model_path = app.config.get("VOSK_MODEL_PATH")
+
+    if not isinstance(model_path, (str, os.PathLike)) or not model_path:
+        return jsonify({
+            "error": "Voice moderation model is not configured."
+        }), 503
+
+    try:
+        audio_file = request.files.get("audio")
+    except RequestEntityTooLarge:
+        return jsonify({
+            "error": (
+                "Voice upload exceeds the maximum "
+                "permitted request size."
+            )
+        }), 413
+
+    if audio_file is None or not audio_file.filename:
+        return jsonify({
+            "error": "A WAV file is required in the audio field."
+        }), 400
+
+    try:
+        audio_data = audio_file.stream.read(MAX_AUDIO_SIZE_BYTES + 1)
+    except (OSError, ValueError):
+        return jsonify({
+            "error": "Audio upload could not be read."
+        }), 400
+
+    if len(audio_data) > MAX_AUDIO_SIZE_BYTES:
+        return jsonify({
+            "error": "Audio file exceeds the maximum permitted size of 10 MB."
+        }), 413
+
+    temporary_path = None
+
+    temporary_path = None
+
+    try:
+        with tempfile.NamedTemporaryFile(
+            suffix=".wav",
+            delete=False,
+        ) as temporary_file:
+            temporary_path = Path(temporary_file.name)
+            temporary_file.write(audio_data)
+
+        result = moderate_voice(temporary_path, model_path)
+
+        return jsonify({
+            "platform": "GameShield AI",
+            "module": "AI Voice Moderation",
+            "analysis": result,
+        }), 200
+
+    except AudioFileTooLargeError:
+        return jsonify({
+            "error": "Audio file exceeds the maximum permitted size of 10 MB."
+        }), 413
+
+    except InvalidWavFormatError:
+        return jsonify({
+            "error": "Audio must be an uncompressed 16-bit mono PCM WAV file."
+        }), 400
+
+    except SpeechModelNotFoundError:
+        return jsonify({
+            "error": "Voice moderation model is unavailable."
+        }), 503
+
+    except (FileNotFoundError, TypeError):
+        return jsonify({
+            "error": "Audio could not be processed."
+        }), 400
+
+    except AudioTranscriptionError:
+        return jsonify({
+            "error": "Audio could not be transcribed."
+        }), 422
+
+    except VoiceModerationError:
+        return jsonify({
+            "error": "Voice moderation could not be completed."
+        }), 500
+
+    except OSError:
+        return jsonify({
+            "error": "Voice moderation could not be completed."
+        }), 500
+
+    finally:
+        if temporary_path is not None:
+            try:
+                temporary_path.unlink(missing_ok=True)
+            except OSError:
+                app.logger.warning(
+                    "Unable to remove temporary voice upload."
+                )
 
 # DevSecOps Dashboard - Read-Only Security Report
 

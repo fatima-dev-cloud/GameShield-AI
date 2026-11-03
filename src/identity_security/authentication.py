@@ -87,6 +87,15 @@ def register_user(username, password, avatar_name):
         }
 
     for user in database["users"]:
+        if (
+            not isinstance(user, dict)
+            or not isinstance(user.get("username"), str)
+        ):
+            return {
+                "status": "REGISTRATION FAILED",
+                "message": "User database contains an invalid record."
+            }
+
         if user["username"].lower() == username.lower():
             return {
                 "status": "REGISTRATION FAILED",
@@ -123,18 +132,50 @@ def register_user(username, password, avatar_name):
     }
 
 
+def _authentication_failed(username):
+    write_identity_log(
+        f"LOGIN_FAILED | username={username}"
+    )
+
+    return {
+        "status": "AUTHENTICATION FAILED",
+        "authenticated": False,
+        "message": "Invalid credentials."
+    }
+
+
 def authenticate_user(username, password):
     database = load_users()
 
     for user in database["users"]:
+        if (
+            not isinstance(user, dict)
+            or not isinstance(user.get("username"), str)
+        ):
+            return _authentication_failed(username)
 
         if user["username"].lower() == username.lower():
-
-            password_valid = verify_password(
-                password,
-                user["password_salt"],
-                user["password_hash"]
+            required_fields = (
+                "user_id",
+                "avatar_name",
+                "password_salt",
+                "password_hash",
             )
+            if any(
+                not isinstance(user.get(field), str)
+                or not user[field]
+                for field in required_fields
+            ):
+                return _authentication_failed(username)
+
+            try:
+                password_valid = verify_password(
+                    password,
+                    user["password_salt"],
+                    user["password_hash"]
+                )
+            except (TypeError, ValueError):
+                return _authentication_failed(username)
 
             if password_valid:
                 session_token = secrets.token_urlsafe(32)
@@ -153,25 +194,9 @@ def authenticate_user(username, password):
                     "session_token": session_token
                 }
 
-            write_identity_log(
-                f"LOGIN_FAILED | username={username}"
-            )
+            return _authentication_failed(username)
 
-            return {
-                "status": "AUTHENTICATION FAILED",
-                "authenticated": False,
-                "message": "Invalid credentials."
-            }
-
-    write_identity_log(
-        f"LOGIN_FAILED | username={username}"
-    )
-
-    return {
-        "status": "AUTHENTICATION FAILED",
-        "authenticated": False,
-        "message": "Invalid credentials."
-    }
+    return _authentication_failed(username)
 
 
 if __name__ == "__main__":

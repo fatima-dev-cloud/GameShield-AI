@@ -81,19 +81,15 @@ The development computer did not require an Ubuntu virtual machine. Linux deploy
 ## 5. Project Structure
 
 ```text
-CyberSecurityProject/
+GameShield-AI/
 ├── .github/
 │   └── workflows/
 │       └── security.yml
-├── config/
 ├── data/
 │   ├── player_behavior.csv
 │   └── moderation_dataset.csv
 ├── docs/
-│   ├── architecture/
 │   └── diagrams/
-├── logs/
-├── models/
 ├── screenshots/
 ├── src/
 │   ├── anti_cheat/
@@ -106,15 +102,21 @@ CyberSecurityProject/
 │   ├── templates/
 │   └── app.py
 ├── tests/
+│   ├── conftest.py
 │   ├── test_api.py
-│   └── test_security.py
+│   ├── test_security.py
+│   └── test_*.py
 ├── .gitignore
 ├── README.md
 ├── requirements.txt
 └── requirements-dev.txt
 ```
 
-Generated model files, local identity records, secrets and private keys are excluded from version control.
+Generated model files, local identity records, logs, secrets and private keys
+are excluded from version control. Local `config/`, `logs/` and `models/`
+directories may be created during setup or execution but are not tracked
+submission artifacts. Use `git ls-files` for the authoritative tracked-file
+inventory.
 
 ## 6. Step-by-Step Windows Installation
 
@@ -247,6 +249,41 @@ The anti-cheat module returns a prediction and associated risk information.
 ![Anti-Cheat Detection](screenshots/AntiCheat_Suspicious_Player_PASS.png)
 
 > High accuracy on a small synthetic dataset must not be interpreted as real-world anti-cheat performance.
+
+### Educational kernel-event simulation API
+
+GameShield AI includes a user-space educational simulation of
+kernel-like security events. It does not collect real kernel telemetry,
+load kernel modules, attach eBPF programs or enforce anti-cheat actions.
+
+The isolated endpoint is:
+
+    POST /api/anti-cheat/kernel-simulation/analyze
+
+The endpoint is disabled by default. To enable it in a controlled
+demonstration environment, supply both settings through environment
+or application configuration:
+
+    KERNEL_SIMULATION_ENABLED=true
+    KERNEL_SIMULATION_API_TOKEN=<strong test-only token>
+
+The token must not be hardcoded in source control, logs or screenshots.
+Requests use the Authorization: Bearer <token> header. Bearer
+credentials must be transmitted only over HTTPS. Transport encryption alone
+does not make a public endpoint production-ready; keep the endpoint disabled
+until appropriate authentication and access controls are also available.
+
+Every successful result remains audit-only and explicitly reports:
+
+    simulation=true
+    kernel_observed=false
+    enforcement=DISABLED
+    decision=AUDIT_ONLY
+
+Detailed Day 3 documentation:
+
+- [Kernel-Event Simulation Architecture and Evidence Report](docs/day3_kernel_event_simulation_evidence.md)
+- [Kernel-Event Simulation Architecture Diagram](docs/diagrams/kernel_event_simulation_architecture.md)
 
 ## 9. Virtual Asset and Marketplace Security
 
@@ -436,11 +473,15 @@ The dashboard communicates with Flask REST APIs.
 
 ## 14. Automated Testing
 
-The project includes automated tests in:
+The project includes unit, API, integration and security tests under `tests/`,
+including:
 
 ```text
 tests/test_api.py
 tests/test_security.py
+tests/test_day6_integration.py
+tests/test_rate_limiting_day5.py
+tests/test_vosk_transcriber_day5.py
 ```
 
 ### Run all tests
@@ -455,13 +496,24 @@ python -m pytest -q
 python -m pytest tests -v
 ```
 
-### Verified local result
+### Verified Day 9 development result
 
-A verified Windows test run returned:
+The initial verified Ubuntu development-EC2 run on 1 November 2026 returned:
 
 ```text
-13 passed in 2.80s
+268 tests collected
+268 passed in 5.16 seconds
 ```
+
+After the stereo-WAV exception-handling regression was added, an earlier full
+run on 2 November 2026 returned **269 passed in 4.57 seconds**. The final
+approval-gate run returned **269 passed in 4.38 seconds**. A broad focused
+identity, moderation, voice, dashboard and API selection returned **108 passed
+in 4.88 seconds**, and the final narrow acceptance selection returned **54
+passed in 3.07 seconds**. The earlier focused dashboard/API selection returned 126
+passed in 3.62 seconds and is retained as historical evidence.
+See [Day 9 Final Testing Evidence](docs/day9_final_testing_evidence.md) and
+[Day 9 Dashboard Testing Evidence](docs/day9_dashboard_testing_evidence.md).
 
 ![Automated Tests](screenshots/final_automated_tests_ss_99.png)
 
@@ -488,6 +540,10 @@ python -m pip check
 ```
 
 The project uses these tools to help identify security and dependency problems.
+
+The verified Day 9 Bandit result was 0 High, 0 Medium and 6 Low findings.
+The Low findings are documented residual risks; they were reviewed, not fixed.
+See [Day 9 Bandit Risk Review](docs/day9_bandit_low_findings_review.md).
 
 Security scan results are time-dependent and should be rerun when dependencies or source code change.
 
@@ -539,7 +595,7 @@ GameShield AI was deployed on an AWS EC2 instance running Ubuntu 24.04 LTS.
 ```text
 User Browser
     |
-    | HTTP Port 80
+    | HTTPS Port 443
     v
 AWS Security Group
     |
@@ -652,11 +708,15 @@ These endpoints previously returned successful HTTP responses through Nginx.
 
 ### Step 11 — Access the dashboard
 
-The dashboard was opened from a Windows browser using the EC2 public IPv4 address and `/dashboard` path.
+The dashboard was opened from a Windows browser during the recorded Day 8
+deployment verification using the EC2 public IPv4 address and `/dashboard`
+path. This is historical evidence, not a Day 9 live-service check.
 
 ![AWS EC2 Deployment](screenshots/GameShield_AI_AWS_EC2_Deployment.png)
 
-**Security limitation:** The demonstration currently uses HTTP rather than HTTPS. Real credentials, real biometric data and other sensitive information must not be submitted over this deployment.
+The final Day 8 deployment uses HTTPS, with HTTP redirected to HTTPS. This
+educational public API is not fully production-hardened; real credentials,
+biometric data, and other sensitive information must not be submitted.
 
 ## 18. Architecture Documentation
 
@@ -713,7 +773,7 @@ GameShield AI currently demonstrates important cybersecurity concepts, but sever
 | Identity | Simulated identity and biometric protection | Real VR/AR device integration |
 | Infrastructure | Rate limiting and validation | Cloud DDoS mitigation and WAF |
 | Moderation | Text and transcript analysis | Live audio processing |
-| Cloud Security | HTTP-based demonstration | HTTPS/TLS and stronger access controls |
+| Cloud Security | HTTPS with automatic certificate renewal | Stronger public API controls and hardening evidence |
 | DevSecOps | Automated CI checks | Controlled automated deployment |
 | Scalability | Single EC2 instance | Load balancing and scalable infrastructure |
 
@@ -738,3 +798,74 @@ The project provides practical experience in:
 **Repository:** https://github.com/fatima-dev-cloud/GameShield-AI
 
 **Project Type:** Educational cybersecurity prototype for gaming and VR/AR environments.
+
+## 22. Day 8 — Final AWS Deployment Verification
+
+The Day 8 evidence records deployment to an existing AWS EC2 Ubuntu instance
+using an independent release at `/home/ubuntu/gameshield-release-day8`. It also
+records that Nginx and the Gunicorn/systemd service remained active. The
+production repository was initially checked on `main` and was later observed
+on `development` at `565afea`; the deployed application used the separate
+release directory. Day 9 did not access production or revalidate service state.
+
+### Recorded Day 8 public demonstration
+
+https://3.115.183.249/dashboard
+
+The dashboard was recorded as successfully opened from an external Windows
+Chrome browser during Day 8. Current availability was not checked during Day 9.
+
+The public IP may change if the EC2 instance is
+stopped and started without an Elastic IP.
+
+### Day 8 recorded status
+
+- HTTP redirects to HTTPS with HTTP 301.
+- The HTTPS dashboard returns HTTP 200 and validates publicly with `curl`.
+- A Let's Encrypt IP-address certificate was recorded as issued with an expiry
+  of 6 November 2026; current validity requires a separately authorized check.
+- Certbot's renewal timer is enabled; the dry run succeeded and the ACME HTTP
+  challenge remains accessible.
+- Nginx and Gunicorn/systemd are running.
+
+### Latest CI/CD verification
+
+GitHub Actions Security Pipeline Run #17:
+
+- Branch: development
+- Commit: dc3ce5c
+- Result: SUCCESS
+- Duration: 44 seconds
+
+### Voice moderation status
+
+Production has `vosk-model-small-en-us-0.15` installed and configured through
+`VOSK_MODEL_PATH`. A one-second silent PCM WAV request returned HTTP 200, an
+empty transcription, and `BLOCK` for the empty message. Actual spoken-word
+transcription has not yet been verified in production.
+
+For a clean clone, train the generated Joblib models using the documented
+training scripts and obtain the Vosk model separately as described below. The
+Vosk model is not tracked in Git. On 2 November 2026, the exact official
+`vosk-model-small-en-us-0.15.zip` archive was verified as SHA256
+`30f26242c4eb449f948e42cb302dd7a686cb29a3423a8367f99ff41780942498`.
+All 14 configured local model files matched the extracted official archive.
+
+See [Voice Setup](docs/voice_setup.md).
+
+### Deployment security limitations
+
+Full EC2 disaster recovery has not been verified. The running root EBS volume
+remains unencrypted, although encrypted backup artifacts exist. The short-lived
+IP certificate depends on reliable automatic renewal. Public API security,
+production hardening, and all 18 original Topic 137 objectives must not be
+claimed as fully verified without further evidence.
+
+### Day 8 evidence
+
+See [Day 8 Deployment Evidence](docs/day8_deployment_evidence.md).
+
+### Architecture diagrams
+
+See [AWS Network Architecture](docs/diagrams/aws_network_architecture.md) and
+[Security Architecture](docs/diagrams/security_architecture.md).

@@ -44,11 +44,13 @@ def load_model():
 
     return joblib.load(MODEL_FILE)
 
-
 def moderate_text(text):
-    model = load_model()
+    if not isinstance(text, str):
+        raise TypeError(
+            "text must be a string"
+        )
 
-    clean_text = str(text).strip()
+    clean_text = text.strip()
 
     if not clean_text:
         return {
@@ -57,6 +59,8 @@ def moderate_text(text):
             "reason": "Empty message",
             "toxicity_probability": 0.0
         }
+
+    model = load_model()
 
     prediction = int(
         model.predict([clean_text])[0]

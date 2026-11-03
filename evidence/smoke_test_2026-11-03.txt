@@ -1,0 +1,30 @@
+PASS: server becomes healthy
+PASS: home page
+PASS: dashboard
+PASS: dashboard stylesheet
+PASS: status API
+PASS: anti-cheat analysis
+PASS: account-sharing analysis
+PASS: rank-boosting analysis
+PASS: cheat-type analysis
+PASS: kernel-event simulation
+PASS: asset registration
+PASS: asset ownership verification
+PASS: asset duplication scan
+PASS: asset ledger verification
+PASS: marketplace analysis
+PASS: identity registration
+PASS: identity login
+PASS: motion privacy consent
+PASS: eye privacy consent
+PASS: biometric protection
+PASS: game-action validation
+PASS: secure packet verification
+PASS: threat response
+PASS: text moderation
+PASS: child-safety check
+PASS: real-time moderation
+PASS: voice moderation validation
+PASS: DevSecOps report
+
+Smoke test passed: all primary GameShield AI checks succeeded.

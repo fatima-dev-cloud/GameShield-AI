@@ -898,6 +898,86 @@ document.getElementById("moderateMultiplayerButton")
         }
     });
 
+// 4. Offline Voice Moderation
+
+document.getElementById("moderateVoiceButton")
+    .addEventListener("click", async () => {
+
+        const button = document.getElementById(
+            "moderateVoiceButton"
+        );
+
+        const result = document.getElementById(
+            "voiceModerationResult"
+        );
+
+        const audioInput = document.getElementById(
+            "voiceAudioFile"
+        );
+
+        const audioFile = audioInput.files[0];
+
+        if (!audioFile) {
+            result.textContent = "Select a WAV audio sample.";
+            return;
+        }
+
+        const maximumAudioSize = 10 * 1024 * 1024;
+
+        if (audioFile.size > maximumAudioSize) {
+            result.textContent =
+                "Audio sample must not exceed 10 MB.";
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("audio", audioFile);
+
+        button.disabled = true;
+        result.textContent =
+            "Transcribing and moderating voice...";
+
+        try {
+            const response = await fetch(
+                "/api/moderation/voice",
+                {
+                    method: "POST",
+                    body: formData
+                }
+            );
+
+            const contentType =
+                response.headers.get("content-type") || "";
+
+            if (!contentType.includes("application/json")) {
+                throw new Error(
+                    "Server returned a non-JSON response. HTTP " +
+                    response.status
+                );
+            }
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(
+                    data.error || "Voice moderation failed."
+                );
+            }
+
+            showModerationResult(
+                result,
+                {
+                    httpStatus: response.status,
+                    data: data
+                }
+            );
+
+        } catch (error) {
+            result.textContent = "Error: " + error.message;
+        } finally {
+            button.disabled = false;
+        }
+    });
 
 // ========================================
 // DEVSECOPS SECURITY DASHBOARD

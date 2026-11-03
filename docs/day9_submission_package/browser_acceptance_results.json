@@ -1,0 +1,120 @@
+{
+  "base_url": "http://127.0.0.1:18766",
+  "executed_at_utc": "2026-11-02T17:12:03.713Z",
+  "browser": {
+    "version": "156.0.8078.4"
+  },
+  "console_errors": [],
+  "page_errors": [],
+  "request_failures": [],
+  "http_errors": [],
+  "checks": {
+    "dashboard_http": 200,
+    "title": "GameShield AI Dashboard",
+    "desktop_no_horizontal_overflow": true,
+    "navigation_links": 7,
+    "navigation": "PASS",
+    "keyboard_focus_sequence": [
+      "#gs-overview",
+      "#gs-anticheat",
+      "#gs-assets",
+      "#gs-identity",
+      "#gs-infrastructure",
+      "#moderation-panel",
+      "#devsecops-panel",
+      "playerType",
+      "analyzeButton",
+      "sharingScenario",
+      "sharingAnalyzeButton",
+      "boostingScenario"
+    ],
+    "keyboard_focus_distinct": true,
+    "mobile_http": 200,
+    "mobile_no_horizontal_overflow": true
+  },
+  "workflows": {
+    "anti_cheat": {
+      "status": 200,
+      "result": "Status: CHEATER DETECTED\nRisk Level: HIGH\nCheat Probability: 100%"
+    },
+    "account_sharing": {
+      "status": 200,
+      "result": "Risk Level: HIGH\nRisk Score: 100/100\nSuspicious: Yes\nSignals: IMPOSSIBLE_TRAVEL, NEW_DEVICE, MAJOR_BEHAVIOR_CHANGE\n\nRisk indicators are not proof of account sharing. VPNs, travel and legitimate device changes may cause false positives."
+    },
+    "marketplace": {
+      "status": 200,
+      "result": "Transaction ID: DEMO-SUSPICIOUS-001\n\nBackend Analysis:\n{\n  \"decision\": \"BLOCKED\",\n  \"reasons\": [\n    \"Unusually high transaction amount\",\n    \"Abnormally high transaction frequency\",\n    \"High-value transaction from a new account\",\n    \"Unusual geographic transaction pattern\"\n  ],\n  \"risk_level\": \"HIGH\",\n  \"risk_score\": 90,\n  \"transaction_id\": \"DEMO-SUSPICIOUS-001\"\n}"
+    },
+    "asset_register": {
+      "status": 200,
+      "result": "{\n  \"asset\": {\n    \"asset_hash\": \"72ac176c3983920aaebba90805d666d3af983cf49fc2f3239a2a217ac91d099e\",\n    \"asset_id\": \"ASSET-F73D8A7F0D\",\n    \"asset_name\": \"Day9 Browser Asset 1793639532301\",\n    \"asset_type\": \"weapon\",\n    \"created_at\": \"2026-11-02T17:12:12+00:00\",\n    \"owner_id\": \"day9_owner_1793639532301\",\n    \"previous_hash\": \"1f904c3d72764a5befc132879de1d50f9307344aa8678b387f1ac9b16147e2fe\",\n    \"record_version\": 2,\n    \"value\": 500\n  },\n  \"module\": \"Virtual Asset Protection\",\n  \"platform\": \"GameShield AI\",\n  \"status\": \"ASSET REGISTERED\"\n}"
+    },
+    "asset_verify": {
+      "status": 200,
+      "result": "{\n  \"asset_id\": \"ASSET-F73D8A7F0D\",\n  \"claimed_owner\": \"day9_owner_1793639532301\",\n  \"hash_valid\": true,\n  \"owner_valid\": true,\n  \"registered_owner\": \"day9_owner_1793639532301\",\n  \"status\": \"OWNERSHIP VERIFIED\"\n}"
+    },
+    "ledger": {
+      "status": 200,
+      "result": "Status: LEDGER INTEGRITY VERIFIED\nLedger Valid: YES\nRecords Checked: 4\nLedger Type: LOCAL HASH-LINKED SIMULATION\n\nNote: This verifies local record consistency only. It does not provide decentralized blockchain consensus or independently prove ownership."
+    },
+    "identity_register": {
+      "status": 201,
+      "result": "{\n  \"module\": \"Metaverse Identity Security\",\n  \"platform\": \"GameShield AI\",\n  \"result\": {\n    \"avatar_name\": \"CyberWarrior\",\n    \"status\": \"REGISTRATION SUCCESSFUL\",\n    \"user_id\": \"USER-A9CF27D005\",\n    \"username\": \"day9_browser_1793639532301\"\n  }\n}"
+    },
+    "identity_login": {
+      "status": 200,
+      "result": "{\n  \"module\": \"Secure Authentication\",\n  \"platform\": \"GameShield AI\",\n  \"result\": {\n    \"authenticated\": true,\n    \"avatar_name\": \"CyberWarrior\",\n    \"session_token\": \"[REDACTED]\",\n    \"status\": \"AUTHENTICATION SUCCESSFUL\",\n    \"user_id\": \"USER-A9CF27D005\"\n  }\n}"
+    },
+    "privacy_eye_tracking": {
+      "status": 200,
+      "result": "{\n  \"module\": \"Metaverse Privacy Controls\",\n  \"platform\": \"GameShield AI\",\n  \"result\": {\n    \"access\": \"ALLOWED\",\n    \"data_type\": \"eye_tracking\",\n    \"status\": \"PRIVACY SETTING UPDATED\",\n    \"user_id\": \"day9_browser_1793639532301\"\n  }\n}"
+    },
+    "privacy_motion_tracking": {
+      "status": 200,
+      "result": "{\n  \"module\": \"Metaverse Privacy Controls\",\n  \"platform\": \"GameShield AI\",\n  \"result\": {\n    \"access\": \"ALLOWED\",\n    \"data_type\": \"motion_tracking\",\n    \"status\": \"PRIVACY SETTING UPDATED\",\n    \"user_id\": \"day9_browser_1793639532301\"\n  }\n}"
+    },
+    "biometric": {
+      "status": 200,
+      "result": "{\n  \"module\": \"VR/AR Biometric Protection\",\n  \"platform\": \"GameShield AI\",\n  \"result\": {\n    \"encrypted_bytes\": 376,\n    \"status\": \"BIOMETRIC DATA PROTECTED\"\n  }\n}"
+    },
+    "server_validation": {
+      "status": 200,
+      "result": "HTTP Status: 200\n\n{\n  \"analysis\": {\n    \"status\": \"ACTION ACCEPTED\",\n    \"valid\": true,\n    \"violations\": []\n  },\n  \"module\": \"Server-Side Validation\",\n  \"platform\": \"GameShield AI\"\n}"
+    },
+    "threat_response": {
+      "status": 200,
+      "result": "HTTP Status: 200\n\n{\n  \"module\": \"Automated Threat Response\",\n  \"platform\": \"GameShield AI\",\n  \"response\": {\n    \"automated_action\": \"TEMPORARILY BLOCK SOURCE\",\n    \"severity\": \"HIGH\",\n    \"source\": \"synthetic_demo_traffic\",\n    \"threat_type\": \"ddos\"\n  }\n}"
+    },
+    "text_moderation": {
+      "status": 200,
+      "result": "HTTP Status: 200\n\n{\n  \"analysis\": {\n    \"action\": \"BLOCK\",\n    \"risk_level\": \"HIGH\",\n    \"status\": \"TOXIC CONTENT DETECTED\",\n    \"toxicity_probability\": 70.89\n  },\n  \"module\": \"AI Content Moderation\",\n  \"platform\": \"GameShield AI\"\n}"
+    },
+    "child_safety": {
+      "status": 200,
+      "result": "HTTP Status: 200\n\n{\n  \"analysis\": {\n    \"access\": \"BLOCKED\",\n    \"content_rating\": \"ADULT\",\n    \"minimum_age\": 18,\n    \"status\": \"CHILD SAFETY FILTER TRIGGERED\",\n    \"user_age\": 10\n  },\n  \"module\": \"Child Safety\",\n  \"platform\": \"GameShield AI\"\n}"
+    },
+    "realtime_text": {
+      "status": 200,
+      "result": "HTTP Status: 200\n\n{\n  \"analysis\": {\n    \"channel\": \"global\",\n    \"message\": \"Good teamwork everyone\",\n    \"moderation\": {\n      \"action\": \"ALLOW\",\n      \"risk_level\": \"LOW\",\n      \"status\": \"CONTENT SAFE\",\n      \"toxicity_probability\": 37.1\n    },\n    \"player_id\": \"demo_player_001\"\n  },\n  \"module\": \"Real-Time Multiplayer Moderation\",\n  \"platform\": \"GameShield AI\"\n}"
+    },
+    "voice": {
+      "status": 200,
+      "result": "HTTP Status: 200\n\n{\n  \"analysis\": {\n    \"moderation\": {\n      \"action\": \"BLOCK\",\n      \"reason\": \"Empty message\",\n      \"status\": \"REJECTED\",\n      \"toxicity_probability\": 0\n    },\n    \"transcription\": \"\"\n  },\n  \"module\": \"AI Voice Moderation\",\n  \"platform\": \"GameShield AI\"\n}"
+    },
+    "devsecops": {
+      "status": 200,
+      "result": "HTTP Status: 200\n\n{\n  \"checks\": [\n    {\n      \"exit_code\": 0,\n      \"name\": \"Python Automated Security Tests\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"exit_code\": 0,\n      \"name\": \"Bandit Static Security Scan\",\n      \"status\": \"PASS\"\n    },\n    {\n      \"exit_code\": 0,\n      \"name\": \"Dependency Vulnerability Audit\",\n      \"status\": \"PASS\"\n    }\n  ],\n  \"generated_at\": \"2026-10-15T13:15:55+00:00\",\n  \"module\": \"DevSecOps Security\",\n  \"overall_status\": \"PASS\",\n  \"platform\": \"GameShield AI\"\n}"
+    }
+  },
+  "screenshots": [
+    "screenshots/day9/Day9_Desktop_Overview.png",
+    "screenshots/day9/Day9_AntiCheat_Workflow.png",
+    "screenshots/day9/Day9_AssetSecurity_Workflow.png",
+    "screenshots/day9/Day9_IdentityPrivacy_Workflow.png",
+    "screenshots/day9/Day9_InfrastructureSecurity_Workflow.png",
+    "screenshots/day9/Day9_Moderation_Workflow.png",
+    "screenshots/day9/Day9_DevSecOps_Workflow.png",
+    "screenshots/day9/Day9_Mobile_Responsive_Dashboard.png"
+  ],
+  "pass": true
+}

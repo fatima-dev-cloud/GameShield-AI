@@ -42,3 +42,5 @@ dist/
 # Operating system files
 .DS_Store
 Thumbs.db
+# Day 5 - Local Vosk speech recognition models
+/models/vosk/

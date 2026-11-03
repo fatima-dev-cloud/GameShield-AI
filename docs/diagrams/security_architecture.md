@@ -7,7 +7,7 @@
 flowchart TD
     A["User / Browser"]
     B["AWS Security Group"]
-    C["Nginx Reverse Proxy"]
+    C["Nginx TLS Reverse Proxy"]
     D["Gunicorn / Flask API"]
 
     E["Anti-Cheat Detection"]
@@ -19,8 +19,8 @@ flowchart TD
 
     K["Security Responses and Logs"]
 
-    A -->|"HTTP Demo Request"| B
-    B -->|"Allowed Port 80"| C
+    A -->|"HTTPS Demo Request"| B
+    B -->|"Allowed Ports 80 / 443"| C
     C --> D
 
     D --> E
@@ -44,7 +44,8 @@ flowchart TD
 
 - AWS Security Group restricts inbound connections.
 - Gunicorn is bound to localhost.
-- Nginx handles incoming HTTP requests.
+- Nginx terminates HTTPS and redirects HTTP to HTTPS while preserving the ACME challenge path.
+- Certbot automatic renewal is enabled for the short-lived IP-address certificate.
 
 ### Layer 2 — Application Security
 
@@ -72,9 +73,9 @@ flowchart TD
 
 ## Security Limitations
 
-- HTTPS/TLS is not yet configured.
+- HTTPS is configured, but public API hardening is not fully verified.
+- The root EBS volume remains unencrypted and full EC2 disaster recovery is unverified.
 - The application is a demonstration, not a production-ready security platform.
 - Comprehensive DDoS mitigation is not implemented.
-- Live voice capture and kernel-level anti-cheat are not implemented.
+- Production spoken-word transcription, live voice capture, and kernel-level anti-cheat are not verified.
 - Blockchain-based ownership verification is not implemented.
-```

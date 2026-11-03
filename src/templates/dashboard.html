@@ -1009,6 +1009,29 @@
         Enter a sample multiplayer message.
     </div>
 
+    <h3>4. Offline Voice Moderation</h3>
+
+<label for="voiceAudioFile">
+    Synthetic Voice Sample (WAV, maximum 10 MB)
+</label>
+
+<input
+    type="file"
+    id="voiceAudioFile"
+    accept="audio/wav,.wav"
+>
+
+<button type="button" id="moderateVoiceButton">
+    Transcribe and Moderate Voice
+</button>
+
+<div id="voiceModerationResult"
+     class="result"
+     role="status"
+     aria-live="polite">
+    Select a local 16-bit mono PCM WAV sample.
+</div>
+
     <p class="demo-note">
         Educational demonstration using synthetic messages.
         This is not a production child-safety system.

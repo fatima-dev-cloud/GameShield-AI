@@ -1,26 +1,87 @@
-from asset_security.asset_registry import load_database, write_log
+from asset_security.asset_registry import (
+    AssetDataError,
+    load_database,
+    write_log,
+)
 
 
 def detect_duplicate_assets():
-    database = load_database()
+    try:
+        database = load_database()
+    except AssetDataError:
+        return {
+            "status": "INVALID ASSET DATABASE",
+            "duplicate_count": 0,
+            "duplicates": [],
+        }
+
+    if (
+        not isinstance(database, dict)
+        or not isinstance(database.get("assets"), list)
+    ):
+        return {
+            "status": "INVALID ASSET DATABASE",
+            "duplicate_count": 0,
+            "duplicates": [],
+        }
 
     seen_hashes = set()
     seen_asset_ids = set()
+    seen_token_ids = set()
 
     duplicates = []
 
-    for asset in database["assets"]:
+    for index, asset in enumerate(database["assets"]):
+        required_fields = (
+            "asset_id",
+            "asset_hash",
+            "asset_name",
+        )
+        if not isinstance(asset, dict) or any(
+            field not in asset for field in required_fields
+        ):
+            return {
+                "status": "INVALID ASSET RECORD",
+                "duplicate_count": 0,
+                "duplicates": [],
+                "failed_record": index + 1,
+            }
 
         asset_id = asset["asset_id"]
         asset_hash = asset["asset_hash"]
+        has_token_id = "token_id" in asset
+        token_id = asset.get("token_id")
 
         reasons = []
 
-        if asset_id in seen_asset_ids:
-            reasons.append("DUPLICATE ASSET ID")
+        try:
+            if asset_id in seen_asset_ids:
+                reasons.append("DUPLICATE ASSET ID")
 
-        if asset_hash in seen_hashes:
-            reasons.append("DUPLICATE ASSET HASH")
+            if asset_hash in seen_hashes:
+                reasons.append("DUPLICATE ASSET HASH")
+
+            if has_token_id:
+                if (
+                    not isinstance(token_id, str)
+                    or not token_id.strip()
+                ):
+                    raise TypeError
+
+                if token_id in seen_token_ids:
+                    reasons.append("DUPLICATE NFT TOKEN ID")
+
+            seen_asset_ids.add(asset_id)
+            seen_hashes.add(asset_hash)
+            if has_token_id:
+                seen_token_ids.add(token_id)
+        except TypeError:
+            return {
+                "status": "INVALID ASSET RECORD",
+                "duplicate_count": 0,
+                "duplicates": [],
+                "failed_record": index + 1,
+            }
 
         if reasons:
             duplicates.append({
@@ -28,9 +89,6 @@ def detect_duplicate_assets():
                 "asset_name": asset["asset_name"],
                 "reasons": reasons
             })
-
-        seen_asset_ids.add(asset_id)
-        seen_hashes.add(asset_hash)
 
     if duplicates:
         status = "DUPLICATION EXPLOIT DETECTED"
