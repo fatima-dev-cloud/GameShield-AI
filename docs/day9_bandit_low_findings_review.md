@@ -42,3 +42,7 @@ scripts, and the password findings concern a direct-execution demonstration.
 Risk acceptance is appropriate only for the frozen educational prototype scope;
 production use would require a separate security review and removal or stronger
 isolation of demonstration behavior.
+
+## Residual risk acceptance (3 November 2026)
+
+The six Low findings were reviewed by the student and are accepted as residual risk for this prototype.

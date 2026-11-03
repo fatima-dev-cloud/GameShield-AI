@@ -106,3 +106,7 @@ the verified Day 9 Codex role and the repository-supported categories of human
 work. The precise historical scope of ChatGPT assistance and final personal
 attribution must be confirmed by the student/author; no percentages have been
 invented.
+
+## Day 10 addendum (3 November 2026)
+
+Claude (Anthropic) was used for verification commands, git/GitHub checks, documentation review feedback and a draft submission email. Codex generated scripts/smoke_test.sh. All outputs were run, reviewed and approved by the student.

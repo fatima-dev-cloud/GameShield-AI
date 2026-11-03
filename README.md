@@ -501,8 +501,8 @@ python -m pytest tests -v
 The initial verified Ubuntu development-EC2 run on 1 November 2026 returned:
 
 ```text
-268 tests collected
-268 passed in 5.16 seconds
+269 tests collected
+269 passed in 5.77 seconds (Day 10 final run, 3 November 2026)
 ```
 
 After the stereo-WAV exception-handling regression was added, an earlier full
@@ -869,3 +869,9 @@ See [Day 8 Deployment Evidence](docs/day8_deployment_evidence.md).
 
 See [AWS Network Architecture](docs/diagrams/aws_network_architecture.md) and
 [Security Architecture](docs/diagrams/security_architecture.md).
+
+## Final verification (Day 10)
+
+- Final automated test output: [evidence/final_pytest_2026-11-03.txt](evidence/final_pytest_2026-11-03.txt)
+- End-to-end smoke test output: [evidence/smoke_test_2026-11-03.txt](evidence/smoke_test_2026-11-03.txt) (run with `scripts/smoke_test.sh`)
+- Final release record: [docs/day10_final_submission_record.md](docs/day10_final_submission_record.md)
